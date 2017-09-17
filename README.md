@@ -79,6 +79,7 @@ AppleHealthkit.initHealthKit(options: Object, (err: string, results: Object) => 
   * [Installation](https://github.com/terrillo/rn-apple-healthkit/wiki/Install)
   * [Documentation](#documentation)
     * [Permissions](#permissions)
+    * [Units](#units)
     * Base Methods
       * [isAvailable](https://github.com/terrillo/rn-apple-healthkit/wiki/isAvailable())
       * [initHealthKit](https://github.com/terrillo/rn-apple-healthkit/wiki/initHealthKit())
@@ -165,6 +166,28 @@ const healthKitOptions = {
     }
 };
 ```
+
+## Units
+- bpm
+- calorie
+- celsius
+- count
+- day
+- fahrenheit
+- foot
+- gram
+- hour
+- inch
+- joule
+- meter
+- mgPerdL
+- mile
+- minute
+- mmhg
+- mmolPerL
+- percent
+- pound
+- second
 
 ## References
 - Apple Healthkit Documentation [https://developer.apple.com/Healthkit/](https://developer.apple.com/Healthkit/)
