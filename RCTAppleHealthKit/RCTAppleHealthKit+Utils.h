@@ -26,6 +26,7 @@
 + (HKUnit *)hkUnitFromOptions:(NSDictionary *)options;
 
 + (HKUnit *)hkUnitFromOptions:(NSDictionary *)options key:(NSString *)key withDefault:(HKUnit *)defaultValue;
++ (HKWorkoutActivityType)hkWorkoutActivityTypeFromOptions:(NSDictionary *)options key:(NSString *)key withDefault:(HKWorkoutActivityType)defaultValue;
 + (NSUInteger)uintFromOptions:(NSDictionary *)options key:(NSString *)key withDefault:(NSUInteger)defaultValue;
 + (double)doubleFromOptions:(NSDictionary *)options key:(NSString *)key withDefault:(double)defaultValue;
 + (NSDate *)dateFromOptions:(NSDictionary *)options key:(NSString *)key withDefault:(NSDate *)defaultValue;

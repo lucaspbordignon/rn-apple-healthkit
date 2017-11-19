@@ -252,6 +252,230 @@
     return theUnit;
 }
 
++ (HKWorkoutActivityType)hkWorkoutActivityTypeFromOptions:(NSDictionary *)options key:(NSString *)key withDefault:(HKWorkoutActivityType)defaultValue {
+	NSString *typeString = [options objectForKey:key];
+	HKWorkoutActivityType theType = defaultValue;
+	
+	if([typeString isEqualToString:@"AmericanFootball"]) {
+		theType = HKWorkoutActivityTypeAmericanFootball;
+	}
+	if([typeString isEqualToString:@"Archery"]) {
+		theType = HKWorkoutActivityTypeArchery;
+	}
+	if([typeString isEqualToString:@"AustralianFootball"]) {
+		theType = HKWorkoutActivityTypeAustralianFootball;
+	}
+	if([typeString isEqualToString:@"Badminton"]) {
+		theType = HKWorkoutActivityTypeBadminton;
+	}
+	if([typeString isEqualToString:@"Baseball"]) {
+		theType = HKWorkoutActivityTypeBaseball;
+	}
+	if([typeString isEqualToString:@"Basketball"]) {
+		theType = HKWorkoutActivityTypeBasketball;
+	}
+	if([typeString isEqualToString:@"Bowling"]) {
+		theType = HKWorkoutActivityTypeBowling;
+	}
+	if([typeString isEqualToString:@"Boxing "]) {
+		theType = HKWorkoutActivityTypeBoxing ;
+	}
+	if([typeString isEqualToString:@"Climbing"]) {
+		theType = HKWorkoutActivityTypeClimbing;
+	}
+	if([typeString isEqualToString:@"Cricket"]) {
+		theType = HKWorkoutActivityTypeCricket;
+	}
+	if([typeString isEqualToString:@"CrossTraining "]) {
+		theType = HKWorkoutActivityTypeCrossTraining ;
+	}
+	if([typeString isEqualToString:@"Curling"]) {
+		theType = HKWorkoutActivityTypeCurling;
+	}
+	if([typeString isEqualToString:@"Cycling"]) {
+		theType = HKWorkoutActivityTypeCycling;
+	}
+	if([typeString isEqualToString:@"Dance"]) {
+		theType = HKWorkoutActivityTypeDance;
+	}
+	if([typeString isEqualToString:@"Elliptical"]) {
+		theType = HKWorkoutActivityTypeElliptical;
+	}
+	if([typeString isEqualToString:@"EquestrianSports "]) {
+		theType = HKWorkoutActivityTypeEquestrianSports ;
+	}
+	if([typeString isEqualToString:@"Fencing"]) {
+		theType = HKWorkoutActivityTypeFencing;
+	}
+	if([typeString isEqualToString:@"Fishing"]) {
+		theType = HKWorkoutActivityTypeFishing;
+	}
+	if([typeString isEqualToString:@"FunctionalStrengthTraining "]) {
+		theType = HKWorkoutActivityTypeFunctionalStrengthTraining ;
+	}
+	if([typeString isEqualToString:@"Golf"]) {
+		theType = HKWorkoutActivityTypeGolf;
+	}
+	if([typeString isEqualToString:@"Gymnastics"]) {
+		theType = HKWorkoutActivityTypeGymnastics;
+	}
+	if([typeString isEqualToString:@"Handball"]) {
+		theType = HKWorkoutActivityTypeHandball;
+	}
+	if([typeString isEqualToString:@"Hiking"]) {
+		theType = HKWorkoutActivityTypeHiking;
+	}
+	if([typeString isEqualToString:@"Hockey "]) {
+		theType = HKWorkoutActivityTypeHockey ;
+	}
+	if([typeString isEqualToString:@"Hunting"]) {
+		theType = HKWorkoutActivityTypeHunting;
+	}
+	if([typeString isEqualToString:@"Lacrosse"]) {
+		theType = HKWorkoutActivityTypeLacrosse;
+	}
+	if([typeString isEqualToString:@"MartialArts"]) {
+		theType = HKWorkoutActivityTypeMartialArts;
+	}
+	if([typeString isEqualToString:@"MindAndBody "]) {
+		theType = HKWorkoutActivityTypeMindAndBody ;
+	}
+	if([typeString isEqualToString:@"PaddleSports "]) {
+		theType = HKWorkoutActivityTypePaddleSports ;
+	}
+	if([typeString isEqualToString:@"Play "]) {
+		theType = HKWorkoutActivityTypePlay ;
+	}
+	if([typeString isEqualToString:@"PreparationAndRecovery "]) {
+		theType = HKWorkoutActivityTypePreparationAndRecovery ;
+	}
+	if([typeString isEqualToString:@"Racquetball"]) {
+		theType = HKWorkoutActivityTypeRacquetball;
+	}
+	if([typeString isEqualToString:@"Rowing"]) {
+		theType = HKWorkoutActivityTypeRowing;
+	}
+	if([typeString isEqualToString:@"Rugby"]) {
+		theType = HKWorkoutActivityTypeRugby;
+	}
+	if([typeString isEqualToString:@"Running"]) {
+		theType = HKWorkoutActivityTypeRunning;
+	}
+	if([typeString isEqualToString:@"Sailing"]) {
+		theType = HKWorkoutActivityTypeSailing;
+	}
+	if([typeString isEqualToString:@"SkatingSports "]) {
+		theType = HKWorkoutActivityTypeSkatingSports ;
+	}
+	if([typeString isEqualToString:@"SnowSports "]) {
+		theType = HKWorkoutActivityTypeSnowSports ;
+	}
+	if([typeString isEqualToString:@"Soccer"]) {
+		theType = HKWorkoutActivityTypeSoccer;
+	}
+	if([typeString isEqualToString:@"Softball"]) {
+		theType = HKWorkoutActivityTypeSoftball;
+	}
+	if([typeString isEqualToString:@"Squash"]) {
+		theType = HKWorkoutActivityTypeSquash;
+	}
+	if([typeString isEqualToString:@"StairClimbing "]) {
+		theType = HKWorkoutActivityTypeStairClimbing ;
+	}
+	if([typeString isEqualToString:@"SurfingSports "]) {
+		theType = HKWorkoutActivityTypeSurfingSports ;
+	}
+	if([typeString isEqualToString:@"Swimming"]) {
+		theType = HKWorkoutActivityTypeSwimming;
+	}
+	if([typeString isEqualToString:@"TableTennis"]) {
+		theType = HKWorkoutActivityTypeTableTennis;
+	}
+	if([typeString isEqualToString:@"Tennis"]) {
+		theType = HKWorkoutActivityTypeTennis;
+	}
+	if([typeString isEqualToString:@"TrackAndField "]) {
+		theType = HKWorkoutActivityTypeTrackAndField ;
+	}
+	if([typeString isEqualToString:@"TraditionalStrengthTraining "]) {
+		theType = HKWorkoutActivityTypeTraditionalStrengthTraining ;
+	}
+	if([typeString isEqualToString:@"Volleyball"]) {
+		theType = HKWorkoutActivityTypeVolleyball;
+	}
+	if([typeString isEqualToString:@"Walking"]) {
+		theType = HKWorkoutActivityTypeWalking;
+	}
+	if([typeString isEqualToString:@"WaterFitness"]) {
+		theType = HKWorkoutActivityTypeWaterFitness;
+	}
+	if([typeString isEqualToString:@"WaterPolo"]) {
+		theType = HKWorkoutActivityTypeWaterPolo;
+	}
+	if([typeString isEqualToString:@"WaterSports "]) {
+		theType = HKWorkoutActivityTypeWaterSports ;
+	}
+	if([typeString isEqualToString:@"Wrestling"]) {
+		theType = HKWorkoutActivityTypeWrestling;
+	}
+	if([typeString isEqualToString:@"Yoga  "]) {
+		theType = HKWorkoutActivityTypeYoga  ;
+	}
+	if([typeString isEqualToString:@"Barre"]) {
+		theType = HKWorkoutActivityTypeBarre;
+	}
+	if([typeString isEqualToString:@"CoreTraining"]) {
+		theType = HKWorkoutActivityTypeCoreTraining;
+	}
+	if([typeString isEqualToString:@"CrossCountrySkiing"]) {
+		theType = HKWorkoutActivityTypeCrossCountrySkiing;
+	}
+	if([typeString isEqualToString:@"DownhillSkiing"]) {
+		theType = HKWorkoutActivityTypeDownhillSkiing;
+	}
+	if([typeString isEqualToString:@"Flexibility"]) {
+		theType = HKWorkoutActivityTypeFlexibility;
+	}
+	if([typeString isEqualToString:@"HighIntensityIntervalTraining"]) {
+		theType = HKWorkoutActivityTypeHighIntensityIntervalTraining;
+	}
+	if([typeString isEqualToString:@"JumpRope"]) {
+		theType = HKWorkoutActivityTypeJumpRope;
+	}
+	if([typeString isEqualToString:@"Kickboxing"]) {
+		theType = HKWorkoutActivityTypeKickboxing;
+	}
+	if([typeString isEqualToString:@"Pilates"]) {
+		theType = HKWorkoutActivityTypePilates;
+	}
+	if([typeString isEqualToString:@"Snowboarding"]) {
+		theType = HKWorkoutActivityTypeSnowboarding;
+	}
+	if([typeString isEqualToString:@"Stairs"]) {
+		theType = HKWorkoutActivityTypeStairs;
+	}
+	if([typeString isEqualToString:@"StepTraining"]) {
+		theType = HKWorkoutActivityTypeStepTraining;
+	}
+	if([typeString isEqualToString:@"WheelchairWalkPace"]) {
+		theType = HKWorkoutActivityTypeWheelchairWalkPace;
+	}
+	if([typeString isEqualToString:@"WheelchairRunPace"]) {
+		theType = HKWorkoutActivityTypeWheelchairRunPace;
+	}
+	if([typeString isEqualToString:@"TaiChi"]) {
+		theType = HKWorkoutActivityTypeTaiChi;
+	}
+	if([typeString isEqualToString:@"MixedCardio"]) {
+		theType = HKWorkoutActivityTypeMixedCardio;
+	}
+	if([typeString isEqualToString:@"HandCycling"]) {
+		theType = HKWorkoutActivityTypeHandCycling;
+	}
+	
+	return theType;
+}
+
 
 + (NSUInteger)uintFromOptions:(NSDictionary *)options key:(NSString *)key withDefault:(NSUInteger)defaultValue {
     NSUInteger val;
