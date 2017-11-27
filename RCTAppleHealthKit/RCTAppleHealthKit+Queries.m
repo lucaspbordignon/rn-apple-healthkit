@@ -316,41 +316,18 @@
                                   unit:(HKUnit *)unit
                                    day:(NSDate *)day
                             completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSPredicate *predicate = [RCTAppleHealthKit predicateForSamplesOnDay:day];
-    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:NO];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *startDate = [calendar startOfDayForDate:day];
+    NSDate *endDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:startDate options:0];
 
-    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:quantityType
-                                                           predicate:predicate
-                                                               limit:HKObjectQueryNoLimit
-                                                     sortDescriptors:@[timeSortDescriptor]
-                                                      resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error)
-                            {
-                                NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
-
-                                [results enumerateObjectsUsingBlock:^(HKQuantitySample *result, NSUInteger idx, BOOL * _Nonnull stop) {
-                                    HKQuantity *quantity = result.quantity;
-                                    if (quantity) {
-                                        NSDate *startDate = result.startDate;
-                                        NSDate *endDate = result.endDate;
-                                        double value = [quantity doubleValueForUnit:unit];
-
-                                        NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:startDate];
-                                        NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:endDate];
-
-                                        NSDictionary *elem = @{@"value" : @(value),
-                                                               @"startDate" : startDateString,
-                                                               @"endDate" : endDateString};
-
-                                        [data addObject:elem];
-                                    }
-                                }];
-
-                                if (completionHandler) {
-                                    completionHandler(data, error);
-                                }
-                            }];
-
-    [self.healthStore executeQuery:query];
+    [self fetchCumulativeSumStatisticsCollection:quantityType
+                                            unit:unit
+                                       startDate:startDate
+                                         endDate:endDate
+                                       ascending:NO
+                                           limit:HKObjectQueryNoLimit
+                                   intervalHours:1
+                                      completion:completionHandler];
 }
 
 
@@ -414,10 +391,22 @@
                                      ascending:(BOOL)asc
                                          limit:(NSUInteger)lim
                                     completion:(void (^)(NSArray *, NSError *))completionHandler {
+    [self fetchCumulativeSumStatisticsCollection:quantityType unit:unit startDate:startDate endDate:endDate ascending:asc limit:lim intervalHours:24 completion:completionHandler];
+}
+
+
+- (void)fetchCumulativeSumStatisticsCollection:(HKQuantityType *)quantityType
+                                          unit:(HKUnit *)unit
+                                     startDate:(NSDate *)startDate
+                                       endDate:(NSDate *)endDate
+                                     ascending:(BOOL)asc
+                                         limit:(NSUInteger)lim
+                                 intervalHours:(NSUInteger)intervalHours
+                                    completion:(void (^)(NSArray *, NSError *))completionHandler {
 
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *interval = [[NSDateComponents alloc] init];
-    interval.day = 1;
+    interval.hour = intervalHours;
 
     NSDateComponents *anchorComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
                                                      fromDate:[NSDate date]];
