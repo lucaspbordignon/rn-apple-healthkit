@@ -107,6 +107,11 @@ RCT_EXPORT_METHOD(getStepCount:(NSDictionary *)input callback:(RCTResponseSender
     [self fitness_getStepCountOnDay:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getHourlyStepCount:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_getHourlyStepCountOnDay:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getDailyStepCountSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_getDailyStepSamples:input callback:callback];

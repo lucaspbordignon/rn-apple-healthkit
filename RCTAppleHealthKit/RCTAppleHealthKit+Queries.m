@@ -312,6 +312,48 @@
 }
 
 
+- (void)fetchHourlySamplesOnDayForType:(HKQuantityType *)quantityType
+                                  unit:(HKUnit *)unit
+                                   day:(NSDate *)day
+                            completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSPredicate *predicate = [RCTAppleHealthKit predicateForSamplesOnDay:day];
+    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:NO];
+
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:quantityType
+                                                           predicate:predicate
+                                                               limit:HKObjectQueryNoLimit
+                                                     sortDescriptors:@[timeSortDescriptor]
+                                                      resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error)
+                            {
+                                NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+
+                                [results enumerateObjectsUsingBlock:^(HKQuantitySample *result, NSUInteger idx, BOOL * _Nonnull stop) {
+                                    HKQuantity *quantity = result.quantity;
+                                    if (quantity) {
+                                        NSDate *startDate = result.startDate;
+                                        NSDate *endDate = result.endDate;
+                                        double value = [quantity doubleValueForUnit:unit];
+
+                                        NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:startDate];
+                                        NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:endDate];
+
+                                        NSDictionary *elem = @{@"value" : @(value),
+                                                               @"startDate" : startDateString,
+                                                               @"endDate" : endDateString};
+
+                                        [data addObject:elem];
+                                    }
+                                }];
+
+                                if (completionHandler) {
+                                    completionHandler(data, error);
+                                }
+                            }];
+
+    [self.healthStore executeQuery:query];
+}
+
+
 - (void)fetchCumulativeSumStatisticsCollection:(HKQuantityType *)quantityType
                                           unit:(HKUnit *)unit
                                      startDate:(NSDate *)startDate
