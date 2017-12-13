@@ -17,6 +17,7 @@
 - (void)fetchHourlySamplesOnDayForType:(HKQuantityType *)quantityType
                                   unit:(HKUnit *)unit
                                    day:(NSDate *)day
+                              interval:(NSUInteger)interval
                             completion:(void (^)(NSArray *, NSError *))completionHandler;
 - (void)fetchCumulativeSumStatisticsCollection:(HKQuantityType *)quantityType
                                           unit:(HKUnit *)unit

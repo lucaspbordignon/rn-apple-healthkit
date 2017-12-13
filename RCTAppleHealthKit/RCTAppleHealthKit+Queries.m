@@ -315,6 +315,7 @@
 - (void)fetchHourlySamplesOnDayForType:(HKQuantityType *)quantityType
                                   unit:(HKUnit *)unit
                                    day:(NSDate *)day
+                         interval:(NSUInteger)interval
                             completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *startDate = [calendar startOfDayForDate:day];
@@ -326,7 +327,7 @@
                                          endDate:endDate
                                        ascending:NO
                                            limit:HKObjectQueryNoLimit
-                                   intervalHours:1
+                                   interval:interval
                                       completion:completionHandler];
 }
 
@@ -391,7 +392,7 @@
                                      ascending:(BOOL)asc
                                          limit:(NSUInteger)lim
                                     completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [self fetchCumulativeSumStatisticsCollection:quantityType unit:unit startDate:startDate endDate:endDate ascending:asc limit:lim intervalHours:24 completion:completionHandler];
+    [self fetchCumulativeSumStatisticsCollection:quantityType unit:unit startDate:startDate endDate:endDate ascending:asc limit:lim interval:24*60 completion:completionHandler];
 }
 
 
@@ -401,18 +402,18 @@
                                        endDate:(NSDate *)endDate
                                      ascending:(BOOL)asc
                                          limit:(NSUInteger)lim
-                                 intervalHours:(NSUInteger)intervalHours
+                                      interval:(NSUInteger)intervalMinutes
                                     completion:(void (^)(NSArray *, NSError *))completionHandler {
-
+    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *interval = [[NSDateComponents alloc] init];
-    interval.hour = intervalHours;
-
+    interval.minute = intervalMinutes;
+    
     NSDateComponents *anchorComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
                                                      fromDate:[NSDate date]];
     anchorComponents.hour = 0;
     NSDate *anchorDate = [calendar dateFromComponents:anchorComponents];
-
+    
     // Create the query
     HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:quantityType
                                                                            quantitySamplePredicate:nil

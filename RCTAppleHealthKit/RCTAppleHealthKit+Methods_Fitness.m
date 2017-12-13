@@ -53,6 +53,7 @@
 - (void)fitness_getHourlyStepCountOnDay:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
     NSDate *date = [RCTAppleHealthKit dateFromOptions:input key:@"date" withDefault:[NSDate date]];
+    NSUInteger interval = [RCTAppleHealthKit uintFromOptions:input key:@"interval" withDefault:60];
 
     if (date == nil) {
         callback(@[RCTMakeError(@"could not parse date from options.date", nil, nil)]);
@@ -65,6 +66,7 @@
     [self fetchHourlySamplesOnDayForType:stepCountType
                                     unit:stepsUnit
                                      day:date
+                                interval:interval
                               completion:^(NSArray *arr, NSError *err) {
                                   if (err != nil) {
                                       NSLog(@"error with fetchHourlySamplesOnDayForType: %@", err);
