@@ -277,7 +277,7 @@
 	if([typeString isEqualToString:@"Bowling"]) {
 		theType = HKWorkoutActivityTypeBowling;
 	}
-	if([typeString isEqualToString:@"Boxing "]) {
+	if([typeString isEqualToString:@"Boxing"]) {
 		theType = HKWorkoutActivityTypeBoxing ;
 	}
 	if([typeString isEqualToString:@"Climbing"]) {
@@ -286,7 +286,7 @@
 	if([typeString isEqualToString:@"Cricket"]) {
 		theType = HKWorkoutActivityTypeCricket;
 	}
-	if([typeString isEqualToString:@"CrossTraining "]) {
+	if([typeString isEqualToString:@"CrossTraining"]) {
 		theType = HKWorkoutActivityTypeCrossTraining ;
 	}
 	if([typeString isEqualToString:@"Curling"]) {
@@ -301,7 +301,7 @@
 	if([typeString isEqualToString:@"Elliptical"]) {
 		theType = HKWorkoutActivityTypeElliptical;
 	}
-	if([typeString isEqualToString:@"EquestrianSports "]) {
+	if([typeString isEqualToString:@"EquestrianSports"]) {
 		theType = HKWorkoutActivityTypeEquestrianSports ;
 	}
 	if([typeString isEqualToString:@"Fencing"]) {
@@ -310,7 +310,7 @@
 	if([typeString isEqualToString:@"Fishing"]) {
 		theType = HKWorkoutActivityTypeFishing;
 	}
-	if([typeString isEqualToString:@"FunctionalStrengthTraining "]) {
+	if([typeString isEqualToString:@"FunctionalStrengthTraining"]) {
 		theType = HKWorkoutActivityTypeFunctionalStrengthTraining ;
 	}
 	if([typeString isEqualToString:@"Golf"]) {
@@ -325,7 +325,7 @@
 	if([typeString isEqualToString:@"Hiking"]) {
 		theType = HKWorkoutActivityTypeHiking;
 	}
-	if([typeString isEqualToString:@"Hockey "]) {
+	if([typeString isEqualToString:@"Hockey"]) {
 		theType = HKWorkoutActivityTypeHockey ;
 	}
 	if([typeString isEqualToString:@"Hunting"]) {
@@ -337,16 +337,16 @@
 	if([typeString isEqualToString:@"MartialArts"]) {
 		theType = HKWorkoutActivityTypeMartialArts;
 	}
-	if([typeString isEqualToString:@"MindAndBody "]) {
+	if([typeString isEqualToString:@"MindAndBody"]) {
 		theType = HKWorkoutActivityTypeMindAndBody ;
 	}
-	if([typeString isEqualToString:@"PaddleSports "]) {
+	if([typeString isEqualToString:@"PaddleSports"]) {
 		theType = HKWorkoutActivityTypePaddleSports ;
 	}
-	if([typeString isEqualToString:@"Play "]) {
+	if([typeString isEqualToString:@"Play"]) {
 		theType = HKWorkoutActivityTypePlay ;
 	}
-	if([typeString isEqualToString:@"PreparationAndRecovery "]) {
+	if([typeString isEqualToString:@"PreparationAndRecovery"]) {
 		theType = HKWorkoutActivityTypePreparationAndRecovery ;
 	}
 	if([typeString isEqualToString:@"Racquetball"]) {
@@ -364,10 +364,10 @@
 	if([typeString isEqualToString:@"Sailing"]) {
 		theType = HKWorkoutActivityTypeSailing;
 	}
-	if([typeString isEqualToString:@"SkatingSports "]) {
+	if([typeString isEqualToString:@"SkatingSports"]) {
 		theType = HKWorkoutActivityTypeSkatingSports ;
 	}
-	if([typeString isEqualToString:@"SnowSports "]) {
+	if([typeString isEqualToString:@"SnowSports"]) {
 		theType = HKWorkoutActivityTypeSnowSports ;
 	}
 	if([typeString isEqualToString:@"Soccer"]) {
@@ -379,10 +379,10 @@
 	if([typeString isEqualToString:@"Squash"]) {
 		theType = HKWorkoutActivityTypeSquash;
 	}
-	if([typeString isEqualToString:@"StairClimbing "]) {
+	if([typeString isEqualToString:@"StairClimbing"]) {
 		theType = HKWorkoutActivityTypeStairClimbing ;
 	}
-	if([typeString isEqualToString:@"SurfingSports "]) {
+	if([typeString isEqualToString:@"SurfingSports"]) {
 		theType = HKWorkoutActivityTypeSurfingSports ;
 	}
 	if([typeString isEqualToString:@"Swimming"]) {
@@ -394,10 +394,10 @@
 	if([typeString isEqualToString:@"Tennis"]) {
 		theType = HKWorkoutActivityTypeTennis;
 	}
-	if([typeString isEqualToString:@"TrackAndField "]) {
+	if([typeString isEqualToString:@"TrackAndField"]) {
 		theType = HKWorkoutActivityTypeTrackAndField ;
 	}
-	if([typeString isEqualToString:@"TraditionalStrengthTraining "]) {
+	if([typeString isEqualToString:@"TraditionalStrengthTraining"]) {
 		theType = HKWorkoutActivityTypeTraditionalStrengthTraining ;
 	}
 	if([typeString isEqualToString:@"Volleyball"]) {
@@ -412,13 +412,13 @@
 	if([typeString isEqualToString:@"WaterPolo"]) {
 		theType = HKWorkoutActivityTypeWaterPolo;
 	}
-	if([typeString isEqualToString:@"WaterSports "]) {
+	if([typeString isEqualToString:@"WaterSports"]) {
 		theType = HKWorkoutActivityTypeWaterSports ;
 	}
 	if([typeString isEqualToString:@"Wrestling"]) {
 		theType = HKWorkoutActivityTypeWrestling;
 	}
-	if([typeString isEqualToString:@"Yoga  "]) {
+	if([typeString isEqualToString:@"Yoga"]) {
 		theType = HKWorkoutActivityTypeYoga  ;
 	}
 	if([typeString isEqualToString:@"Barre"]) {
