@@ -77,7 +77,7 @@ AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => 
 }
 ```
 
-## Changelog 
+## Changelog
 0.6.1v
 - HKQuantityTypeIdentifierActiveEnergyBurned
 
@@ -119,6 +119,7 @@ AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => 
       * [saveMindfulSession](https://github.com/terrillo/rn-apple-healthkit/wiki/saveMindfulSession())
       * [saveWeight](https://github.com/terrillo/rn-apple-healthkit/wiki/saveweight())
       * [saveSteps](https://github.com/terrillo/rn-apple-healthkit/wiki/saveSteps())
+      * [saveWorkout]
   * [References](#references)
 
 ## Supported Apple Permissions
