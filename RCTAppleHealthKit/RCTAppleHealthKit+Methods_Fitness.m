@@ -128,6 +128,14 @@
              return;
          }
 
+         // Added to sync when app is closed.
+         UIBackgroundTaskIdentifier __block taskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            if (taskID != UIBackgroundTaskInvalid) {
+                [[UIApplication sharedApplication] endBackgroundTask:taskID];
+                taskID = UIBackgroundTaskInvalid;
+            }
+         }];
+
           [self.bridge.eventDispatcher sendAppEventWithName:@"change:steps"
                                                        body:@{@"name": @"change:steps"}];
 
