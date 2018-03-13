@@ -112,22 +112,18 @@
 {
     HKSampleType *sampleType =
     [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
+    
+    HKUpdateFrequency frequency = HKUpdateFrequencyHourly;
+    
+    [self.healthStore enableBackgroundDeliveryForType:sampleType frequency:frequency withCompletion:^(BOOL success, NSError *error) {}];
 
-    HKObserverQuery *query =
-    [[HKObserverQuery alloc]
-     initWithSampleType:sampleType
-     predicate:nil
-     updateHandler:^(HKObserverQuery *query,
-                     HKObserverQueryCompletionHandler completionHandler,
-                     NSError *error) {
-
-         if (error) {
-             // Perform Proper Error Handling Here...
-             NSLog(@"*** An error occured while setting up the stepCount observer. %@ ***", error.localizedDescription);
-             callback(@[RCTMakeError(@"An error occured while setting up the stepCount observer", error, nil)]);
-             return;
+    HKQuery *backgroundquery = [[HKObserverQuery alloc] initWithSampleType:sampleType predicate:nil updateHandler:
+     ^void(HKObserverQuery *observerQuery, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
+         NSLog(@"HealthKit native received a background call");
+         if (completionHandler) {
+             completionHandler();
          }
-
+            
          // Added to sync when app is closed.
          UIBackgroundTaskIdentifier __block taskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
             if (taskID != UIBackgroundTaskInvalid) {
@@ -136,15 +132,14 @@
             }
          }];
 
-          [self.bridge.eventDispatcher sendAppEventWithName:@"change:steps"
-                                                       body:@{@"name": @"change:steps"}];
+        [self.bridge.eventDispatcher sendAppEventWithName:@"change:steps" body:@{@"name": @"change:steps"}];
 
          // If you have subscribed for background updates you must call the completion handler here.
          // completionHandler();
 
-     }];
+    }];
 
-    [self.healthStore executeQuery:query];
+    [self.healthStore executeQuery:backgroundquery];
 }
 
 
