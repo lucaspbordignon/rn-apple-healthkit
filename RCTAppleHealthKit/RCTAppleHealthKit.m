@@ -37,6 +37,16 @@ RCT_EXPORT_METHOD(initHealthKit:(NSDictionary *)input callback:(RCTResponseSende
     [self initializeHealthKit:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(clearSproutBackgroundTask:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_clearSproutBackgroundTask:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(initSproutBackgroundTask:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_initializeSproutBackgroundTask:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(initStepCountObserver:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_initializeStepEventObserver:input callback:callback];
