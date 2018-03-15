@@ -272,8 +272,8 @@
                 }
             ];
 
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", _url, @"client_logs"]];
-            //NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", _url, @"users/apps_devices"]];
+            //NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", _url, @"client_logs"]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", _url, @"users/apps_devices"]];
             NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
             NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
