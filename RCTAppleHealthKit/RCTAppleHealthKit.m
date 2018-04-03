@@ -18,6 +18,7 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_CDA.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -187,6 +188,22 @@ RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponse
     [self mindfulness_saveMindfulSession:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(saveCDADocument:(NSString *)xml callback:(RCTResponseSenderBlock)callback)
+{
+    [self cda_saveCDADocument:xml callback:callback];
+}
+
+RCT_EXPORT_METHOD(getCDADocuments:(RCTResponseSenderBlock)callback)
+{
+    [self fetchDocumentsWithCompletion:^(NSArray *arr, NSError *err){
+        if (err != nil) {
+            NSLog(@"error with fetchDocumentsWithCompletion: %@", err);
+            callback(@[RCTMakeError(@"error with fetchDocumentsWithCompletion", err, nil)]);
+            return;
+        }
+        callback(@[[NSNull null], arr]);
+    }];
+}
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
 {

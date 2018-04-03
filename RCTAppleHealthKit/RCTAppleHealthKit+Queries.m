@@ -437,4 +437,39 @@
     [self.healthStore executeQuery:query];
 }
 
+- (void)fetchDocumentsWithCompletion:(void (^)(NSArray *, NSError *))completion {
+    HKDocumentType *cdaType = [HKObjectType documentTypeForIdentifier:HKDocumentTypeIdentifierCDA];
+    
+    NSMutableArray *allDocuments = [NSMutableArray new];
+    HKDocumentQuery *cdaQuery = [[HKDocumentQuery alloc] initWithDocumentType:cdaType
+                                                                    predicate:nil
+                                                                        limit:HKObjectQueryNoLimit
+                                                              sortDescriptors:nil
+                                                          includeDocumentData:true
+                                                               resultsHandler:^(HKDocumentQuery * _Nonnull query, NSArray<__kindof HKDocumentSample *> * _Nullable results, BOOL done, NSError * _Nullable error) {
+                                                                   if (!results) {
+                                                                       completion(nil, error);
+                                                                       return;
+                                                                   }
+                                                                   
+                                                                   for (HKCDADocumentSample *result in results) {
+                                                                       HKCDADocument *document = result.document;
+                                                                       NSString *xml = [[NSString alloc] initWithData:document.documentData encoding:NSUTF8StringEncoding];
+                                                                       [allDocuments addObject:@{
+                                                                                                 @"authorName": document.authorName,
+                                                                                                 @"custodianName": document.custodianName,
+                                                                                                 @"patientName": document.patientName,
+                                                                                                 @"title": document.title,
+                                                                                                 @"documentData": xml}];
+                                                                   }
+                                                                   
+                                                                   if (done) {
+                                                                       // Handle documents
+                                                                       completion(allDocuments, nil);
+                                                                   }
+                                                               }];
+    
+    [self.healthStore executeQuery:cdaQuery];
+}
+
 @end
