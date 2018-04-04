@@ -10,6 +10,7 @@
 
 @interface RCTAppleHealthKit (Methods_CDA)
 
+- (void)cda_getCDADocuments:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)cda_saveCDADocument:(NSString *)xml callback:(RCTResponseSenderBlock)callback;
 
 @end

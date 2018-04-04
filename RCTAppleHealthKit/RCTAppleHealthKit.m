@@ -193,16 +193,9 @@ RCT_EXPORT_METHOD(saveCDADocument:(NSString *)xml callback:(RCTResponseSenderBlo
     [self cda_saveCDADocument:xml callback:callback];
 }
 
-RCT_EXPORT_METHOD(getCDADocuments:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(getCDADocuments:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
-    [self fetchDocumentsWithCompletion:^(NSArray *arr, NSError *err){
-        if (err != nil) {
-            NSLog(@"error with fetchDocumentsWithCompletion: %@", err);
-            callback(@[RCTMakeError(@"error with fetchDocumentsWithCompletion", err, nil)]);
-            return;
-        }
-        callback(@[[NSNull null], arr]);
-    }];
+    [self cda_getCDADocuments:input callback:callback];
 }
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
