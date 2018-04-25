@@ -1,0 +1,67 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.3.2
+
+Node version: 
+  9.5.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "rn-apple-healthkit",
+    "version": "0.6.3",
+    "description": "A React Native package for interacting with Apple HealthKit",
+    "main": "index.js",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/terrillo/rn-apple-healthkit.git"
+    },
+    "keywords": [
+      "Apple",
+      "health-kit",
+      "healthkit",
+      "ReactNative",
+      "react-native",
+      "react",
+      "native",
+      "ios"
+    ],
+    "bugs": {
+      "url": "https://github.com/terrillo/rn-apple-healthkit/issues"
+    },
+    "homepage": "https://github.com/terrillo/rn-apple-healthkit",
+    "author": "Terrillo Walls",
+    "license": "MIT",
+    "devDependencies": {
+      "react-native": ">=0.40.0"
+    },
+    "peerDependencies": {
+      "react-native": ">=0.40.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: https://registry.yarnpkg.com/react-native/-/react-native-0.55.3.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:123716:19)
+      at Object.onceWrapper (events.js:255:19)
+      at ClientRequest.emit (events.js:160:13)
+      at TLSSocket.emitTimeout (_http_client.js:702:34)
+      at Object.onceWrapper (events.js:255:19)
+      at TLSSocket.emit (events.js:160:13)
+      at TLSSocket.Socket._onTimeout (net.js:415:8)
+      at ontimeout (timers.js:458:11)
+      at tryOnTimeout (timers.js:296:5)
+      at Timer.listOnTimeout (timers.js:259:5)
