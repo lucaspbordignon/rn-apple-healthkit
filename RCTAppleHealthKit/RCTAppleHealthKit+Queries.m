@@ -9,6 +9,7 @@
 
 #import "RCTAppleHealthKit+Queries.h"
 #import "RCTAppleHealthKit+Utils.h"
+#import "RCTAppleHealthKit+TypesAndPermissions.h"
 
 @implementation RCTAppleHealthKit (Queries)
 
@@ -437,7 +438,7 @@
     [self.healthStore executeQuery:query];
 }
 
-- (void)fetchSamplesForPredicate: (NSPredicate *)predicate
+- (void)fetchWorkoutForPredicate: (NSPredicate *)predicate
                        ascending: (BOOL)ascending
                            limit:(NSUInteger)limit
                       completion:(void (^)(NSArray *, NSError *))completion {
@@ -454,12 +455,16 @@
 
         if(completion) {
             NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+            NSDictionary *numberToWorkoutNameDictionary = [RCTAppleHealthKit getNumberToWorkoutNameDictionary];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 for (HKWorkout * sample in results) {
                     double energy = [[sample totalEnergyBurned] doubleValueForUnit:[HKUnit kilocalorieUnit]];
                     double distance = [[sample totalDistance] doubleValueForUnit:[HKUnit mileUnit]];
+                    NSNumber *activityNumber =  [NSNumber numberWithInt: [sample workoutActivityType]];
+                    
                     NSDictionary *elem = @{
-                                           @"activityName" : [NSNumber numberWithInt:[sample workoutActivityType]],
+                                           @"activityName" : [numberToWorkoutNameDictionary objectForKey: activityNumber],
                                            @"calories" : @(energy),
                                            @"distance" : @(distance),
                                            @"start" : [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate],
@@ -497,7 +502,6 @@
         if(completion) {
             NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
             dispatch_async(dispatch_get_main_queue(), ^{
-                RCTLog([results componentsJoinedByString:@"\n"]);
                 for (HKQuantitySample *sample in results) {
                     double value = [[sample quantity] doubleValueForUnit:[HKUnit gramUnit]];
                     NSDictionary *elem = @{
