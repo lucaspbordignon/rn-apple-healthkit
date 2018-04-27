@@ -19,9 +19,8 @@
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
 #import "RCTAppleHealthKit+Methods_Nutrition.h"
+#import "RCTAppleHealthKit+Methods_Workout.h"
 
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventDispatcher.h>
 
 @implementation RCTAppleHealthKit
 @synthesize bridge = _bridge;
@@ -198,6 +197,11 @@ RCT_EXPORT_METHOD(getCholesterol:(NSDictionary *)input callback:(RCTResponseSend
     [self nutrition_getCholesterol:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(saveWorkout:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self workout_save:input callback:callback];
+}
+
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
 {
@@ -269,5 +273,4 @@ RCT_EXPORT_METHOD(getCholesterol:(NSDictionary *)input callback:(RCTResponseSend
     };
     callback(@[[NSNull null], info]);
 }
-
 @end

@@ -10,9 +10,6 @@
 #import "RCTAppleHealthKit+Queries.h"
 #import "RCTAppleHealthKit+Utils.h"
 
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventDispatcher.h>
-
 @implementation RCTAppleHealthKit (Methods_Nutrition)
 - (void)nutrition_getCholesterol:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {

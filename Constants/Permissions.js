@@ -3,7 +3,7 @@
  * https://github.com/terrillo/rn-apple-healthkit#permissions
  * @type {Object}
  */
-export const Permissions = {
+export default {
   ActiveEnergyBurned: 'ActiveEnergyBurned',
   AppleExerciseTime: 'AppleExerciseTime',
   BasalEnergyBurned: 'BasalEnergyBurned',
