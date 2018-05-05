@@ -89,6 +89,7 @@ AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => 
     * Base Methods
       * [isAvailable](https://github.com/terrillo/rn-apple-healthkit/wiki/isAvailable())
       * [initHealthKit](https://github.com/terrillo/rn-apple-healthkit/wiki/initHealthKit())
+      * [getAuthStatus](https://github.com/AFGhazy/rn-apple-healthkit/wiki/getAuthStatus())
     * Realtime Methods
       * [initStepCountObserver](https://github.com/terrillo/rn-apple-healthkit/wiki/initStepCountObserver())
     * Read Methods
