@@ -152,6 +152,37 @@
     return writePermSet;
 }
 
+- (NSArray *)getReadPermsArrayFromOptions:(NSArray *)options {
+    NSDictionary *readPermDict = [self readPermsDict];
+    NSMutableArray *readPermArray = [NSMutableArray arrayWithCapacity:1];
+    
+    for(int i=0; i<[options count]; i++) {
+        NSString *optionKey = options[i];
+        HKObjectType *val = [readPermDict objectForKey:optionKey];
+        
+        if(val != nil) {
+            [readPermArray addObject:val];
+        }
+    }
+    return readPermArray;
+}
+
+
+- (NSArray *)getWritePermsArrayFromOptions:(NSArray *)options {
+    NSDictionary *writePermDict = [self writePermsDict];
+    NSMutableArray *writePermArray = [NSMutableArray arrayWithCapacity:1];
+    
+    for(int i=0; i<[options count]; i++) {
+        NSString *optionKey = options[i];
+        HKObjectType *val = [writePermDict objectForKey:optionKey];
+        if(val != nil) {
+            [writePermArray addObject:val];
+        }
+        
+    }
+    return writePermArray;
+}
+
 NSString * const AmericanFootball = @"AmericanFootball";
 NSString * const Archery = @"Archery";
 NSString * const AustralianFootball = @"AustralianFootball";
