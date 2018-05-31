@@ -49,6 +49,8 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
+        @"Workout" : [HKObjectType workoutType],
+        @"Cholesterol": [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCholesterol]
     };
     return readPerms;
 }
