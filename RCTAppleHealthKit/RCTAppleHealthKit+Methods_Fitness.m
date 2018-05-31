@@ -11,9 +11,6 @@
 #import "RCTAppleHealthKit+Queries.h"
 #import "RCTAppleHealthKit+Utils.h"
 
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventDispatcher.h>
-
 @implementation RCTAppleHealthKit (Methods_Fitness)
 
 
@@ -213,6 +210,35 @@
 
         callback(@[[NSNull null], response]);
     }];
+}
+
+- (void)fitness_getSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
+    BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:[NSDate date]];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+    
+    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:endDate options:HKQueryOptionStrictStartDate];
+    
+    void (^completion)(NSArray *results, NSError *error);
+    
+    completion = ^(NSArray *results, NSError *error) {
+        if(results){
+            callback(@[[NSNull null], results]);
+            return;
+        } else {
+            NSString *errMsg = [NSString stringWithFormat:@"Error getting samples: %@", error];
+            NSLog(errMsg);
+            callback(@[RCTMakeError(errMsg, nil, nil)]);
+            return;
+        }
+    };
+    
+    [self fetchSamplesForPredicate: predicate
+                        ascending:ascending
+                            limit:limit
+                        completion:completion];
 }
 
 @end

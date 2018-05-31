@@ -437,4 +437,86 @@
     [self.healthStore executeQuery:query];
 }
 
+- (void)fetchSamplesForPredicate: (NSPredicate *)predicate
+                       ascending: (BOOL)ascending
+                           limit:(NSUInteger)limit
+                      completion:(void (^)(NSArray *, NSError *))completion {
+    
+    void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
+    NSSortDescriptor *endDateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:ascending];
+    handlerBlock = ^(HKSampleQuery *query, NSArray *results, NSError *error) {
+        if(!results) {
+            if(completion) {
+                completion(nil, error);
+            }
+            return;
+        }
+
+        if(completion) {
+            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                for (HKWorkout * sample in results) {
+                    double energy = [[sample totalEnergyBurned] doubleValueForUnit:[HKUnit kilocalorieUnit]];
+                    double distance = [[sample totalDistance] doubleValueForUnit:[HKUnit mileUnit]];
+                    NSDictionary *elem = @{
+                                           @"activityName" : [NSNumber numberWithInt:[sample workoutActivityType]],
+                                           @"calories" : @(energy),
+                                           @"distance" : @(distance),
+                                           @"start" : [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate],
+                                           @"end" : [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate]
+                                           };
+                    [data addObject:elem];
+                }
+                completion(data, error);
+            });
+            
+        }
+    };
+    
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:[HKObjectType workoutType] predicate:predicate limit:limit sortDescriptors:@[endDateSortDescriptor] resultsHandler:handlerBlock];
+    
+    [self.healthStore executeQuery:query];
+    
+}
+
+- (void)fetchCholesterolForPredicate: (NSPredicate *)predicate
+                           ascending: (BOOL)ascending
+                               limit:(NSUInteger)limit
+                          completion:(void (^)(NSArray *, NSError *))completion {
+    
+    void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
+    NSSortDescriptor *endDateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:ascending];
+    handlerBlock = ^(HKSampleQuery *query, NSArray *results, NSError *error) {
+        if(!results) {
+            if(completion) {
+                completion(nil, error);
+            }
+            return;
+        }
+        
+        if(completion) {
+            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                RCTLog([results componentsJoinedByString:@"\n"]);
+                for (HKQuantitySample *sample in results) {
+                    double value = [[sample quantity] doubleValueForUnit:[HKUnit gramUnit]];
+                    NSDictionary *elem = @{
+                                           @"value" : @(value),
+                                           @"start" : [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate],
+                                           @"end" : [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate]
+                                           };
+                    [data addObject:elem];
+                }
+                completion(data, error);
+            });
+            
+        }
+    };
+    
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCholesterol] predicate:predicate limit:limit sortDescriptors:@[endDateSortDescriptor] resultsHandler:handlerBlock];
+    
+    [self.healthStore executeQuery:query];
+    
+}
+
 @end

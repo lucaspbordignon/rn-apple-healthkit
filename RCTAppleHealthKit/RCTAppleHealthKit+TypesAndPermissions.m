@@ -7,6 +7,8 @@
 //
 
 #import "RCTAppleHealthKit+TypesAndPermissions.h"
+#define WORKOUT_DICTIONARY @{"key" : "value"\
+"key2" : "value2"}
 
 @implementation RCTAppleHealthKit (TypesAndPermissions)
 
@@ -49,6 +51,8 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
+        @"Workout" : [HKObjectType workoutType],
+        @"Cholesterol": [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCholesterol]
     };
     return readPerms;
 }
@@ -114,6 +118,7 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
+        @"Workout" : [HKObjectType workoutType],
     };
     return writePerms;
 }
@@ -148,6 +153,83 @@
         }
     }
     return writePermSet;
+}
+
++ (NSDictionary *)getStringToWorkoutActivityTypeDictionary {
+    return @{
+             @"AmericanFootball": @(HKWorkoutActivityTypeAmericanFootball),
+             @"Archery": @(HKWorkoutActivityTypeArchery),
+             @"AustralianFootball": @(HKWorkoutActivityTypeAustralianFootball),
+             @"Badminton": @(HKWorkoutActivityTypeBadminton),
+             @"Baseball": @(HKWorkoutActivityTypeBaseball),
+             @"Basketball": @(HKWorkoutActivityTypeBasketball),
+             @"Bowling": @(HKWorkoutActivityTypeBowling),
+             @"Boxing": @(HKWorkoutActivityTypeBoxing) ,
+             @"Climbing": @(HKWorkoutActivityTypeClimbing),
+             @"Cricket": @(HKWorkoutActivityTypeCricket),
+             @"CrossTraining": @(HKWorkoutActivityTypeCrossTraining) ,
+             @"Curling": @(HKWorkoutActivityTypeCurling),
+             @"Cycling": @(HKWorkoutActivityTypeCycling),
+             @"Dance": @(HKWorkoutActivityTypeDance),
+             @"Elliptical": @(HKWorkoutActivityTypeElliptical),
+             @"EquestrianSports": @(HKWorkoutActivityTypeEquestrianSports) ,
+             @"Fencing": @(HKWorkoutActivityTypeFencing),
+             @"Fishing": @(HKWorkoutActivityTypeFishing),
+             @"FunctionalStrengthTraining": @(HKWorkoutActivityTypeFunctionalStrengthTraining) ,
+             @"Golf": @(HKWorkoutActivityTypeGolf),
+             @"Gymnastics": @(HKWorkoutActivityTypeGymnastics),
+             @"Handball": @(HKWorkoutActivityTypeHandball),
+             @"Hiking": @(HKWorkoutActivityTypeHiking),
+             @"Hockey": @(HKWorkoutActivityTypeHockey) ,
+             @"Hunting": @(HKWorkoutActivityTypeHunting),
+             @"Lacrosse": @(HKWorkoutActivityTypeLacrosse),
+             @"MartialArts": @(HKWorkoutActivityTypeMartialArts),
+             @"MindAndBody": @(HKWorkoutActivityTypeMindAndBody) ,
+             @"PaddleSports": @(HKWorkoutActivityTypePaddleSports) ,
+             @"Play": @(HKWorkoutActivityTypePlay) ,
+             @"PreparationAndRecovery": @(HKWorkoutActivityTypePreparationAndRecovery) ,
+             @"Racquetball": @(HKWorkoutActivityTypeRacquetball),
+             @"Rowing": @(HKWorkoutActivityTypeRowing),
+             @"Rugby": @(HKWorkoutActivityTypeRugby),
+             @"Running": @(HKWorkoutActivityTypeRunning),
+             @"Sailing": @(HKWorkoutActivityTypeSailing),
+             @"SkatingSports": @(HKWorkoutActivityTypeSkatingSports) ,
+             @"SnowSports": @(HKWorkoutActivityTypeSnowSports) ,
+             @"Soccer": @(HKWorkoutActivityTypeSoccer),
+             @"Softball": @(HKWorkoutActivityTypeSoftball),
+             @"Squash": @(HKWorkoutActivityTypeSquash),
+             @"StairClimbing": @(HKWorkoutActivityTypeStairClimbing) ,
+             @"SurfingSports": @(HKWorkoutActivityTypeSurfingSports) ,
+             @"Swimming": @(HKWorkoutActivityTypeSwimming),
+             @"TableTennis": @(HKWorkoutActivityTypeTableTennis),
+             @"Tennis": @(HKWorkoutActivityTypeTennis),
+             @"TrackAndField": @(HKWorkoutActivityTypeTrackAndField) ,
+             @"TraditionalStrengthTraining": @(HKWorkoutActivityTypeTraditionalStrengthTraining) ,
+             @"Volleyball": @(HKWorkoutActivityTypeVolleyball),
+             @"Walking": @(HKWorkoutActivityTypeWalking),
+             @"WaterFitness": @(HKWorkoutActivityTypeWaterFitness),
+             @"WaterPolo": @(HKWorkoutActivityTypeWaterPolo),
+             @"WaterSports": @(HKWorkoutActivityTypeWaterSports) ,
+             @"Wrestling": @(HKWorkoutActivityTypeWrestling),
+             @"Yoga": @(HKWorkoutActivityTypeYoga)  ,
+             @"Barre": @(HKWorkoutActivityTypeBarre),
+             @"CoreTraining": @(HKWorkoutActivityTypeCoreTraining),
+             @"CrossCountrySkiing": @(HKWorkoutActivityTypeCrossCountrySkiing),
+             @"DownhillSkiing": @(HKWorkoutActivityTypeDownhillSkiing),
+             @"Flexibility": @(HKWorkoutActivityTypeFlexibility),
+             @"HighIntensityIntervalTraining": @(HKWorkoutActivityTypeHighIntensityIntervalTraining),
+             @"JumpRope": @(HKWorkoutActivityTypeJumpRope),
+             @"Kickboxing": @(HKWorkoutActivityTypeKickboxing),
+             @"Pilates": @(HKWorkoutActivityTypePilates),
+             @"Snowboarding": @(HKWorkoutActivityTypeSnowboarding),
+             @"Stairs": @(HKWorkoutActivityTypeStairs),
+             @"StepTraining": @(HKWorkoutActivityTypeStepTraining),
+             @"WheelchairWalkPace": @(HKWorkoutActivityTypeWheelchairWalkPace),
+             @"WheelchairRunPace": @(HKWorkoutActivityTypeWheelchairRunPace),
+             @"TaiChi": @(HKWorkoutActivityTypeTaiChi),
+             @"MixedCardio": @(HKWorkoutActivityTypeMixedCardio),
+             @"HandCycling": @(HKWorkoutActivityTypeHandCycling)
+             };
 }
 
 @end
