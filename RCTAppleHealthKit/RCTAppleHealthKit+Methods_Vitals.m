@@ -130,7 +130,7 @@
 - (void)vitals_saveBloodPressureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
 
-    NSDate *sampleDate = [RCTAppleHealthKit dateFromOptions:input];
+    NSDate *sampleDate = [RCTAppleHealthKit dateFromOptionsDefaultNow:input];
 
     // Build systolic object
     double systolic = [RCTAppleHealthKit doubleFromOptions:input key:@"systolic" withDefault:0];
@@ -142,7 +142,7 @@
     double diastolic = [RCTAppleHealthKit doubleFromOptions:input key:@"diastolic" withDefault:0];
     HKQuantityType *diastolicType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic];
     HKQuantity *diastolicQuantity = [HKQuantity quantityWithUnit:[HKUnit millimeterOfMercuryUnit] doubleValue:diastolic];
-    HKQuantitySample *diastolicSample = [HKQuantitySample quantitySampleWithType:diastolicType quantity:systolicQuantity startDate:sampleDate endDate:sampleDate];
+    HKQuantitySample *diastolicSample = [HKQuantitySample quantitySampleWithType:diastolicType quantity:diastolicQuantity startDate:sampleDate endDate:sampleDate];
 
     /*
     // Get  device data
