@@ -9,13 +9,31 @@ Install the [rn-apple-healthkit] package from npm:
 - Run `npm install rn-apple-healthkit --save`
 - Run `react-native link rn-apple-healthkit`
 
-Update `info.plist` in your React Native project
-```
+Update `Info.plist` in your React Native project
+
+```xml
 <key>NSHealthShareUsageDescription</key>
 <string>Read and understand health data.</string>
 <key>NSHealthUpdateUsageDescription</key>
 <string>Share workout data with other apps.</string>
 ```
+
+### With `react-native@0.56`
+
+From version 0.56, React Native uses [Babel 7 beta](https://babeljs.io/docs/en/next/index.html), there're some extra configurations needed to integrate this module to your iOS project successfully, as below:
+
+- Install `@babel/plugin-transform-runtime` and `@babel/runtime` as [instructed here](https://babeljs.io/docs/en/next/babel-plugin-transform-runtime#installation)
+- Add `@babel/plugin-transform-runtime` to `plugins` section in `babel.config.js` file (from version 7, Babel uses [`babel.config.js` file](https://babeljs.io/docs/en/next/babelconfigjs) in root folder instead of `.babelrc`):
+
+```git
+module.exports = {
++  plugins: [
++    '@babel/plugin-transform-runtime',
++  ],
+  presets: ['react-native'],
+};
+```
+- Then normally run `react-native link rn-apple-healthkit` as mentioned above.
 
 ## Manual Installation
 
