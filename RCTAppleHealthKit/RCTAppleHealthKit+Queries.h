@@ -31,16 +31,20 @@
                             ascending:(BOOL)asc
                                 limit:(NSUInteger)lim
                            completion:(void (^)(NSArray *, NSError *))completion;
-- (void)fetchCumulativeSumStatisticsCollection:(HKQuantityType *)quantityType
+- (void)fetchAverageHourlyStatisticsCollection:(HKQuantityType *)quantityType
                                           unit:(HKUnit *)unit
                                      startDate:(NSDate *)startDate
                                        endDate:(NSDate *)endDate
                                      ascending:(BOOL)asc
                                          limit:(NSUInteger)lim
                                     completion:(void (^)(NSArray *, NSError *))completionHandler;
-
-
-
+- (void)fetchCumulativeHourlySumStatisticsCollection:(HKQuantityType *)quantityType
+                                                unit:(HKUnit *)unit
+                                           startDate:(NSDate *)startDate
+                                             endDate:(NSDate *)endDate
+                                           ascending:(BOOL)asc
+                                               limit:(NSUInteger)lim
+                                          completion:(void (^)(NSArray *, NSError *))completionHandler;
 - (void)fetchSleepCategorySamplesForPredicate:(NSPredicate *)predicate
                                    limit:(NSUInteger)lim
                                    completion:(void (^)(NSArray *, NSError *))completion;
