@@ -102,7 +102,7 @@
                                                                limit:lim
                                                      sortDescriptors:@[timeSortDescriptor]
                                                       resultsHandler:handlerBlock];
-
+    
 
     [self.healthStore executeQuery:query];
 }
@@ -350,7 +350,7 @@
                                        HKQuantity *quantity = result.sumQuantity;
                                        if (quantity) {
                                            NSDate *date = result.startDate;
-                                           double value = [quantity doubleValueForUnit:[HKUnit countUnit]];
+                                           double value = [quantity doubleValueForUnit:unit];
                                            NSLog(@"%@: %f", date, value);
 
                                            NSString *dateString = [RCTAppleHealthKit buildISO8601StringFromDate:date];
@@ -372,23 +372,23 @@
                                            ascending:(BOOL)asc
                                                limit:(NSUInteger)lim
                                     completion:(void (^)(NSArray *, NSError *))completionHandler {
-
+    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *interval = [[NSDateComponents alloc] init];
     interval.hour = 1;
-
+    
     NSDateComponents *anchorComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
                                                      fromDate:[NSDate date]];
     anchorComponents.hour = 1;
     NSDate *anchorDate = [calendar dateFromComponents:anchorComponents];
-
+    
     // Create the query
     HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:quantityType
                                                                            quantitySamplePredicate:nil
                                                                                            options:HKStatisticsOptionDiscreteAverage
                                                                                         anchorDate:anchorDate
                                                                                 intervalComponents:interval];
-
+    
     // Set the results handler
     query.initialResultsHandler = ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection *results, NSError *error) {
         if (error) {
@@ -396,19 +396,19 @@
             NSLog(@"*** An error occurred while calculating the statistics: %@ ***",error.localizedDescription);
         }
         NSLog(@"");
-
+        
         NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
         [results enumerateStatisticsFromDate:startDate
                                       toDate:endDate
                                    withBlock:^(HKStatistics *result, BOOL *stop) {
-
+                                       
                                        HKQuantity *quantity = result.averageQuantity;
                                        NSLog(@"the quanitty %@", quantity);
                                        if (quantity) {
                                            NSDate *date = result.startDate;
                                            double value = [quantity doubleValueForUnit:unit];
                                            NSLog(@"%@: %f", date, value);
-
+                                           
                                            NSString *dateString = [RCTAppleHealthKit buildISO8601StringFromDate:date];
                                            NSArray *elem = @[dateString, @(value)];
                                            [data addObject:elem];
@@ -417,7 +417,7 @@
         NSError *err;
         completionHandler(data, err);
     };
-
+    
     [self.healthStore executeQuery:query];
 }
 

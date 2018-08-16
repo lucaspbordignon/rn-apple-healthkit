@@ -23,13 +23,15 @@
         callback(@[RCTMakeError(@"startDate is required in options", nil, nil)]);
         return;
     }
-    NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
+    // NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
 
-    [self fetchQuantitySamplesOfType:activeEnergyType
+    [self fetchCumulativeSumStatisticsCollection:activeEnergyType
                                 unit:cal
-                           predicate:predicate
-                           ascending:false
-                               limit:HKObjectQueryNoLimit
+                           // predicate:predicate
+                           // ascending:false
+                               // limit:HKObjectQueryNoLimit
+                                startDate:startDate
+                                endDate:endDate
                           completion:^(NSArray *results, NSError *error) {
                               if(results){
                                   callback(@[[NSNull null], results]);
