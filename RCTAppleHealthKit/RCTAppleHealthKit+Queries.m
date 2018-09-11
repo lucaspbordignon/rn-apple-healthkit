@@ -159,6 +159,9 @@
                       case HKCategoryValueSleepAnalysisAsleep:
                         valueString = @"ASLEEP";
                       break;
+                      case HKCategoryValueSleepAnalysisAwake:
+                        valueString = @"AWAKE";
+                      break;
                      default:
                         valueString = @"UNKNOWN";
                      break;
