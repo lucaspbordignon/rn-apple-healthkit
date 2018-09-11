@@ -45,4 +45,43 @@
 }
 
 
+- (void)sleep_saveSleep:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    NSString *valueString = [RCTAppleHealthKit stringFromOptions:input key:@"value" withDefault:nil];
+    double value;
+
+    if ([valueString isEqualToString:@"INBED"]) {
+        value = HKCategoryValueSleepAnalysisInBed;
+    } else if ([valueString isEqualToString:@"ASLEEP"]) {
+        value = HKCategoryValueSleepAnalysisAsleep;
+    } else if ([valueString isEqualToString:@"AWAKE"]) {
+        value = HKCategoryValueSleepAnalysisAwake;
+    } else {
+        callback(@[RCTMakeError(@"value must be one of (INBED, ASLEEP, AWAKE)", nil, nil)]);
+        return;
+    }
+
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+
+    if(startDate == nil || endDate == nil){
+        callback(@[RCTMakeError(@"startDate and endDate are required in options", nil, nil)]);
+        return;
+    }
+
+    HKCategoryType *type = [HKCategoryType categoryTypeForIdentifier: HKCategoryTypeIdentifierSleepAnalysis];
+    HKCategorySample *sample = [HKCategorySample categorySampleWithType:type value:value startDate:startDate endDate:endDate];
+
+    [self.healthStore saveObject:sample withCompletion:^(BOOL success, NSError *error) {
+        if (!success) {
+            NSLog(@"An error occured saving the sleep sample %@. The error was: %@.", sample, error);
+            callback(@[RCTMakeError(@"An error occured saving the sleep sample", error, nil)]);
+            return;
+        }
+        callback(@[[NSNull null], @(value)]);
+    }];
+
+}
+
+
 @end

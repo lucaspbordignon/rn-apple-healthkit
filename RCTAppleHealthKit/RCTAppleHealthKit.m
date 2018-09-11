@@ -177,6 +177,11 @@ RCT_EXPORT_METHOD(getSleepSamples:(NSDictionary *)input callback:(RCTResponseSen
     [self sleep_getSleepSamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(saveSleep:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self sleep_saveSleep:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self getModuleInfo:input callback:callback];
