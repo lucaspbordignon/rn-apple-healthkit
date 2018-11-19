@@ -244,6 +244,13 @@
     if([unitString isEqualToString:@"mgPerdL"]){
         theUnit = [HKUnit unitFromString:@"mg/dL"];
     }
+    if([unitString isEqualToString:@"mlPerKgMin"]) {
+      // ml / (kg * min)
+      HKUnit *ml = [HKUnit literUnitWithMetricPrefix:HKMetricPrefixMilli];
+      HKUnit *kg = [HKUnit gramUnitWithMetricPrefix:HKMetricPrefixKilo];
+      HKUnit *min = [HKUnit minuteUnit];
+      theUnit = [ml unitDividedByUnit:[kg unitMultipliedByUnit:min]];
+    }
 
     if(theUnit == nil){
         theUnit = defaultValue;
