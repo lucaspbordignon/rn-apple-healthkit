@@ -11,20 +11,21 @@
 
 #import "RCTAppleHealthKit.h"
 
-/*
-             "MedicationRecord", 
-             "AllergyRecord",
-             "ConditionRecord",
-             "ImmunizationRecord",
-             "LabResultRecord",
-             "ProcedureRecord",
-             "VitalSignRecord"
-            
-*/
-
 @interface RCTAppleHealthKit (Methods_ClinicalRecords)
     
-- (void)clinical_getMedicationRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)clinical_getAllergyRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
     
+- (void)clinical_getConditionRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+
+- (void)clinical_getMedicationRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+
+- (void)clinical_getLabResultRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+
+- (void)clinical_getProcedureRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+
+- (void)clinical_getImmunizationRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+
+- (void)clinical_getClinicalVitalRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+
     @end
 #endif /* RCTAppleHealthKit_Methods_ClincalRecords_h */

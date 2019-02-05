@@ -18,6 +18,7 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_ClinicalRecords.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -206,6 +207,42 @@ RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponse
 {
     [self mindfulness_saveMindfulSession:input callback:callback];
 }
+
+RCT_EXPORT_METHOD(getAllergyRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self clinical_getAllergyRecord:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getConditionRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self clinical_getConditionRecord:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getMedicationRecords:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self clinical_getMedicationRecord:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getLabResultRecords:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self clinical_getLabResultRecord:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getProcedureRecords:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self clinical_getProcedureRecord:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getImmunizationRecords:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self clinical_getImmunizationRecord:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getClinicalVitalRecords:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self clinical_getClinicalVitalRecord:input callback:callback];
+}
+
 
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback

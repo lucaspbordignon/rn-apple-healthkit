@@ -49,6 +49,28 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
+        
+        //Allergy Records
+        @"AllergyRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord],
+
+        //Condition Records
+        @"ConditionRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierConditionRecord],
+
+        //Immunization Records
+        @"ImmunizationRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierImmunizationRecord],
+
+        //LabResults Records
+        @"LabResultRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierLabResultRecord],
+
+        //Medication Records
+        @"MedicationRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierMedicationRecord],
+
+        //Condition Records
+        @"ProcedureRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierProcedureRecord],
+
+        //Clincal Vital Sign Records
+        @"ClinicalVitalRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord],
+
     };
     return readPerms;
 }
