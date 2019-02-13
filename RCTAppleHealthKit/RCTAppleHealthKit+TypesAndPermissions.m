@@ -14,7 +14,8 @@
 #pragma mark - HealthKit Permissions
 
 - (NSDictionary *)readPermsDict {
-    NSDictionary *readPerms = @{
+
+    NSMutableDictionary *readPerms = [@{
         // Characteristic Identifiers
         @"DateOfBirth" : [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth],
         @"BiologicalSex" : [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex],
@@ -49,29 +50,43 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
+
+        // Document Identifiers
+        @"CDADocument" : [HKObjectType documentTypeForIdentifier:HKDocumentTypeIdentifierCDA],
+    } mutableCopy];
+
+    if (@available(iOS 12.0, *)) {
         
-        //Allergy Records
-        @"AllergyRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord],
 
-        //Condition Records
-        @"ConditionRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierConditionRecord],
+        // //Allergy Records
+        // @"AllergyRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord],
 
-        //Immunization Records
-        @"ImmunizationRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierImmunizationRecord],
+        // //Condition Records
+        // @"ConditionRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierConditionRecord],
 
-        //LabResults Records
-        @"LabResultRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierLabResultRecord],
+        // //Immunization Records
+        // @"ImmunizationRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierImmunizationRecord],
 
-        //Medication Records
-        @"MedicationRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierMedicationRecord],
+        // //LabResults Records
+        // @"LabResultRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierLabResultRecord],
 
-        //Condition Records
-        @"ProcedureRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierProcedureRecord],
+        // //Medication Records
+        // @"MedicationRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierMedicationRecord],
 
-        //Clincal Vital Sign Records
-        @"ClinicalVitalRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord],
+        // //Condition Records
+        // @"ProcedureRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierProcedureRecord],
 
-    };
+        // //Clincal Vital Sign Records
+        // @"ClinicalVitalRecord" : [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord],
+
+        [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord] forKey: @"AllergyRecord"];
+        [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierConditionRecord] forKey: @"ConditionRecord"];
+        [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierImmunizationRecord] forKey: @"ImmunizationRecord"];
+        [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierLabResultRecord] forKey: @"LabResultRecord"];
+        [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierMedicationRecord] forKey: @"MedicationRecord"];
+        [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierProcedureRecord] forKey: @"ProcedureRecord"];
+        [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord] forKey: @"ClinicalVitalRecord"];
+    }
     return readPerms;
 }
 
@@ -136,6 +151,9 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
+
+        // Document Identifiers
+        @"CDADocument" : [HKObjectType documentTypeForIdentifier:HKDocumentTypeIdentifierCDA],
     };
     return writePerms;
 }

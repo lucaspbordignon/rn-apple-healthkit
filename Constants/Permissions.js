@@ -20,6 +20,7 @@ export const Permissions = {
   Caffeine: "Caffeine",
   Calcium: "Calcium",
   Carbohydrates: "Carbohydrates",
+  CDADocument: "CDADocument",
   Chloride: "Chloride",
   Cholesterol: "Cholesterol",
   Copper: "Copper",

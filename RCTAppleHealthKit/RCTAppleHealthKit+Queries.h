@@ -45,4 +45,6 @@
                                    limit:(NSUInteger)lim
                                    completion:(void (^)(NSArray *, NSError *))completion;
 
+- (void)fetchDocumentsWithCompletion:(void (^)(NSArray *, NSError *))completion;
+
 @end

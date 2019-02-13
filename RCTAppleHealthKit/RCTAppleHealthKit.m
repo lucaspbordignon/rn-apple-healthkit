@@ -18,6 +18,7 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_CDA.h"
 #import "RCTAppleHealthKit+Methods_ClinicalRecords.h"
 
 #import <React/RCTBridgeModule.h>
@@ -206,6 +207,16 @@ RCT_EXPORT_METHOD(getInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock
 RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self mindfulness_saveMindfulSession:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(saveCDADocument:(NSString *)xml callback:(RCTResponseSenderBlock)callback)
+{
+    [self cda_saveCDADocument:xml callback:callback];
+}
+
+RCT_EXPORT_METHOD(getCDADocuments:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self cda_getCDADocuments:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getAllergyRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
