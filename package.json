@@ -3,6 +3,7 @@
   "version": "0.6.4",
   "description": "A React Native package for interacting with Apple HealthKit",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/terrillo/rn-apple-healthkit.git"
