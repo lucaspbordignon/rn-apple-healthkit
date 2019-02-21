@@ -254,7 +254,7 @@ RCT_EXPORT_METHOD(getClinicalVitalRecords:(NSDictionary *)input callback:(RCTRes
     [self clinical_getClinicalVitalRecord:input callback:callback];
 }
 
-RCT_EXPORT_METHOD(permissionsAvailable:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self arePermissionsAvailable:input callback:callback];
 }
@@ -367,7 +367,14 @@ RCT_EXPORT_METHOD(permissionsAvailable:(NSDictionary *)input callback:(RCTRespon
         }
          if (@available(iOS 12.0, *)) {
         [self.healthStore getRequestStatusForAuthorizationToShareTypes:shareDataTypes readTypes:readDataTypes completion:^(HKAuthorizationRequestStatus requestStatus, NSError *error) {
-           callback(@[[NSNull null], @true]);
+            if (error) {
+                NSString *errMsg = [NSString stringWithFormat:@"Error with HealthKit permissions: %@", error];
+                NSLog(errMsg);
+                callback(@[RCTMakeError(errMsg, nil, nil)]);
+                return;
+            } else {
+                callback(@[[NSNull null], [NSNumber numberWithInt:requestStatus]]);
+            }
         }];
          }
     } else {
