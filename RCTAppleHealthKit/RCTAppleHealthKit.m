@@ -254,6 +254,11 @@ RCT_EXPORT_METHOD(getClinicalVitalRecords:(NSDictionary *)input callback:(RCTRes
     [self clinical_getClinicalVitalRecord:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(permissionsAvailable:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self arePermissionsAvailable:input callback:callback];
+}
+
 
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
@@ -325,6 +330,49 @@ RCT_EXPORT_METHOD(getClinicalVitalRecords:(NSDictionary *)input callback:(RCTRes
             @"author": @"Greg Wilson",
     };
     callback(@[[NSNull null], info]);
+}
+
+- (void)arePermissionsAvailable:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    self.healthStore = [[HKHealthStore alloc] init];
+
+    if ([HKHealthStore isHealthDataAvailable]) {
+        NSSet *readDataTypes;
+        NSSet *shareDataTypes;
+
+        // get permissions from input object provided by JS options argument
+        NSDictionary* permissions =[input objectForKey:@"permissions"];
+        if(permissions != nil){
+            NSArray* readPermsArray = [permissions objectForKey:@"read"];
+            NSArray* sharePermsArray = [permissions objectForKey:@"share"];
+            NSSet* readPerms = [self getReadPermsFromOptions:readPermsArray];
+            NSSet* sharePerms = [self getWritePermsFromOptions:sharePermsArray];
+
+            if(readPerms != nil) {
+                readDataTypes = readPerms;
+            }
+            if(sharePerms != nil) {
+                shareDataTypes = sharePerms;
+            }
+            
+        } else {
+            callback(@[RCTMakeError(@"permissions must be provided in the initialization options", nil, nil)]);
+            return;
+        }
+
+        // make sure at least 1 read or write permission is provided
+        if(!readDataTypes){
+            callback(@[RCTMakeError(@"at least 1 read or write permission must be set in options.permissions", nil, nil)]);
+            return;
+        }
+         if (@available(iOS 12.0, *)) {
+        [self.healthStore getRequestStatusForAuthorizationToShareTypes:shareDataTypes readTypes:readDataTypes completion:^(HKAuthorizationRequestStatus requestStatus, NSError *error) {
+           callback(@[[NSNull null], @true]);
+        }];
+         }
+    } else {
+        callback(@[RCTMakeError(@"HealthKit permissions is not available", nil, nil)]);
+    }
 }
 
 @end

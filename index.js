@@ -84,6 +84,18 @@ let HealthKit = Object.assign({}, AppleHealthKit, {
 		}
 		return result;
 	},
+
+	getPermissions: async (permissions) => {
+		const hkOptions = { permissions: { read: permissions } };
+		await new Promise((resolve, reject) => AppleHealthKit.permissionsAvailable(hkOptions, (err, results) => {
+			if (err) {
+				console.log("error permissions Healthkit: ", err);
+				return reject(err);
+			}
+			return results;
+			//return resolve(results);
+		}));
+	},
 });
 
 export default HealthKit
