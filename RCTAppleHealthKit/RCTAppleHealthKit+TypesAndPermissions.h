@@ -13,5 +13,9 @@
 
 - (NSSet *)getReadPermsFromOptions:(NSArray *)options;
 - (NSSet *)getWritePermsFromOptions:(NSArray *)options;
+- (NSArray *)getReadPermsArrayFromOptions:(NSArray *)options;
+- (NSArray *)getWritePermsArrayFromOptions:(NSArray *)options;
++ (NSDictionary *)getStringToWorkoutActivityTypeDictionary;
++ (NSDictionary *)getNumberToWorkoutNameDictionary;
 
 @end

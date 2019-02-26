@@ -43,8 +43,8 @@ If new read/write permissions are added to the options object then the app user 
 ```javascript
 let options = {
     permissions: {
-        read: ["Height", "Weight", "StepCount", "DateOfBirth", "BodyMassIndex", "ActiveEnergyBurned"],
-        write: ["Height", "Weight", "StepCount", "BodyMassIndex", "Biotin", "Caffeine", "Calcium", "Carbohydrates", "Chloride", "Cholesterol", "Copper", "EnergyConsumed", "FatMonounsaturated", "FatPolyunsaturated", "FatSaturated", "FatTotal", "Fiber", "Folate", "Iodine", "Iron", "Magnesium", "Manganese", "Molybdenum", "Niacin", "PantothenicAcid", "Phosphorus", "Potassium", "Protein", "Riboflavin", "Selenium", "Sodium", "Sugar", "Thiamin", "VitaminA", "VitaminB12", "VitaminB6", "VitaminC", "VitaminD", "VitaminE", "VitaminK", "Zinc", "Water"]
+        read: ["Height", "Weight", "StepCount", "DateOfBirth", "BodyMassIndex", "ActiveEnergyBurned","Workout","Cholesterol"],
+        write: ["Height", "Weight", "StepCount", "BodyMassIndex", "Biotin", "Caffeine", "Calcium", "Carbohydrates", "Chloride", "Cholesterol", "Copper", "EnergyConsumed", "FatMonounsaturated", "FatPolyunsaturated", "FatSaturated", "FatTotal", "Fiber", "Folate", "Iodine", "Iron", "Magnesium", "Manganese", "Molybdenum", "Niacin", "PantothenicAcid", "Phosphorus", "Potassium", "Protein", "Riboflavin", "Selenium", "Sodium", "Sugar", "Thiamin", "VitaminA", "VitaminB12", "VitaminB6", "VitaminC", "VitaminD", "VitaminE", "VitaminK", "Zinc", "Water","Workout"]
     }
 };
 ```
@@ -100,10 +100,11 @@ AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => 
     * Base Methods
       * [isAvailable](/docs/isAvailable().md)
       * [initHealthKit](/docs/initHealthKit().md)
+      * [getAuthStatus](https://github.com/AFGhazy/rn-apple-healthkit/wiki/getAuthStatus())
     * Realtime Methods
       * [initStepCountObserver](/docs/initStepCountObserver().md)
     * Read Methods
-      * [getActiveEnergyBurned](/docs/getActiveEnergyBurned().md)
+* [getActiveEnergyBurned](/docs/getActiveEnergyBurned().md)
       * [getBasalEnergyBurned](/docs/getBasalEnergyBurned().md)
       * [getBiologicalSex](/docs/getBiologicalSex().md)
       * [getBloodGlucoseSamples](/docs/getbloodglucosesamples().md)
@@ -134,6 +135,8 @@ AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => 
       * [saveMindfulSession](/docs/saveMindfulSession().md)
       * [saveWeight](/docs/saveweight().md)
       * [saveSteps](/docs/saveSteps().md)
+	    * [saveWorkout](https://github.com/AFGhazy/rn-apple-healthkit/wiki/saveWorkout())
+
   * [References](#references)
 
 ## Supported Apple Permissions
@@ -163,6 +166,8 @@ The available Healthkit permissions to use with `initHealthKit`
 | StepCount              | [HKQuantityTypeIdentifierStepCount](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierstepcount?language=objc)                               | ✓    | ✓     |
 | Steps                  | [HKQuantityTypeIdentifierSteps](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifiersteps?language=objc)                                       | ✓    | ✓     |
 | Weight                 | [HKQuantityTypeIdentifierBodyMass](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodymass?language=objc)                                 | ✓    | ✓     |
+| Workout                 | [HKWorkout](https://developer.apple.com/documentation/healthkit/hkworkout?language=objc)                                 | ✓    | ✓     |
+| Dietary Cholesterol                 | [HKQuantityTypeIdentifierDietaryCholesterol](https://developer.apple.com/documentation/healthkit/hkworkout?language=objc)                                 | ✓    |      |
 
 These permissions are exported as constants of the `rn-apple-healthkit` module.
 
