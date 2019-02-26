@@ -66,5 +66,6 @@ export const Permissions = {
   SleepAnalysis: "SleepAnalysis",
   StepCount: "StepCount",
   Steps: "Steps",
-  Weight: "Weight"
+  Weight: "Weight",
+  Vo2Max: "Vo2Max"
 }

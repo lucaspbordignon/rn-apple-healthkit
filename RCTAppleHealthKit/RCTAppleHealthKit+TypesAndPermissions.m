@@ -14,7 +14,7 @@
 #pragma mark - HealthKit Permissions
 
 - (NSDictionary *)readPermsDict {
-    NSDictionary *readPerms = @{
+    NSMutableDictionary *readPerms = [@{
         // Characteristic Identifiers
         @"DateOfBirth" : [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth],
         @"BiologicalSex" : [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex],
@@ -49,7 +49,10 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
-    };
+    } mutableCopy];
+    if (@available(iOS 11.0, *)) {
+      readPerms[@"Vo2Max"] = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierVO2Max];
+    }
     return readPerms;
 }
 
