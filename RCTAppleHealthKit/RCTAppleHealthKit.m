@@ -19,10 +19,7 @@
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
 #import "RCTAppleHealthKit+Methods_CDA.h"
-<<<<<<< HEAD
 #import "RCTAppleHealthKit+Methods_ClinicalRecords.h"
-=======
->>>>>>> master
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -264,8 +261,6 @@ RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCT
 }
 
 
-=======
->>>>>>> master
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
 {
