@@ -19,7 +19,10 @@
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
 #import "RCTAppleHealthKit+Methods_CDA.h"
+<<<<<<< HEAD
 #import "RCTAppleHealthKit+Methods_ClinicalRecords.h"
+=======
+>>>>>>> master
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -218,6 +221,7 @@ RCT_EXPORT_METHOD(getCDADocuments:(NSDictionary *)input callback:(RCTResponseSen
 {
     [self cda_getCDADocuments:input callback:callback];
 }
+<<<<<<< HEAD
 
 RCT_EXPORT_METHOD(getAllergyRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
@@ -260,6 +264,8 @@ RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCT
 }
 
 
+=======
+>>>>>>> master
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
 {
