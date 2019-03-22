@@ -3,7 +3,8 @@
 //  RCTAppleHealthKit
 //
 //  Created by Greg Wilson on 2016-06-26.
-//  Copyright © 2016 Greg Wilson. All rights reserved.
+//  This source code is licensed under the MIT-style license found in the
+//  LICENSE file in the root directory of this source tree.
 //
 
 #import "RCTAppleHealthKit.h"
@@ -23,6 +24,7 @@
 #import <React/RCTEventDispatcher.h>
 
 @implementation RCTAppleHealthKit
+
 @synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE();
@@ -112,6 +114,16 @@ RCT_EXPORT_METHOD(getHourlyStepCount:(NSDictionary *)input callback:(RCTResponse
     [self fitness_getHourlyStepCountOnDay:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_getSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(setObserver:(NSDictionary *)input)
+{
+    [self fitness_setObserver:input];
+}
+
 RCT_EXPORT_METHOD(getDailyStepCountSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_getDailyStepSamples:input callback:callback];
@@ -170,6 +182,11 @@ RCT_EXPORT_METHOD(getHeartRateSamples:(NSDictionary *)input callback:(RCTRespons
 RCT_EXPORT_METHOD(getActiveEnergyBurned:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
    [self activity_getActiveEnergyBurned:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getActiveEnergyBurnedSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+  [self activity_getActiveEnergyBurnedSamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getBasalEnergyBurned:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
