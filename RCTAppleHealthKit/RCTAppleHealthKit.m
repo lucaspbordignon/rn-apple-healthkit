@@ -184,6 +184,11 @@ RCT_EXPORT_METHOD(getActiveEnergyBurned:(NSDictionary *)input callback:(RCTRespo
    [self activity_getActiveEnergyBurned:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getActiveEnergyBurnedSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+  [self activity_getActiveEnergyBurnedSamples:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getBasalEnergyBurned:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self activity_getBasalEnergyBurned:input callback:callback];

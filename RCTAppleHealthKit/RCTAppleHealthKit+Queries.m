@@ -256,8 +256,6 @@
 
     NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate
                                                                        ascending:false];
-
-
     // declare the block
     void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
     // create and assign the block
@@ -339,18 +337,6 @@
     [self.healthStore executeQuery:query];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 - (void)fetchCorrelationSamplesOfType:(HKQuantityType *)quantityType
                                  unit:(HKUnit *)unit
                             predicate:(NSPredicate *)predicate
@@ -403,7 +389,6 @@
     [self.healthStore executeQuery:query];
 }
 
-
 - (void)fetchSumOfSamplesTodayForType:(HKQuantityType *)quantityType
                                  unit:(HKUnit *)unit
                            completion:(void (^)(double, NSError *))completionHandler {
@@ -422,7 +407,6 @@
 
     [self.healthStore executeQuery:query];
 }
-
 
 - (void)fetchSumOfSamplesOnDayForType:(HKQuantityType *)quantityType
                                  unit:(HKUnit *)unit
@@ -451,7 +435,6 @@
     [self.healthStore executeQuery:query];
 }
 
-
 - (void)fetchHourlySamplesOnDayForType:(HKQuantityType *)quantityType
                                   unit:(HKUnit *)unit
                                    day:(NSDate *)day
@@ -470,7 +453,6 @@
                                    interval:interval
                                       completion:completionHandler];
 }
-
 
 - (void)fetchCumulativeSumStatisticsCollection:(HKQuantityType *)quantityType
                                           unit:(HKUnit *)unit
@@ -524,7 +506,6 @@
     [self.healthStore executeQuery:query];
 }
 
-
 - (void)fetchCumulativeSumStatisticsCollection:(HKQuantityType *)quantityType
                                           unit:(HKUnit *)unit
                                      startDate:(NSDate *)startDate
@@ -534,7 +515,6 @@
                                     completion:(void (^)(NSArray *, NSError *))completionHandler {
     [self fetchCumulativeSumStatisticsCollection:quantityType unit:unit startDate:startDate endDate:endDate ascending:asc limit:lim interval:24*60 completion:completionHandler];
 }
-
 
 - (void)fetchCumulativeSumStatisticsCollection:(HKQuantityType *)quantityType
                                           unit:(HKUnit *)unit
