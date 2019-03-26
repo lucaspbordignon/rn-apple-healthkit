@@ -50,8 +50,8 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
-        //workouts
-        @"Workout" : [HKObjectType workoutType],
+        // workouts
+        @"Workout" : [HKObjectType workoutType]
     };
     return readPerms;
 }
@@ -117,6 +117,8 @@
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
         // Mindfulness
         @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
+        // Workout
+        @"Workout" : [HKObjectType workoutType]
     };
     return writePerms;
 }
@@ -150,6 +152,28 @@
         }
     }
     return writePermSet;
+}
+
+- (NSString *)getAuthorizationStatusString:(HKAuthorizationStatus)status {
+  switch (status) {
+    case HKAuthorizationStatusNotDetermined:
+      return @"NotDetermined";
+    case HKAuthorizationStatusSharingDenied:
+      return @"SharingDenied";
+    case HKAuthorizationStatusSharingAuthorized:
+      return @"SharingAuthorized";
+  }
+}
+
+- (NSString *)getAuthorizationRequestStatusString:(HKAuthorizationRequestStatus)status  API_AVAILABLE(ios(12.0)) {
+  switch (status) {
+    case HKAuthorizationRequestStatusUnknown:
+      return @"Unknown";
+    case HKAuthorizationRequestStatusShouldRequest:
+      return @"ShouldRequest";
+    case HKAuthorizationRequestStatusUnnecessary:
+      return @"Unnecessary";
+  }
 }
 
 @end
