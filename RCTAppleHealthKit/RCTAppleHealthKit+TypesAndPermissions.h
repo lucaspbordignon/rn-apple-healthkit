@@ -15,5 +15,7 @@
 - (NSDictionary *)writePermsDict;
 - (NSSet *)getReadPermsFromOptions:(NSArray *)options;
 - (NSSet *)getWritePermsFromOptions:(NSArray *)options;
+- (NSString *)getAuthorizationStatusString:(HKAuthorizationStatus)status;
+- (NSString *)getAuthorizationRequestStatusString:(HKAuthorizationRequestStatus)status;
 
 @end

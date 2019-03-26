@@ -19,6 +19,7 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Utils.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -37,6 +38,16 @@ RCT_EXPORT_METHOD(isAvailable:(RCTResponseSenderBlock)callback)
 RCT_EXPORT_METHOD(initHealthKit:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self initializeHealthKit:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getWriteAuthorizationStatus:(NSString *)input callback:(RCTResponseSenderBlock)callback)
+{
+  [self getWriteAuthorizationStatusForType:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getAuthorizationRequestStatus:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+  [self getAuthorizationStatus:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(initStepCountObserver:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
@@ -229,7 +240,6 @@ RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponse
     [self mindfulness_saveMindfulSession:input callback:callback];
 }
 
-
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
 {
     BOOL isAvailable = NO;
@@ -239,29 +249,27 @@ RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponse
     callback(@[[NSNull null], @(isAvailable)]);
 }
 
-
 - (void)initializeHealthKit:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
     self.healthStore = [[HKHealthStore alloc] init];
 
     if ([HKHealthStore isHealthDataAvailable]) {
+      BOOL initSilently = [RCTAppleHealthKit boolFromOptions:input key:@"silently" withDefault:NO];
+      if (initSilently) {
+        callback(@[[NSNull null], [NSNull null]]);
+        return;
+      }
+
         NSSet *writeDataTypes;
         NSSet *readDataTypes;
 
         // get permissions from input object provided by JS options argument
-        NSDictionary* permissions =[input objectForKey:@"permissions"];
+        NSDictionary* permissions = [input objectForKey:@"permissions"];
         if(permissions != nil){
             NSArray* readPermsArray = [permissions objectForKey:@"read"];
             NSArray* writePermsArray = [permissions objectForKey:@"write"];
-            NSSet* readPerms = [self getReadPermsFromOptions:readPermsArray];
-            NSSet* writePerms = [self getWritePermsFromOptions:writePermsArray];
-
-            if(readPerms != nil) {
-                readDataTypes = readPerms;
-            }
-            if(writePerms != nil) {
-                writeDataTypes = writePerms;
-            }
+            readDataTypes = [self getReadPermsFromOptions:readPermsArray];
+            writeDataTypes = [self getWritePermsFromOptions:writePermsArray];
         } else {
             callback(@[RCTMakeError(@"permissions must be provided in the initialization options", nil, nil)]);
             return;
@@ -273,21 +281,80 @@ RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponse
             return;
         }
 
-        [self.healthStore requestAuthorizationToShareTypes:writeDataTypes readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
-            if (!success) {
-                NSString *errMsg = [NSString stringWithFormat:@"Error with HealthKit authorization: %@", error];
-                NSLog(errMsg);
-                callback(@[RCTMakeError(errMsg, nil, nil)]);
-                return;
-            } else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    callback(@[[NSNull null], @true]);
-                });
-            }
-        }];
+      [self.healthStore requestAuthorizationToShareTypes:writeDataTypes readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
+        if (!success) {
+          NSString *errMsg = [NSString stringWithFormat:@"Error with HealthKit authorization: %@", error];
+          NSLog(@"%@", errMsg);
+          callback(@[RCTMakeError(errMsg, nil, nil)]);
+          return;
+        } else {
+          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            callback(@[[NSNull null], @true]);
+          });
+        }
+      }];
     } else {
         callback(@[RCTMakeError(@"HealthKit data is not available", nil, nil)]);
     }
+}
+
+- (void)getAuthorizationStatus:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback {
+  if (![HKHealthStore isHealthDataAvailable]) {
+    callback(@[RCTMakeError(@"HealthKit data is not available", nil, nil)]);
+    return;
+  }
+
+  if (self.healthStore == nil) {
+    self.healthStore = [[HKHealthStore alloc] init];
+  }
+
+  NSSet *writeDataTypes;
+  NSSet *readDataTypes;
+
+  // get permissions from input object provided by JS options argument
+  NSDictionary* permissions = [input objectForKey:@"permissions"];
+  if(permissions != nil){
+    NSArray* readPermsArray = [permissions objectForKey:@"read"];
+    NSArray* writePermsArray = [permissions objectForKey:@"write"];
+    readDataTypes = [self getReadPermsFromOptions:readPermsArray];
+    writeDataTypes = [self getWritePermsFromOptions:writePermsArray];
+  } else {
+    callback(@[RCTMakeError(@"permissions must be provided in the initialization options", nil, nil)]);
+    return;
+  }
+
+  // make sure at least 1 read or write permission is provided
+  if(!writeDataTypes && !readDataTypes){
+    callback(@[RCTMakeError(@"at least 1 read or write permission must be set in options.permissions", nil, nil)]);
+    return;
+  }
+
+  if (@available(iOS 12.0, *)) {
+    [self.healthStore getRequestStatusForAuthorizationToShareTypes:writeDataTypes
+                                                         readTypes:readDataTypes
+                                                        completion:^(HKAuthorizationRequestStatus requestStatus, NSError * _Nullable error)
+     {
+       NSString *status = [self getAuthorizationRequestStatusString:requestStatus];
+       callback(@[[NSNull null], status]);
+     }];
+  } else {
+    // Unknown iOS < 12
+    callback(@[[NSNull null], @"Unknown"]);
+  }
+}
+
+- (void)getWriteAuthorizationStatusForType:(NSString *)type callback:(RCTResponseSenderBlock)callback {
+  if (self.healthStore == nil) {
+    self.healthStore = [[HKHealthStore alloc] init];
+  }
+
+  if ([HKHealthStore isHealthDataAvailable]) {
+    HKObjectType *objectType = [[self writePermsDict] objectForKey:type];
+    NSString *status = [self getAuthorizationStatusString:[self.healthStore authorizationStatusForType:objectType]];
+    callback(@[[NSNull null], status]);
+  } else {
+    callback(@[RCTMakeError(@"HealthKit data is not available", nil, nil)]);
+  }
 }
 
 - (void)getModuleInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
