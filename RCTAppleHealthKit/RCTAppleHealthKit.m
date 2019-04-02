@@ -218,7 +218,6 @@ RCT_EXPORT_METHOD(getCDADocuments:(NSDictionary *)input callback:(RCTResponseSen
 {
     [self cda_getCDADocuments:input callback:callback];
 }
-<<<<<<< HEAD
 
 RCT_EXPORT_METHOD(getAllergyRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
