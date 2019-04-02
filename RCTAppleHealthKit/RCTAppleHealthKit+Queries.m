@@ -439,6 +439,7 @@
 
 - (void)fetchDocumentsWithCompletion:(void (^)(NSArray *, NSError *))completion {
     HKDocumentType *cdaType = [HKObjectType documentTypeForIdentifier:HKDocumentTypeIdentifierCDA];
+
     
     NSMutableArray *allDocuments = [NSMutableArray new];
     HKDocumentQuery *cdaQuery = [[HKDocumentQuery alloc] initWithDocumentType:cdaType
@@ -451,7 +452,6 @@
                                                                        completion(nil, error);
                                                                        return;
                                                                    }
-                                                                   
                                                                    for (HKCDADocumentSample *result in results) {
                                                                        HKCDADocument *document = result.document;
                                                                        NSString *xml = [[NSString alloc] initWithData:document.documentData encoding:NSUTF8StringEncoding];
@@ -462,13 +462,12 @@
                                                                                                  @"title": document.title,
                                                                                                  @"documentData": xml}];
                                                                    }
-                                                                   
                                                                    if (done) {
                                                                        // Handle documents
                                                                        completion(allDocuments, nil);
                                                                    }
                                                                }];
-    
+
     [self.healthStore executeQuery:cdaQuery];
 }
 

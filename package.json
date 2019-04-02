@@ -1,6 +1,6 @@
 {
   "name": "rn-apple-healthkit",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "A React Native package for interacting with Apple HealthKit",
   "main": "index.js",
   "repository": {
@@ -28,5 +28,8 @@
   },
   "peerDependencies": {
     "react-native": ">=0.40.0"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
   }
 }
