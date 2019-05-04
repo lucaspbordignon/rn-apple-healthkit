@@ -113,8 +113,6 @@
                                             unit:unit
                                        startDate:startDate
                                          endDate:endDate
-                                       ascending:ascending
-                                           limit:limit
                                       completion:^(NSArray *arr, NSError *err){
         if (err != nil) {
             callback(@[RCTJSErrorFromNSError(err)]);

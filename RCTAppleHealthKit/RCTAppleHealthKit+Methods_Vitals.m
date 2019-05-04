@@ -39,6 +39,42 @@
     }];
 }
 
+- (void)vitals_getHeartRateHourlySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+
+
+    HKQuantityType *heartRateType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+
+    HKUnit *count = [HKUnit countUnit];
+    HKUnit *minute = [HKUnit minuteUnit];
+
+    HKUnit *unit = [RCTAppleHealthKit hkUnitFromOptions:input key:@"unit" withDefault:[count unitDividedByUnit:minute]];
+    NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+    if(startDate == nil){
+        callback(@[RCTMakeError(@"startDate is required in options", nil, nil)]);
+        return;
+    }
+
+    [self fetchAverageHourlyStatisticsCollection:heartRateType
+                                            unit:unit
+                                       startDate:startDate
+                                         endDate:endDate
+                                       ascending:false
+                                           limit:limit
+                                      completion:^(NSArray *results, NSError *error) {
+        if(results){
+            callback(@[[NSNull null], results]);
+            return;
+        } else {
+            NSLog(@"error getting heart rate samples: %@", error);
+            callback(@[RCTMakeError(@"error getting heart rate samples", nil, nil)]);
+            return;
+        }
+    }];
+
+}
 
 - (void)vitals_getBodyTemperatureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
