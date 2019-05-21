@@ -143,50 +143,11 @@
     HKQuantity *diastolicQuantity = [HKQuantity quantityWithUnit:[HKUnit millimeterOfMercuryUnit] doubleValue:diastolic];
     HKQuantitySample *diastolicSample = [HKQuantitySample quantitySampleWithType:diastolicType quantity:diastolicQuantity startDate:sampleDate endDate:sampleDate];
 
-    /*
-    // Get  device data
-    NSString *deviceName = [RCTAppleHealthKit stringFromOptions:input key:@"deviceName" withDefault:@"Unknown"];
-    NSString *manufacturerName = [RCTAppleHealthKit stringFromOptions:input key:@"manufacturerName" withDefault:@"Unknown"];
-    NSString *modelName = [RCTAppleHealthKit stringFromOptions:input key:@"modelName" withDefault:@"Unknown"];
-    NSString *hardwareVersionNumber = [RCTAppleHealthKit stringFromOptions:input key:@"hardwareVersionNumber" withDefault:@"Unknown"];
-    NSString *firmwareVersionNumber = [RCTAppleHealthKit stringFromOptions:input key:@"firmwareVersionNumber" withDefault:@"Unknown"];
-    NSString *localIdentifier = [RCTAppleHealthKit stringFromOptions:input key:@"localIdentifier" withDefault:@"Unknown"];
-    NSString *deviceIdentifier = [RCTAppleHealthKit stringFromOptions:input key:@"deviceIdentifier" withDefault:@"Unknown"];
-   
-     HKDevice *device = [[HKDevice alloc] initWithName: deviceName,
-     manufacturer: manufacturerName,
-     model: modelName,
-     hardwareVersion: hardwareVersionNumber,
-     firmwareVersion: firmwareVersionNumber,
-     localIdentifier: localIdentifier,
-     UDIDeviceIdentifier: deviceIdentifier];
-     */
-    
-    
     HKCorrelationType *bloodPressureType = [HKObjectType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
-
-
     NSSet *bloodObjects = [NSSet setWithObjects:systolicSample, diastolicSample, nil];
-    
-    
-    /*
-    NSDictionary *metadata = @{HKMetadataKeyDigitalSignature:digitalSignature,
-                               HKMetadataKeyTimeZone:timeZone};
-    */
-    
-    HKCorrelation *bloodPressure =
-    [HKCorrelation correlationWithType:bloodPressureType
-                             startDate:sampleDate
-                               endDate:sampleDate
-                               objects:bloodObjects];
-     /*
-                                device:device
-                                metadata:nil];
 
-      */
-      
-      
-    
+    HKCorrelation *bloodPressure = [HKCorrelation correlationWithType:bloodPressureType startDate:sampleDate endDate:sampleDate objects:bloodObjects];
+
     [self.healthStore saveObject:bloodPressure withCompletion:^(BOOL success, NSError *error) {
         if (!success) {
             NSLog(@"error saving the blood pressure sample: %@", error);
@@ -195,10 +156,6 @@
         }
         callback(@[[NSNull null], @(systolic)]);
     }];
-    
-    
-    
-    
 }
 
 
