@@ -256,6 +256,7 @@
                                    limit:(NSUInteger)lim
                                    completion:(void (^)(NSArray *, NSError *))completion {
 
+
     NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate
                                                                        ascending:false];
 
@@ -277,36 +278,41 @@
             dispatch_async(dispatch_get_main_queue(), ^{
 
                 for (HKCategorySample *sample in results) {
-
+                    
                     // HKCategoryType *catType = sample.categoryType;
                     NSInteger val = sample.value;
-
+                    NSString * source = sample.sourceRevision.source.name;
+   
                     // HKQuantity *quantity = sample.quantity;
                     // double value = [quantity doubleValueForUnit:unit];
-
+                    
                     NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
                     NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
-
+                    
                     NSString *valueString;
-
+                    
                     switch (val) {
-                      case HKCategoryValueSleepAnalysisInBed:
-                        valueString = @"INBED";
-                      break;
-                      case HKCategoryValueSleepAnalysisAsleep:
-                        valueString = @"ASLEEP";
-                      break;
-                     default:
-                        valueString = @"UNKNOWN";
-                     break;
-                  }
-
+                        case HKCategoryValueSleepAnalysisInBed:
+                            valueString = @"INBED";
+                            break;
+                        case HKCategoryValueSleepAnalysisAsleep:
+                            valueString = @"ASLEEP";
+                            break;
+                        case HKCategoryValueSleepAnalysisAwake:
+                            valueString = @"AWAKE";
+                            break;
+                        default:
+                            valueString = @"UNKNOWN";
+                            break;
+                    }
+                    
                     NSDictionary *elem = @{
-                            @"value" : valueString,
-                            @"startDate" : startDateString,
-                            @"endDate" : endDateString,
-                    };
-
+                                           @"value" : valueString,
+                                           @"startDate" : startDateString,
+                                           @"endDate" : endDateString,
+                                           @"source" : source
+                                           };
+                    
                     [data addObject:elem];
                 }
 
@@ -314,32 +320,6 @@
             });
         }
     };
-
-    // HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:quantityType
-    //                                                        predicate:predicate
-    //                                                            limit:lim
-    //                                                  sortDescriptors:@[timeSortDescriptor]
-    //                                                   resultsHandler:handlerBlock];
-
-    HKCategoryType *categoryType =
-    [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
-
-    // HKCategorySample *categorySample =
-    // [HKCategorySample categorySampleWithType:categoryType
-    //                                    value:value
-    //                                startDate:startDate
-    //                                  endDate:endDate];
-
-
-   HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:categoryType
-                                                          predicate:predicate
-                                                              limit:lim
-                                                    sortDescriptors:@[timeSortDescriptor]
-                                                     resultsHandler:handlerBlock];
-
-
-    [self.healthStore executeQuery:query];
-}
 
 
 
