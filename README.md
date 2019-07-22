@@ -117,6 +117,7 @@ AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => 
       * [getBloodGlucoseSamples](/docs/getBloodglucoseSamples().md)
       * [getBloodPressureSamples](/docs/getBloodPressureSamples().md)
       * [getBodyTemperatureSamples](/docs/getBodyTemperatureSamples().md)
+      * [getCalciumSamples](/docs/getCalciumSamples().md)
       * [getDailyDistanceCyclingSamples](/docs/getDailyDistanceCyclingSamples().md)
       * [getDailyDistanceWalkingRunningSamples](/docs/getDailyDistanceWalkingRunningSamples().md)
       * [getDailyFlightsClimbedSamples](/docs/getDailyFlightsClimbedSamples().md)
@@ -164,6 +165,7 @@ The available Healthkit permissions to use with `initHealthKit`
 | BloodPressureSystolic  | [HKQuantityTypeIdentifierBloodPressureSystolic](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifierbloodpressuresystolic?language=objc)   | ✓    | ✓     |
 | BodyMassIndex          | [HKQuantityTypeIdentifierBodyMassIndex](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodymassindex?language=objc)                       | ✓    | ✓     |
 | BodyTemperature        | [HKQuantityTypeIdentifierBodyTemperature](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodytemperature?language=objc)                   | ✓    |       |
+| Calcium                | [HKQuantityTypeIdentifierDietaryCalcium](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifierdietarycalcium?preferredLanguage=occ)                   | ✓    |       |
 | DateOfBirth            | [HKCharacteristicTypeIdentifierDateOfBirth](https://developer.apple.com/reference/Healthkit/hkcharacteristictypeidentifierdateofbirth?language=objc)               | ✓    |       |
 | DistanceCycling        | [HKQuantityTypeIdentifierDistanceCycling](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierdistancecycling?language=objc)                   | ✓    | ✓     |
 | DistanceWalkingRunning | [HKQuantityTypeIdentifierDistanceWalkingRunning](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierdistancewalkingrunning?language=objc)     | ✓    | ✓     |
