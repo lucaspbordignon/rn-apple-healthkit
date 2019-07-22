@@ -200,6 +200,12 @@ RCT_EXPORT_METHOD(getCalciumSamples:(NSDictionary *)input callback:(RCTResponseS
     [self dietary_getCalciumSamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getFoodSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getFoodSamples:input callback:callback];
+}
+
+
 RCT_EXPORT_METHOD(getHeartRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self vitals_getHeartRateSamples:input callback:callback];
