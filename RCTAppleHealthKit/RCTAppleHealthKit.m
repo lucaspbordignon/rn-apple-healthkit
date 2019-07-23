@@ -196,7 +196,7 @@ RCT_EXPORT_METHOD(saveWater:(NSDictionary *)input callback:(RCTResponseSenderBlo
     [self saveWater:input callback:callback];
 }
 
-RCT_EXPORT_METHOD(getFoodSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(getNutritionSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self getNutritionSamples:input callback:callback];
 }
