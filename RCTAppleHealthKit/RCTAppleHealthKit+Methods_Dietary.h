@@ -12,6 +12,6 @@
 
 - (void)saveFood:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)saveWater:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
-- (void)dietary_getCalciumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)getNutritionSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
 @end
