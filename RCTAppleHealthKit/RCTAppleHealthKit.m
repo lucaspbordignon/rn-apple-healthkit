@@ -12,13 +12,14 @@
 
 #import "RCTAppleHealthKit+Methods_Activity.h"
 #import "RCTAppleHealthKit+Methods_Body.h"
-#import "RCTAppleHealthKit+Methods_Fitness.h"
-#import "RCTAppleHealthKit+Methods_Dietary.h"
 #import "RCTAppleHealthKit+Methods_Characteristic.h"
-#import "RCTAppleHealthKit+Methods_Vitals.h"
+#import "RCTAppleHealthKit+Methods_Dietary.h"
+#import "RCTAppleHealthKit+Methods_Fitness.h"
+#import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_ReproductiveHealth.h"
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
-#import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_Vitals.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -243,6 +244,26 @@ RCT_EXPORT_METHOD(getInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock
 RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self mindfulness_saveMindfulSession:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getBasalBodyTemperatureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self reproductiveHealth_getBasalBodyTemperatureSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getMenstruationFlowSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self reproductiveHealth_getMenstruationFlowSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getOvulationTestResultSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self reproductiveHealth_getOvulationTestResultSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getSexualActivitySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self reproductiveHealth_getSexualActivitySamples:input callback:callback];
 }
 
 
