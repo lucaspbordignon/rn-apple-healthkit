@@ -1,6 +1,6 @@
 ```javascript
 let options = {
-  ascending: 'celsius', // optional; default true
+  ascending: true, // optional; default true
   endDate: new Date().toISOString(), // optional; default now
   startDate: new Date(2019, 06, 21).toISOString(), // required
   unit: 'celsius' // optional; default 'celsius'
