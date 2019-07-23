@@ -54,7 +54,7 @@
         //workouts
         @"Workout" : [HKObjectType workoutType],
         // Reproductive Health
-        @"BasalBodyTemperature" : [HKObjectType categoryTypeForIdentifier:HKQuantityTypeIdentifierBasalBodyTemperature],
+        @"BasalBodyTemperature" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSexualActivity],
         @"MenstruationFlow" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow],
         @"OvulationTestResult" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierOvulationTestResult],
         @"SexualActivity" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSexualActivity],
