@@ -9,7 +9,7 @@ let options = {
 ```
 
 ```javascript
-AppleHealthKit.getFoodSamples(options: Object, (error: Object, results: Object) => {
+AppleHealthKit.getNutritionSamples(options: Object, (error: Object, results: Object) => {
     if (error) {
       console.error(error.message);
     }
