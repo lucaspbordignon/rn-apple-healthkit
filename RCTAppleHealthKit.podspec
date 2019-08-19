@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "Terrillo Walls" => "terrillo@terrillo.com" }
   s.platform     = :ios, "9.0"
-  s.source       = { :git => "https://github.com/stridekick/rn-apple-healthkit.git", :tag => "master" }
+  s.source       = { :git => "https://github.com/stridekick/rn-apple-healthkit.git#24145673bc513abdb88c34d97b99ed72b477c219" }
   s.source_files  = "RCTAppleHealthKit/*.{h,m}"
   s.requires_arc = true
   s.dependency "React"
