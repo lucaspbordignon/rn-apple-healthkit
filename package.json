@@ -1,7 +1,7 @@
 {
   "name": "rn-apple-healthkit",
-  "version": "0.6.5",
-  "description": "A React Native package for interacting with Apple HealthKit",
+  "version": "1.0.0-beta.1",
+  "description": "A React Native bridge module for interacting with Apple Healthkit data. iOS only",
   "main": "index.js",
   "repository": {
     "type": "git",
