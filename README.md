@@ -1,4 +1,3 @@
-
 # React Native Apple Healthkit
 A React Native bridge module for interacting with Apple Healthkit data. Checkout the [full documentation](https://github.com/terrillo/rn-apple-healthkit/tree/master/docs)
 
@@ -8,25 +7,17 @@ Install the [rn-apple-healthkit] package from npm:
 
 - Run `npm install rn-apple-healthkit --save`
 - Run `react-native link rn-apple-healthkit`
-
-Update `info.plist` in your React Native project
+- Run `cd ./ios && pod install`
+- Update `./ios/<Project Name>/info.plist` in your React Native project
 ```
 <key>NSHealthShareUsageDescription</key>
 <string>Read and understand health data.</string>
 <key>NSHealthUpdateUsageDescription</key>
 <string>Share workout data with other apps.</string>
 ```
-
-## Manual Installation
-
-1. Run `npm install rn-apple-healthkit --save`
-2. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-3. Go to `node_modules` ➜ `rn-apple-healthkit` and add `RCTAppleHealthkit.xcodeproj`
-4. In XCode, in the project navigator, select your project. Add `libRCTAppleHealthkit.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-5. Click `RCTAppleHealthkit.xcodeproj` in the project navigator and go the `Build Settings` tab. Make sure 'All' is toggled on (instead of 'Basic'). In the `Search Paths` section, look for `Header Search Paths` and make sure it contains both `$(SRCROOT)/../../react-native/React` and `$(SRCROOT)/../../../React` - mark both as `recursive`.
-6. Enable Healthkit in your application's `Capabilities`
+- Enable Healthkit in your application's `Capabilities`
 ![](https://i.imgur.com/eOCCCyv.png "Xcode Capabilities Section")
-7. Compile and run
+- Build and run
 
 ## Get Started
 Initialize Healthkit. This will show the Healthkit permissions prompt for any read/write permissions set in the required `options` object.
@@ -40,35 +31,32 @@ For any data written to Healthkit an authorization error can be caught. If an au
 If new read/write permissions are added to the options object then the app user will see the Healthkit permissions prompt with the new permissions to allow.
 
 `initHealthKit` requires an options object with Healthkit permission settings
-```javascript
-let options = {
-    permissions: {
-        read: ["Height", "Weight", "StepCount", "DateOfBirth", "BodyMassIndex", "ActiveEnergyBurned"],
-        write: ["Height", "Weight", "StepCount", "BodyMassIndex", "Biotin", "Caffeine", "Calcium", "Carbohydrates", "Chloride", "Cholesterol", "Copper", "EnergyConsumed", "FatMonounsaturated", "FatPolyunsaturated", "FatSaturated", "FatTotal", "Fiber", "Folate", "Iodine", "Iron", "Magnesium", "Manganese", "Molybdenum", "Niacin", "PantothenicAcid", "Phosphorus", "Potassium", "Protein", "Riboflavin", "Selenium", "Sodium", "Sugar", "Thiamin", "VitaminA", "VitaminB12", "VitaminB6", "VitaminC", "VitaminD", "VitaminE", "VitaminK", "Zinc", "Water"]
-    }
-};
-```
 
 ```javascript
 import AppleHealthKit from 'rn-apple-healthkit';
 
-AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => {
+let options = {
+    permissions: {
+        read: ["Height", "Weight"],
+        write: ["Height", "Weight"]
+    }
+};
+
+AppleHealthKit.initHealthKit(options, (err, results) => {
     if (err) {
         console.log("error initializing Healthkit: ", err);
         return;
     }
 
     // Height Example
-    AppleHealthKit.getDateOfBirth(null, (err: Object, results: Object) => {
-    if (this._handleHealthkitError(err, 'getDateOfBirth')) {
-      return;
-    }
+    AppleHealthKit.getDateOfBirth(null, (err, results) => {
       console.log(results)
     });
 
 });
 ```
 
+Height Example Response
 ```javascript
 {
 	value: '1986-09-01T00:00:00.000-0400',
