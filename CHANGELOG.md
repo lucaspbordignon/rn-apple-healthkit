@@ -1,4 +1,8 @@
 # Changelog
+0.7.1v
+- Add TypeScript definition file [#63](https://github.com/terrillo/rn-apple-healthkit/pull/63)
+- Fix ios 9 crash [#109](https://github.com/terrillo/rn-apple-healthkit/pull/109)
+
 0.7v
 - Added Pods Header in Header Search Path [#101](https://github.com/terrillo/rn-apple-healthkit/pull/101)
 - Add podspec for CocoaPods [#96](https://github.com/terrillo/rn-apple-healthkit/pull/96)
