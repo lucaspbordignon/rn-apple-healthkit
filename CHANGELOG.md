@@ -1,4 +1,7 @@
 # Changelog
+0.7.2v
+- Add query for basalEnergyBurned. [#49](https://github.com/terrillo/rn-apple-healthkit/pull/49)
+
 0.7.1v
 - Add TypeScript definition file [#63](https://github.com/terrillo/rn-apple-healthkit/pull/63)
 - Fix ios 9 crash [#109](https://github.com/terrillo/rn-apple-healthkit/pull/109)
