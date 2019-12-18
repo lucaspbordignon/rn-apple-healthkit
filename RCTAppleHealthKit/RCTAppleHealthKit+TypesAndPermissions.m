@@ -15,7 +15,9 @@
 
 - (nullable HKObjectType *)getReadPermFromText:(nonnull NSString*)key {
     // Characteristic Identifiers
-    if ([@"Height" isEqualToString: key]) {
+    if ([@"DateOfBirth" isEqualToString: key]) {
+        return [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth];
+    }else if ([@"Height" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
     }else if ([@"Weight" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
