@@ -19,6 +19,8 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
     }else if ([@"Weight" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+    }else if ([@"BiologicalSex" isEqualToString: key]) {
+        return [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
     }
     
     // Body Measurements
