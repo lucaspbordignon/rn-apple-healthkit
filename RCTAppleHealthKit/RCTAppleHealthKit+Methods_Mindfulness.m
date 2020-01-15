@@ -41,39 +41,43 @@
 {
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
     NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+    double limit = [RCTAppleHealthKit doubleFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
+
     NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc]
-            initWithKey:HKSampleSortIdentifierEndDate
-              ascending:NO
+        initWithKey:HKSampleSortIdentifierEndDate
+        ascending:NO
     ];
 
     HKCategoryType *type = [HKCategoryType categoryTypeForIdentifier: HKCategoryTypeIdentifierMindfulSession];
+    NSPredicate *predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
 
-    NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
     HKSampleQuery *query = [[HKSampleQuery alloc]
-            initWithSampleType:type
-                     predicate:predicate
-                     limit: 0
-               sortDescriptors:@[timeSortDescriptor]
-                resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
+        initWithSampleType:type
+        predicate:predicate
+        limit: limit
+        sortDescriptors:@[timeSortDescriptor]
+        resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
 
-                 if (error != nil) {
-                    NSLog(@"error with fetchCumulativeSumStatisticsCollection: %@", error);
-                    callback(@[RCTMakeError(@"error with fetchCumulativeSumStatisticsCollection", error, nil)]);
-                    return;
-                 }
-                 NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
-                 for (HKQuantitySample *sample in results) {
-                    NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
-                    NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
+            if (error != nil) {
+            NSLog(@"error with fetchCumulativeSumStatisticsCollection: %@", error);
+            callback(@[RCTMakeError(@"error with fetchCumulativeSumStatisticsCollection", error, nil)]);
+            return;
+            }
+            NSMutableArray *data = [NSMutableArray arrayWithCapacity:(10)];
 
-                    NSDictionary *elem = @{
-                            @"startDate" : startDateString,
-                            @"endDate" : endDateString,
-                    };
+            for (HKQuantitySample *sample in results) {
+            NSLog(@"sample for mindfulsession %@", sample);
+            NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
+            NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
 
-                    [data addObject:elem];
-                }
-                callback(@[[NSNull null], data]);
+            NSDictionary *elem = @{
+                    @"startDate" : startDateString,
+                    @"endDate" : endDateString,
+            };
+
+            [data addObject:elem];
+        }
+        callback(@[[NSNull null], data]);
      }
     ];
     [self.healthStore executeQuery:query];
