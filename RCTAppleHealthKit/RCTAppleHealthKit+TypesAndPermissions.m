@@ -85,7 +85,7 @@
     
     // Sleep
     if ([@"SleepAnalysis" isEqualToString: key]) {
-        return [HKObjectType quantityTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
+        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     }
     
     // workouts
