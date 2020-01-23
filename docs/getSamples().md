@@ -55,6 +55,7 @@ for other types:
 ```
 for StepCount:
 ```
+```
 {
   "device": String //"iPhone9,3",
   "end": DateString //"2020-01-22T16:59:59.000+0500",
@@ -64,3 +65,4 @@ for StepCount:
   "tracked": Boolean //true,
   "sourceName": String //"Mi Fit"
 }
+```
