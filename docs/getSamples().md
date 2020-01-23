@@ -4,7 +4,7 @@ Query to get all activities of given type with extended information about it.
 let options = {
   startDate: (new Date(2016,4,27)).toISOString(),
   endDate: (new Date()).toISOString(),
-  type: 'Walking', // one of: ['Walking', 'StairClimbing', 'Running', 'Cycling', 'Workout']
+  type: 'Walking', // one of: ['Walking', 'StairClimbing', 'Running', 'Cycling', 'Workout', 'StepCount']
 };
 ```
 
@@ -34,6 +34,7 @@ In case of workout:
   start: String, // [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
   end: String, // [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
 }
+
 ```
 for other types:
 ```
@@ -50,3 +51,16 @@ for other types:
   calories: Number, // [[sample totalEnergyBurned] doubleValueForUnit:[HKUnit kilocalorieUnit]]
 }
 ```
+
+```
+for StepCount:
+```
+{
+  "device": String //"iPhone9,3",
+  "end": DateString //"2020-01-22T16:59:59.000+0500",
+  "quantity": Number //14,
+  "start": DateString //"2020-01-22T16:50:00.000+0500",
+  "sourceId": String //"HM.wristband",
+  "tracked": Boolean //true,
+  "sourceName": String //"Mi Fit"
+}

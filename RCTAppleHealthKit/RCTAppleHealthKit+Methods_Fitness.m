@@ -54,6 +54,7 @@
     NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
     BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
     NSString *type = [RCTAppleHealthKit stringFromOptions:input key:@"type" withDefault:@"Walking"];
+    HKQuantityType *stepCountType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:[NSDate date]];
     NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
     
@@ -63,22 +64,23 @@
     if ([type isEqual:@"Running"] || [type isEqual:@"Cycling"]) {
         unit = [HKUnit mileUnit];
     }
+
     NSLog(@"error getting samples: %@", [samplesType identifier]);
-    [self fetchSamplesOfType:samplesType
-                                unit:unit
-                           predicate:predicate
-                           ascending:ascending
-                               limit:limit
-                          completion:^(NSArray *results, NSError *error) {
-                              if(results){
-                                  callback(@[[NSNull null], results]);
-                                  return;
-                              } else {
-                                  NSLog(@"error getting samples: %@", error);
-                                  callback(@[RCTMakeError(@"error getting samples", nil, nil)]);
-                                  return;
-                              }
-                          }];
+    [self fetchSamplesOfType:([type isEqual:@"StepCount"]) ? stepCountType : samplesType
+        unit:unit
+        predicate:predicate
+        ascending:ascending
+        limit:limit
+        completion:^(NSArray *results, NSError *error) {
+            if(results){
+                callback(@[[NSNull null], results]);
+                return;
+            } else {
+                NSLog(@"error getting samples: %@", error);
+                callback(@[RCTMakeError(@"error getting samples", nil, nil)]);
+                return;
+            }
+        }];
 }
 
 - (void)fitness_setObserver:(NSDictionary *)input
