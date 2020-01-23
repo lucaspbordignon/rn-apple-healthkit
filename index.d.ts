@@ -10,6 +10,7 @@ declare module "rn-apple-healthkit" {
         endDate?: Date,
         limit?: number
     }
+
     export interface SamplesData {
         startDate?: string,
         endDate?: string,
@@ -36,7 +37,6 @@ declare module "rn-apple-healthkit" {
         getStepCount(options: any, callback: (err: string, results: HealthValue) => void): void;
 
         getSamples(options: SamplesData, callback: (err: string, results: HealthValue) => void): void;
-
     }
 
     export interface HealthDateOfBirth {

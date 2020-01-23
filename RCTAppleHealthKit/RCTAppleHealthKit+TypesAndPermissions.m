@@ -18,10 +18,14 @@
     float systemVersion = deviceInfo.systemVersion.floatValue;
 
     // Characteristic Identifiers
-    if ([@"Height" isEqualToString: key]) {
+    if ([@"DateOfBirth" isEqualToString: key]) {
+        return [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth];
+    }else if ([@"Height" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
     }else if ([@"Weight" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+    }else if ([@"BiologicalSex" isEqualToString: key]) {
+        return [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
     }
     
     // Body Measurements
@@ -83,7 +87,7 @@
     
     // Sleep
     if ([@"SleepAnalysis" isEqualToString: key]) {
-        return [HKObjectType quantityTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
+        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     }
     
     // workouts
