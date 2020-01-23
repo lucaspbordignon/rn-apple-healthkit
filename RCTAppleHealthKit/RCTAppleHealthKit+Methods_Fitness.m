@@ -65,7 +65,6 @@
         unit = [HKUnit mileUnit];
     }
 
-    NSLog(@"error getting samples: %@", [samplesType identifier]);
     [self fetchSamplesOfType:([type isEqual:@"StepCount"]) ? stepCountType : samplesType
         unit:unit
         predicate:predicate
