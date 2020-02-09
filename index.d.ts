@@ -27,6 +27,10 @@ declare module "rn-apple-healthkit" {
         getMindfulSession(options: MindfulSessionData, callback: (err: string, results: HealthValue) => void): void;
 
         getStepCount(options: any, callback: (err: string, results: HealthValue) => void): void;
+
+        getBloodGlucoseSamples(options: GetBloodGlucoseOptions, callback: (error: string, result: Object) => void): void;
+
+        saveBloodGlucoseSample(options: SaveBloodGlucoseOptions, callback: (error: string, result: Object) => void): void;
     }
 
     export interface HealthDateOfBirth {
@@ -43,6 +47,21 @@ declare module "rn-apple-healthkit" {
     export interface HealthUnitOptions {
         unit: HealthUnit;
     }
+
+    export interface GetBloodGlucoseOptions {
+        unit: HealthUnit;
+        startDate: Date;
+        endDate: Date;
+        ascending: boolean;
+        limit: Number;
+    }
+
+    export interface SaveBloodGlucoseOptions {
+        unit: HealthUnit;
+        value: Number,
+        date: Date;
+    }
+
     export enum HealthUnit {
         bpm = "bpm",
         calorie = "calorie",
