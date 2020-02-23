@@ -219,6 +219,11 @@
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     }
     
+    // Reproductive Health
+    if([@"MenstrualFlow" isEqualToString:key]) {
+        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow];
+    }
+
     // Mindfulness
     if([@"MindfulSession" isEqualToString:key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession];

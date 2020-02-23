@@ -65,6 +65,7 @@ export const Permissions = {
   NikeFuel: "NikeFuel",
   RespiratoryRate: "RespiratoryRate",
   SleepAnalysis: "SleepAnalysis",
+  MenstrualFlow: "MenstrualFlow",
   StepCount: "StepCount",
   Steps: "Steps",
   Weight: "Weight",

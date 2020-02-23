@@ -19,6 +19,7 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_Reproductive.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -127,6 +128,11 @@ RCT_EXPORT_METHOD(saveLeanBodyMass:(NSDictionary *)input callback:(RCTResponseSe
 RCT_EXPORT_METHOD(getStepCount:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_getStepCountOnDay:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getMenstrualFlow:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self reproductive_getMenstrualSamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
