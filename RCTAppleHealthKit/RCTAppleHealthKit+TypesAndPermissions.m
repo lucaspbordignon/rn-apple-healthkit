@@ -84,6 +84,11 @@
     if ([@"BloodGlucose" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose];
     }
+
+    // Reproductive Health
+    if([@"MenstrualFlow" isEqualToString:key]) {
+        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow];
+    }
     
     // Sleep
     if ([@"SleepAnalysis" isEqualToString: key]) {
@@ -217,11 +222,6 @@
     // Sleep
     if([@"SleepAnalysis" isEqualToString:key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
-    }
-    
-    // Reproductive Health
-    if([@"MenstrualFlow" isEqualToString:key]) {
-        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow];
     }
 
     // Mindfulness
