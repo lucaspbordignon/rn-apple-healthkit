@@ -46,6 +46,8 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     }else if ([@"DistanceWalkingRunning" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
+    }else if ([@"DistanceSwimming" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceSwimming];
     }else if ([@"DistanceCycling" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling];
     }else if ([@"BasalEnergyBurned" isEqualToString: key]) {
