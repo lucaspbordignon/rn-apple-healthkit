@@ -218,7 +218,7 @@
         theUnit = [HKUnit unitFromString:@"mg/dL"];
     }
     if([unitString isEqualToString:@"yard"]){
-        theUnit = [HKUnit yardUnit]
+        theUnit = [HKUnit yardUnit];
     }
 
     if(theUnit == nil){
