@@ -155,7 +155,7 @@ RCT_EXPORT_METHOD(getDistanceWalkingRunning:(NSDictionary *)input callback:(RCTR
     [self fitness_getDistanceWalkingRunningOnDay:input callback:callback];
 }
 
-RCT_EXPORT_METHOD(saveDistanceWalkingRunning(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(saveDistanceWalkingRunning:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_saveDistanceWalkingRunning:input callback:callback];
 }
