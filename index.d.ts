@@ -63,7 +63,8 @@ declare module "rn-apple-healthkit" {
         mmolPerL = "mmolPerL",
         percent = "percent",
         pound = "pound",
-        second = "second"
+        second = "second",
+        yard = "yard"
     }
 
     const appleHealthKit: AppleHealthKit;

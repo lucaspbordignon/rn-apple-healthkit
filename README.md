@@ -115,6 +115,9 @@ Height Example Response
       * [saveSteps](/docs/saveSteps().md)
       * [saveBodyFatPercentage](/docs/saveBodyFatPercentage().md)
       * [saveLeanBodyMass](/docs/saveLeanBodyMass().md)
+      * [saveActiveEnergyBurned](/docs/saveActiveEnergyBurned().md)
+      * [saveDistanceCycling](/docs/saveDistanceCycling().md)
+      * [saveDistanceWalkingRunning](/docs/saveDistanceWalkingRunning().md)
   * [References](#references)
 
 ## Supported Apple Permissions
@@ -123,7 +126,7 @@ The available Healthkit permissions to use with `initHealthKit`
 
 | Permission             | Healthkit Identifier Type                                                                                                                                          | Read | Write |
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|-------|
-| ActiveEnergyBurned     | [HKQuantityTypeIdentifierActiveEnergyBurned](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/1615771-activeenergyburned?language=objc)           | ✓    |       |
+| ActiveEnergyBurned     | [HKQuantityTypeIdentifierActiveEnergyBurned](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/1615771-activeenergyburned?language=objc)           | ✓    |  ✓    |
 | BasalEnergyBurned      | [HKQuantityTypeIdentifierBasalEnergyBurned](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/1615512-basalenergyburned?language=objc)           | ✓    |       |
 | BiologicalSex          | [HKCharacteristicTypeIdentifierBiologicalSex](https://developer.apple.com/reference/Healthkit/hkcharacteristictypeidentifierbiologicalsex?language=objc)           | ✓    |       |
 | BloodGlucose           | [HKQuantityTypeIdentifierBloodGlucose](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbloodglucose?language=objc)                         | ✓    |       |
@@ -189,6 +192,7 @@ const healthKitOptions = {
 - percent
 - pound
 - second
+- yard
 
 
 ## References
