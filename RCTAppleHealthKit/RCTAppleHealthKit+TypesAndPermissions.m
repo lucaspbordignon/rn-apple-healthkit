@@ -70,6 +70,8 @@
     // Vital Signs Identifiers
     if ([@"HeartRate" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+    }else if ([@"Oxygen" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierOxygenSaturation];
     }else if ([@"BodyTemperature" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyTemperature];
     }else if ([@"BloodPressureSystolic" isEqualToString: key]) {
