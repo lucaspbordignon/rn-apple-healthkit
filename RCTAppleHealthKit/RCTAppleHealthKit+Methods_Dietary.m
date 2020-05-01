@@ -406,4 +406,33 @@
     }];
 }
 
+- (void)getFoodSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback {
+    
+    HKCorrelationType *foodtype = [HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierFood];
+    
+    NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
+    BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+    if(startDate == nil){
+        callback(@[RCTMakeError(@"StartDate is required in options", nil, nil)]);
+        return;
+    }
+
+    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:endDate options:HKQueryOptionNone];
+    NSPredicate *userEnterDataPredicate = [HKQuery predicateForObjectsWithMetadataKey:HKMetadataKeyWasUserEntered operatorType:NSEqualToPredicateOperatorType value: [NSNumber numberWithBool:true]];
+    NSPredicate *allPredicates = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate,userEnterDataPredicate, nil]];
+    
+    [self fetchCorrelationFoodSamplesOfType: foodtype predicate:allPredicates ascending: ascending limit: limit completion:completion:^(NSArray *results, NSError *error) {
+        if(results){
+            callback(@[[NSNull null], results]);
+            return;
+        } else {
+            NSLog(@"error getting food nutirions samples: %@", error);
+            callback(@[RCTMakeError(@"Error getting food nutirions samples", nil, nil)]);
+            return;
+        }
+    }];
+}
+
 @end
