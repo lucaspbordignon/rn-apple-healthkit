@@ -185,6 +185,11 @@ RCT_EXPORT_METHOD(getDailyFlightsClimbedSamples:(NSDictionary *)input callback:(
     [self fitness_getDailyFlightsClimbedSamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(saveWorkout:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_saveWorkout:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(saveFood:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self saveFood:input callback:callback];
