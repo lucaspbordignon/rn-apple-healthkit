@@ -99,7 +99,9 @@
 
     //hearing
     if ([@"HeadphoneAudioExposure" isEqualToString: key] && systemVersion >= 10.0) {
-        return [HKObjectType categoryTypeForIdentifier:HKQuantityTypeIdentifierHeadphoneAudioExposure];
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeadphoneAudioExposure];
+    } else if ([@"EnvironmentalAudioExposure" isEqualToString: key] && systemVersion >= 10.0) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierEnvironmentalAudioExposure];
     }
     
     return nil;

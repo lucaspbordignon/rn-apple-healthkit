@@ -263,7 +263,12 @@ RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseS
 
 RCT_EXPORT_METHOD(getHeadphoneAudioSamples:(NSDictionary *) input callback:(RCTResponseSenderBlock)callback)
 {
-    [self hearing_getHeadphoneAudioSamples:input callback:callback]
+    [self hearing_getHeadphoneAudioSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getEnvironmentalAudioSamples:(NSDictionary *) input callback:(RCTResponseSenderBlock)callback)
+{
+    [self hearing_getEnvironmentalAudioSamples:input callback:callback];
 }
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
