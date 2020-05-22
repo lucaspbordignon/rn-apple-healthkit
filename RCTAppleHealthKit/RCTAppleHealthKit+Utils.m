@@ -184,12 +184,20 @@
     if([unitString isEqualToString:@"day"]){
         theUnit = [HKUnit dayUnit];
     }
+    // Energy units
     if([unitString isEqualToString:@"joule"]){
         theUnit = [HKUnit jouleUnit];
     }
-    if([unitString isEqualToString:@"calorie"]){
-        theUnit = [HKUnit calorieUnit];
+    if([unitString isEqualToString:@"kilocalorie"]){
+        theUnit = [HKUnit kilocalorieUnit];
     }
+    if([unitString isEqualToString:@"smallCalorie"]){
+        theUnit = [HKUnit smallCalorieUnit];
+    }
+    if([unitString isEqualToString:@"largeCalorie"]){
+        theUnit = [HKUnit largeCalorieUnit];
+    }
+
     if([unitString isEqualToString:@"count"]){
         theUnit = [HKUnit countUnit];
     }
