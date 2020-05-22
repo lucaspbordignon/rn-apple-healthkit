@@ -65,4 +65,8 @@
                                    limit:(NSUInteger)lim
                                    completion:(void (^)(NSArray *, NSError *))completion;
 
+- (void)fetchHeadphoneAudioSamplesForPredicate:(NSPredicate *)predicate
+                                   limit:(NSUInteger)lim
+                                   completion:(void (^)(NSArray *, NSError *))completion;
+
 @end
