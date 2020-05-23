@@ -185,6 +185,9 @@
         theUnit = [HKUnit dayUnit];
     }
     // Energy units
+    if([unitString isEqualToString:@"calorie"]){
+        theUnit = [HKUnit calorieUnit];
+    }
     if([unitString isEqualToString:@"joule"]){
         theUnit = [HKUnit jouleUnit];
     }

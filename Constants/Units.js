@@ -5,6 +5,7 @@
  */
 export const Units = {
   bpm: "bpm",
+  calorie: "calorie",
   kilocalorie: "kilocalorie",
   smallCalorie: "smallCalorie",
   largeCalorie: "largeCalorie",
