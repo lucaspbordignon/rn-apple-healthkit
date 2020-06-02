@@ -12,8 +12,17 @@
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
+#import <objc/runtime.h>
 
 @implementation RCTAppleHealthKit (Methods_Dietary)
+
+//- (NSString *)strCalroies{
+//    return objc_getAssociatedObject(self, @selector(text));
+//}
+//
+//- (void)setstrCalroies:(NSString *)strCalroies{
+//    objc_setAssociatedObject(self, @selector(strCalroies), strCalroies, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
 
 - (void)saveFood:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
@@ -374,6 +383,7 @@
                                                             objects:mySet
                                                             metadata:metadata];
     // Save the food correlation to HealthKit //
+    NSLog(@"%@", food);
     [self.healthStore saveObject:food withCompletion:^(BOOL success, NSError *error) {
         if (!success) {
             NSLog(@"An error occured saving the food sample %@. The error was: ", error);
@@ -406,4 +416,320 @@
     }];
 }
 
+- (void)getFoodSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback {
+    
+    HKCorrelationType *foodtype = [HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierFood];
+    NSLog(@"%@", foodtype);
+    
+    NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
+    BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+
+    NSLog(@"%@", startDate);
+    NSLog(@"%@", endDate);
+    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:endDate options:HKQueryOptionNone];
+    //NSLog(@"%@", endDate);
+    
+    if(startDate == nil) {
+        callback(@[RCTMakeError(@"StartDate is required in options", nil, nil)]);
+        return;
+    }
+    
+//    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:endDate options:HKQueryOptionNone];
+//    NSPredicate *userEnterDataPredicate = [HKQuery predicateForObjectsWithMetadataKey:HKMetadataKeyWasUserEntered operatorType:NSEqualToPredicateOperatorType value: [NSNumber numberWithBool:true]];
+//    NSPredicate *allPredicates = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate,userEnterDataPredicate, nil]];
+    
+    [self fetchCorrelationFoodSamplesOfType:foodtype predicate:predicate ascending:ascending limit:limit completion:^(NSArray *results, NSError *error) {
+        if (results) {
+            NSLog(@"%@", results);
+
+            if (results == nil) {
+                // Provide proper error handling here...
+                NSLog(@"An error occurred while searching for blood pressure data %@",
+                      error.localizedDescription);
+                abort();
+            }
+            
+            NSMutableDictionary *aFoodData = [[NSMutableDictionary alloc] init];
+            NSMutableArray *aNutration = [[NSMutableArray alloc] init];
+            
+            for (int i =0; i<results.count ; i++) {
+                HKCorrelation *correlation = results[i][@"correlation"];
+
+                NSSet *objs = correlation.objects;
+                for (HKQuantitySample *sample in objs) {
+                    
+                    NSLog(@"%@", sample);
+                    
+                    NSString *foodType = sample.metadata[HKMetadataKeyFoodType];
+                    NSString *foodMeal = sample.metadata[@"HKFoodMeal"];
+                    NSString *foodDate = [NSString stringWithFormat:@"%@", sample.startDate];
+                    
+                    double quantity = 0.0;
+                    NSString *type = @"";
+                   
+                    if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryBiotin]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"biotin" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryCaffeine]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"caffeine" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryCalcium]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"calcium" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryCarbohydrates]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"carbohydrates" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryChloride]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"chloride" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+    //                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryChromium]) {
+    //                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+    //                        type = @"Chromium" ;
+    //                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+    //                        [aNutration addObject:aData];
+    //                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryCopper]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"copper" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryCholesterol]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"cholesterol" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryEnergyConsumed]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit kilocalorieUnit]];
+                        type = @"energy" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietarySugar]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"sugar" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryFiber]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"fiber" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryFolate]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"folate" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryIron]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"iodine" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryIron]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"iron" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryMagnesium]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"magnesium" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryManganese]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"manganese" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryMolybdenum]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"molybdenum" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryFatMonounsaturated]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"fatMonounsaturated" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryNiacin]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"niacin" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryPantothenicAcid]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"pantothenicAcid" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryPhosphorus]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"phosphorus" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryFatPolyunsaturated]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"fatPolyunsaturated" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryPotassium]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"potassium" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryProtein]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"protein" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryRiboflavin]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"riboflavin" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryFatSaturated]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"fatSaturated" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietarySelenium]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"selenium" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietarySodium]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"sodium" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryThiamin]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"thiamin" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryFatTotal]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        NSLog(@"%f", quantity);
+                        type = @"fatTotal" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryVitaminA]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"vitaminA" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryVitaminB6]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"vitaminB6" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryVitaminB12]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"vitaminB12" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryVitaminC]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"vitaminC" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryVitaminD]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"vitaminD" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryVitaminE]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"vitaminE" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryVitaminK]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"vitaminK" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    /*else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryWater]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"Water" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }*/
+                    else if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryZinc]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit gramUnit]];
+                        type = @"zinc" ;
+                        NSDictionary *aData = @{ @"nutrition_name" : type, @"value" : [NSString stringWithFormat:@"%f", quantity]};
+                        [aNutration addObject:aData];
+                    }
+                    
+                    if ([[NSString stringWithFormat:@"%@", sample.quantityType] isEqualToString: HKQuantityTypeIdentifierDietaryEnergyConsumed]) {
+                        quantity = [sample.quantity doubleValueForUnit:[HKUnit kilocalorieUnit]];
+                        self.strCalroies = [NSString stringWithFormat:@"%f", quantity];
+                    }
+                    
+                    if (self.strCalroies.length == 0) {
+                        self.strCalroies = @"";
+                    }
+                    
+                    [aFoodData setValue:foodMeal forKey:@"food_name"];
+                    [aFoodData setValue:foodType forKey:@"food_type"];
+                    [aFoodData setValue:self.strCalroies forKey:@"calories"];
+                    [aFoodData setValue:foodDate forKey:@"date"];
+                    [aFoodData setObject:aNutration forKey:@"nutritions"];
+                }
+            }
+            
+            callback(@[[NSNull null], aFoodData]);
+            return;
+        }
+        else {
+            NSLog(@"error getting food nutirions samples: %@", error);
+            callback(@[RCTMakeError(@"Error getting food nutirions samples", nil, nil)]);
+            return;
+        }
+    }];
+}
 @end

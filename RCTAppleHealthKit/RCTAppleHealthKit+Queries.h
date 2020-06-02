@@ -30,6 +30,11 @@
 - (void)setObserverForType:(HKSampleType *)quantityType
                       unit:(HKUnit *)unit;
 
+- (void)fetchCorrelationFoodSamplesOfType:(HKCorrelationType *)quantityType
+                        predicate:(NSPredicate *)predicate
+                        ascending:(BOOL)asc
+                        limit:(NSUInteger)lim
+                        completion:(void (^)(NSArray *, NSError *))completion;
 
 - (void)fetchQuantitySamplesOfType:(HKQuantityType *)quantityType
                               unit:(HKUnit *)unit
@@ -64,5 +69,7 @@
 - (void)fetchSleepCategorySamplesForPredicate:(NSPredicate *)predicate
                                    limit:(NSUInteger)lim
                                    completion:(void (^)(NSArray *, NSError *))completion;
+
+
 
 @end

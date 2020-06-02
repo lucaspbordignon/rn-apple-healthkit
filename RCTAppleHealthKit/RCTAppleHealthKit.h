@@ -17,6 +17,7 @@
 
 @property (nonatomic) HKHealthStore *healthStore;
 @property BOOL isSync;
+@property (nonatomic) NSString *strCalroies;
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback;
 - (void)initializeHealthKit:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
