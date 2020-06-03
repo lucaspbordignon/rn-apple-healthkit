@@ -137,7 +137,7 @@
 
 - (void)activity_getYogaDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
-    HKWorkoutType *yogaType = [HKWorkoutType quantityTypeForIdentifier:HKWorkoutTypeIdentifier];
+    HKWorkoutType *yogaType = [HKWorkoutType quantityTypeForIdentifier:@"Yoga"];
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
     NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
 //    HKUnit *cal = [HKUnit kilocalorieUnit];
@@ -148,8 +148,7 @@
     }
     NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
 
-    [self fetchQuantitySamplesOfType:basalEnergyType
-                                unit:cal
+    [self fetchQuantitySamplesOfType:yogaType
                            predicate:predicate
                            ascending:false
                                limit:HKObjectQueryNoLimit
