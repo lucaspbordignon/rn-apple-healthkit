@@ -99,8 +99,8 @@
         return [HKObjectType workoutType];
     }
     
-    if ([@"Yoga" isEqualToString: key]) {
-        return [HKObjectType categoryTypeForIdentifier:HKWorkoutTypeIdentifier];
+    if ([@"Workouts" isEqualToString: key]) {
+        return [HKObjectType workoutType];
     }
     
     return nil;
