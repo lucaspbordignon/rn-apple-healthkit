@@ -135,33 +135,4 @@
                                      }];
 }
 
-- (void)activity_getYogaDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
-{
-    HKWorkoutType *yogaType = [HKWorkoutType quantityTypeForIdentifier:@"Yoga"];
-    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
-    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
-//    HKUnit *cal = [HKUnit kilocalorieUnit];
-
-    if(startDate == nil){
-        callback(@[RCTMakeError(@"startDate is required in options", nil, nil)]);
-        return;
-    }
-    NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
-
-    [self fetchQuantitySamplesOfType:yogaType
-                           predicate:predicate
-                           ascending:false
-                               limit:HKObjectQueryNoLimit
-                          completion:^(NSArray *results, NSError *error) {
-                              if(results){
-                                  callback(@[[NSNull null], results]);
-                                  return;
-                              } else {
-                                  callback(@[RCTJSErrorFromNSError(error)]);
-                                  return;
-                              }
-                          }];
-
-}
-
 @end
