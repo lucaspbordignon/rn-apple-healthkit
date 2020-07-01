@@ -446,6 +446,7 @@
     }
     if ([type isEqual:@"EnergyConsumed"]) {
         quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
+        unit = [HKUnit kilocalorieUnit];
     }
     if ([type isEqual:@"FatMonounsaturated"]) {
         quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatMonounsaturated];
