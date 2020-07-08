@@ -2,9 +2,9 @@ Get the aggregated total steps for a specific day (starting and ending at midnig
 
 An optional options object may be provided containing `date` field representing the selected day. If `date` is not set or an options object is not provided then the current day will be used.
 ```javascript
-let d = new Date(2016,1,1);
 let options = {
-    date: d.toISOString()
+    startDate: new Date(2020, 1, 1).toISOString(), // required
+    endDate: new Date().toISOString(), // optional; default now
 };
 ```
 
