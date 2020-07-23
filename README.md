@@ -102,6 +102,7 @@ Height Example Response
       * [getLeanBodyMassSamples](/docs/getLeanBodyMassSamples().md)
       * [getLatestWeight](/docs/getLatestWeight().md)
       * [getRespiratoryRateSamples](/docs/getRespiratoryRateSamples().md)
+      * [getRestingHeartRate](/docs/getRestingHeartRate().md)
       * [getSleepSamples](/docs/getSleepSamples().md)
       * [getStepCount](/docs/getStepCount().md)
       * [getWeightSamples](/docs/getWeightSamples().md)
@@ -140,6 +141,7 @@ The available Healthkit permissions to use with `initHealthKit`
 | LeanBodyMass           | [HKQuantityTypeIdentifierLeanBodyMass](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierleanbodymass?language=objc)                         | ✓    | ✓     |
 | MindfulSession         | [HKCategoryTypeIdentifierMindfulSession](https://developer.apple.com/reference/healthkit/hkcategorytypeidentifiermindfulsession?language=objc)                     |      |  ✓    |
 | RespiratoryRate        | [HKQuantityTypeIdentifierRespiratoryRate](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierrespiratoryrate?language=objc)                   | ✓    |       |
+| RestingHeartRate       | [HKQuantityTypeIdentifierRestingHeartRate](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierrestingheartrate?language=objc)                 | ✓    |       |
 | SleepAnalysis          | [HKCategoryTypeIdentifierSleepAnalysis](https://developer.apple.com/reference/Healthkit/hkcategorytypeidentifiersleepanalysis?language=objc)                       | ✓    |       |
 | StepCount              | [HKQuantityTypeIdentifierStepCount](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierstepcount?language=objc)                               | ✓    | ✓     |
 | Steps                  | [HKQuantityTypeIdentifierSteps](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifiersteps?language=objc)                                       | ✓    | ✓     |
