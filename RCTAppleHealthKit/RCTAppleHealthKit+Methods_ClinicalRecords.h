@@ -1,3 +1,4 @@
+
 //
 //  RCTAppleHealthKit+Methods_ClinicalRecords.h
 //  RCTAppleHealthKit
@@ -10,7 +11,6 @@
 #define RCTAppleHealthKit_Methods_ClincalRecords_h
 
 #import "RCTAppleHealthKit.h"
-
 
 @interface RCTAppleHealthKit (Methods_ClinicalRecords)
     
@@ -28,5 +28,5 @@
 
 - (void)clinical_getClinicalVitalRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
-@end
-
+    @end
+#endif /* RCTAppleHealthKit_Methods_ClincalRecords_h */
