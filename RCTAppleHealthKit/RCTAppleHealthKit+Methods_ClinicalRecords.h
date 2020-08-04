@@ -11,6 +11,7 @@
 
 #import "RCTAppleHealthKit.h"
 
+
 @interface RCTAppleHealthKit (Methods_ClinicalRecords)
     
 - (void)clinical_getAllergyRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
@@ -27,5 +28,5 @@
 
 - (void)clinical_getClinicalVitalRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
-    @end
-#endif /* RCTAppleHealthKit_Methods_ClincalRecords_h */
+@end
+
