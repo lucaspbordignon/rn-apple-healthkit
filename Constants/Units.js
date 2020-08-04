@@ -1,6 +1,6 @@
 /**
  * Units
- * https://github.com/terrillo/rn-apple-healthkit#units
+ * https://github.com/doc-ai/rn-apple-healthkit#units
  * @type {Object}
  */
 export const Units = {
