@@ -13,7 +13,6 @@
 
 #pragma mark - HealthKit Permissions
 
-
 - (nullable HKObjectType *)getReadPermFromText:(nonnull NSString*)key {
     UIDevice *deviceInfo = [UIDevice currentDevice];
     float systemVersion = deviceInfo.systemVersion.floatValue;
@@ -134,9 +133,7 @@
             return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord];
         }
     }
-
-
-    
+   
     return nil;
 }
 

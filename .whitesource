@@ -1,3 +1,4 @@
+
 ##########################################################
 #### WhiteSource "Bolt for Github" configuration file ####
 ##########################################################
@@ -6,3 +7,12 @@
 #---------------#
 ws.repo.scan=true
 vulnerable.check.run.conclusion.level=failure
+
+{
+  "generalSettings": {
+    "shouldScanRepo": true
+  },
+  "checkRunSettings": {
+    "vulnerableCheckRunConclusionLevel": "failure"
+  }
+}

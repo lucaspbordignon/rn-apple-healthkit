@@ -29,5 +29,8 @@
   },
   "peerDependencies": {
     "react-native": ">=0.40.0"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
   }
 }
