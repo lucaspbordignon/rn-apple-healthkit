@@ -1,3 +1,4 @@
+
 //
 //  RCTAppleHealthKit+Methods_ClinicalRecords.h
 //  RCTAppleHealthKit
@@ -27,5 +28,5 @@
 
 - (void)clinical_getClinicalVitalRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
-    @end
+@end
 #endif /* RCTAppleHealthKit_Methods_ClincalRecords_h */

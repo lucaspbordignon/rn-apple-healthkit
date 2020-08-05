@@ -9,6 +9,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   A React Native package for interacting with Apple HealthKit
                    DESC
+
   s.homepage     = "https://github.com/doc.ai/rn-apple-healthkit"
   s.license      = "MIT"
   s.author      = { "Doc.ai" => "doc@doc.ai" }

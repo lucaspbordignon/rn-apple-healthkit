@@ -3,7 +3,8 @@
 //  RCTAppleHealthKit
 //
 //  Created by Greg Wilson on 2016-06-26.
-//  Copyright © 2016 Greg Wilson. All rights reserved.
+//  This source code is licensed under the MIT-style license found in the
+//  LICENSE file in the root directory of this source tree.
 //
 
 #import "RCTAppleHealthKit.h"
@@ -21,10 +22,12 @@
 #import "RCTAppleHealthKit+Methods_CDA.h"
 #import "RCTAppleHealthKit+Methods_ClinicalRecords.h"
 
+
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
 
 @implementation RCTAppleHealthKit
+
 @synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE();
@@ -99,15 +102,46 @@ RCT_EXPORT_METHOD(getLatestBodyFatPercentage:(NSDictionary *)input callback:(RCT
     [self body_getLatestBodyFatPercentage:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getBodyFatPercentageSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self body_getBodyFatPercentageSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(saveBodyFatPercentage:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self body_saveBodyFatPercentage:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getLatestLeanBodyMass:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self body_getLatestLeanBodyMass:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getLeanBodyMassSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self body_getLeanBodyMassSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(saveLeanBodyMass:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self body_saveLeanBodyMass:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getStepCount:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_getStepCountOnDay:input callback:callback];
 }
+
+RCT_EXPORT_METHOD(getSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_getSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(setObserver:(NSDictionary *)input)
+{
+    [self fitness_setObserver:input];
+}
+
 
 RCT_EXPORT_METHOD(getDailyStepCountSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
@@ -127,6 +161,11 @@ RCT_EXPORT_METHOD(getDistanceWalkingRunning:(NSDictionary *)input callback:(RCTR
 RCT_EXPORT_METHOD(getDailyDistanceWalkingRunningSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_getDailyDistanceWalkingRunningSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getDailyDistanceSwimmingSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_getDailyDistanceSwimmingSamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getDistanceCycling:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
@@ -169,9 +208,19 @@ RCT_EXPORT_METHOD(getActiveEnergyBurned:(NSDictionary *)input callback:(RCTRespo
    [self activity_getActiveEnergyBurned:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getActiveEnergyDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+   [self activity_getActiveEnergyDailySamples:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getBasalEnergyBurned:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
-    [self activity_getBasalEnergyBurned:input callback:callback];
+   [self activity_getBasalEnergyBurned:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getBasalEnergyDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+   [self activity_getBasalEnergyDailySamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getBodyTemperatureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
@@ -209,6 +258,12 @@ RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponse
     [self mindfulness_saveMindfulSession:input callback:callback];
 }
 
+
+RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self mindfulness_getMindfulSession:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(saveCDADocument:(NSString *)xml callback:(RCTResponseSenderBlock)callback)
 {
     [self cda_saveCDADocument:xml callback:callback];
@@ -218,6 +273,7 @@ RCT_EXPORT_METHOD(getCDADocuments:(NSDictionary *)input callback:(RCTResponseSen
 {
     [self cda_getCDADocuments:input callback:callback];
 }
+
 
 RCT_EXPORT_METHOD(getAllergyRecord:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
@@ -254,11 +310,11 @@ RCT_EXPORT_METHOD(getClinicalVitalRecords:(NSDictionary *)input callback:(RCTRes
     [self clinical_getClinicalVitalRecord:input callback:callback];
 }
 
+
 RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self arePermissionsAvailable:input callback:callback];
 }
-
 
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
@@ -306,9 +362,7 @@ RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCT
 
         [self.healthStore requestAuthorizationToShareTypes:writeDataTypes readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
             if (!success) {
-                NSString *errMsg = [NSString stringWithFormat:@"Error with HealthKit authorization: %@", error];
-                NSLog(errMsg);
-                callback(@[RCTMakeError(errMsg, nil, nil)]);
+                callback(@[RCTJSErrorFromNSError(error)]);
                 return;
             } else {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -321,6 +375,28 @@ RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCT
     }
 }
 
+RCT_EXPORT_METHOD(authorizationStatusForType:(NSString *)type
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+{
+    if (self.healthStore == nil) {
+        self.healthStore = [[HKHealthStore alloc] init];
+    }
+
+    if ([HKHealthStore isHealthDataAvailable]) {
+        HKObjectType *objectType = [self getWritePermFromString:type];
+        if (objectType == nil) {
+            reject(@"unknown write permission", nil, nil);
+            return;
+        }
+
+        NSString *status = [self getAuthorizationStatusString:[self.healthStore authorizationStatusForType:objectType]];
+        resolve(status);
+    } else {
+        reject(@"HealthKit data is not available", nil, nil);
+    }
+})
+
 - (void)getModuleInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
     NSDictionary *info = @{
@@ -331,6 +407,8 @@ RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCT
     };
     callback(@[[NSNull null], info]);
 }
+
+
 
 - (void)arePermissionsAvailable:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
@@ -354,7 +432,7 @@ RCT_EXPORT_METHOD(getPermissionsAvailability:(NSDictionary *)input callback:(RCT
             if(sharePerms != nil) {
                 shareDataTypes = sharePerms;
             }
-            
+
         } else {
             callback(@[RCTMakeError(@"permissions must be provided in the initialization options", nil, nil)]);
             return;

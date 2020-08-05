@@ -1,6 +1,6 @@
 {
   "name": "rn-apple-healthkit",
-  "version": "0.6.4",
+  "version": "0.8.0",
   "description": "A React Native package for interacting with Apple HealthKit",
   "main": "index.js",
   "repository": {
@@ -24,6 +24,7 @@
   "author": "Terrillo Walls",
   "license": "MIT",
   "devDependencies": {
+    "react": "16.8.3",
     "react-native": ">=0.40.0"
   },
   "peerDependencies": {

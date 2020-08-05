@@ -1,6 +1,6 @@
 /**
  * Apple Health Permissions
- * https://github.com/terrillo/rn-apple-healthkit#permissions
+ * https://github.com/doc-ai/rn-apple-healthkit#supported-apple-permissions
  * @type {Object}
  */
 export const Permissions = {
@@ -56,6 +56,7 @@ export const Permissions = {
   Zinc: "Zinc",
   Water: "Water",
   DistanceCycling: "DistanceCycling",
+  DistanceSwimming: "DistanceSwimming",
   DistanceWalkingRunning: "DistanceWalkingRunning",
   FlightsClimbed: "FlightsClimbed",
   HeartRate: "HeartRate",
@@ -67,5 +68,12 @@ export const Permissions = {
   SleepAnalysis: "SleepAnalysis",
   StepCount: "StepCount",
   Steps: "Steps",
-  Weight: "Weight"
+  Weight: "Weight",
+  Workout: "Workout",
+  ConditionRecord: "ConditionRecord",
+  ImmunizationRecord: "ImmunizationRecord",
+  LabResultRecord: "LabResultRecord",
+  MedicationRecord: "MedicationRecord",
+  ProcedureRecord: "ProcedureRecord",
+  ClinicalVitalRecord: "ClinicalVitalRecord",
 }

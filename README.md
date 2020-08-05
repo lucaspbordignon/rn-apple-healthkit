@@ -1,4 +1,3 @@
-
 # React Native Apple Healthkit
 A React Native bridge module for interacting with Apple Healthkit data. Checkout the [full documentation](https://github.com/terrillo/rn-apple-healthkit/tree/master/docs)
 
@@ -8,25 +7,17 @@ Install the [rn-apple-healthkit] package from npm:
 
 - Run `npm install rn-apple-healthkit --save`
 - Run `react-native link rn-apple-healthkit`
-
-Update `info.plist` in your React Native project
+- Run `cd ./ios && pod install`
+- Update `./ios/<Project Name>/info.plist` in your React Native project
 ```
 <key>NSHealthShareUsageDescription</key>
 <string>Read and understand health data.</string>
 <key>NSHealthUpdateUsageDescription</key>
 <string>Share workout data with other apps.</string>
 ```
-
-## Manual Installation
-
-1. Run `npm install rn-apple-healthkit --save`
-2. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-3. Go to `node_modules` ➜ `rn-apple-healthkit` and add `RCTAppleHealthkit.xcodeproj`
-4. In XCode, in the project navigator, select your project. Add `libRCTAppleHealthkit.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-5. Click `RCTAppleHealthkit.xcodeproj` in the project navigator and go the `Build Settings` tab. Make sure 'All' is toggled on (instead of 'Basic'). In the `Search Paths` section, look for `Header Search Paths` and make sure it contains both `$(SRCROOT)/../../react-native/React` and `$(SRCROOT)/../../../React` - mark both as `recursive`.
-6. Enable Healthkit in your application's `Capabilities`
+- Enable Healthkit in your application's `Capabilities`
 ![](https://i.imgur.com/eOCCCyv.png "Xcode Capabilities Section")
-7. Compile and run
+- Build and run
 
 ## Get Started
 Initialize Healthkit. This will show the Healthkit permissions prompt for any read/write permissions set in the required `options` object.
@@ -40,35 +31,32 @@ For any data written to Healthkit an authorization error can be caught. If an au
 If new read/write permissions are added to the options object then the app user will see the Healthkit permissions prompt with the new permissions to allow.
 
 `initHealthKit` requires an options object with Healthkit permission settings
-```javascript
-let options = {
-    permissions: {
-        read: ["Height", "Weight", "StepCount", "DateOfBirth", "BodyMassIndex", "ActiveEnergyBurned"],
-        write: ["Height", "Weight", "StepCount", "BodyMassIndex", "Biotin", "Caffeine", "Calcium", "Carbohydrates", "Chloride", "Cholesterol", "Copper", "EnergyConsumed", "FatMonounsaturated", "FatPolyunsaturated", "FatSaturated", "FatTotal", "Fiber", "Folate", "Iodine", "Iron", "Magnesium", "Manganese", "Molybdenum", "Niacin", "PantothenicAcid", "Phosphorus", "Potassium", "Protein", "Riboflavin", "Selenium", "Sodium", "Sugar", "Thiamin", "VitaminA", "VitaminB12", "VitaminB6", "VitaminC", "VitaminD", "VitaminE", "VitaminK", "Zinc", "Water"]
-    }
-};
-```
 
 ```javascript
 import AppleHealthKit from 'rn-apple-healthkit';
 
-AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => {
+let options = {
+    permissions: {
+        read: ["Height", "Weight"],
+        write: ["Height", "Weight"]
+    }
+};
+
+AppleHealthKit.initHealthKit(options, (err, results) => {
     if (err) {
         console.log("error initializing Healthkit: ", err);
         return;
     }
 
     // Height Example
-    AppleHealthKit.getDateOfBirth(null, (err: Object, results: Object) => {
-    if (this._handleHealthkitError(err, 'getDateOfBirth')) {
-      return;
-    }
+    AppleHealthKit.getDateOfBirth(null, (err, results) => {
       console.log(results)
     });
 
 });
 ```
 
+Height Example Response
 ```javascript
 {
 	value: '1986-09-01T00:00:00.000-0400',
@@ -76,64 +64,57 @@ AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => 
 }
 ```
 
-## Changelog
-0.6.4v
-- Basal energy ([#23](https://github.com/terrillo/rn-apple-healthkit/pull/23))
-- Fixed issues with saving weight in the past
-- Commited the docs to increase pull request support
-- Add daily samples for:
-  - Flights Climbed
-  - WalkingRunning Distance
-  - Cycling Distance
-
-0.6.3v
-- Food and Water ([#19](https://github.com/terrillo/rn-apple-healthkit/pull/19))
-
-0.6.1v
-- HKQuantityTypeIdentifierActiveEnergyBurned
-
 ## Wiki
   * [Installation](/docs/Install)
   * [Documentation](#documentation)
-    * [Permissions](#permissions)
+    * [Permissions](#supported-apple-permissions)
     * [Units](#units)
     * Base Methods
       * [isAvailable](/docs/isAvailable().md)
       * [initHealthKit](/docs/initHealthKit().md)
+      * [authorizationStatusForType](/docs/authorizationStatusForType().md)
     * Realtime Methods
       * [initStepCountObserver](/docs/initStepCountObserver().md)
+      * [setObserver](/docs/setObserver().md)
     * Read Methods
       * [getActiveEnergyBurned](/docs/getActiveEnergyBurned().md)
       * [getBasalEnergyBurned](/docs/getBasalEnergyBurned().md)
       * [getBiologicalSex](/docs/getBiologicalSex().md)
-      * [getBloodGlucoseSamples](/docs/getbloodglucosesamples().md)
-      * [getBloodPressureSamples](/docs/getbloodpressuresamples().md)
-      * [getBodyTemperatureSamples](/docs/getbodytemperaturesamples().md)
-      * [getDailyDistanceCyclingSamples]()
+      * [getBloodGlucoseSamples](/docs/getBloodGlucoseSamples().md)
+      * [getBloodPressureSamples](/docs/getBloodPressureSamples().md)
+      * [getBodyTemperatureSamples](/docs/getBodyTemperatureSamples().md)
+      * [getDailyDistanceCyclingSamples](/docs/getDailyDistanceCyclingSamples().md)
       * [getDailyDistanceWalkingRunningSamples](/docs/getDailyDistanceWalkingRunningSamples().md)
       * [getDailyFlightsClimbedSamples](/docs/getDailyFlightsClimbedSamples().md)
       * [getDailyStepCountSamples](/docs/getDailyStepCountSamples().md)
       * [getDateOfBirth](/docs/getDateOfBirth().md)
-      * [getDistanceCycling](/docs/getdistancecycling().md)
+      * [getDistanceCycling](/docs/getDistanceCycling().md)
+      * [getDistanceSwimming](/docs/getDistanceSwimming().md)
       * [getDistanceWalkingRunning](/docs/getDistanceWalkingRunning().md)
-      * [getFlightsClimbed](/docs/getflightsclimbed().md)
-      * [getHeartRateSamples](/docs/getheartratesamples().md)
-      * [getHeightSamples](/docs/getheightsamples().md)
-      * [getLatestBmi](/docs/getlatestbmi().md)
-      * [getLatestBodyFatPercentage](/docs/getlatestbodyfatpercentage().md)
-      * [getLatestHeight](/docs/getlatestheight().md)
-      * [getLatestLeanBodyMass](/docs/getlatestleanbodymass().md)
-      * [getLatestWeight](/docs/getlatestweight().md)
-      * [getRespiratoryRateSamples](/docs/getrespiratoryratesamples().md)
-      * [getSleepSamples](/docs/getsleepsamples().md)
+      * [getFlightsClimbed](/docs/getFlightsClimbed().md)
+      * [getHeartRateSamples](/docs/getHeartRateSamples().md)
+      * [getHeightSamples](/docs/getHeightSamples().md)
+      * [getLatestBmi](/docs/getLatestBmi().md)
+      * [getLatestBodyFatPercentage](/docs/getLatestBodyFatPercentage().md)
+      * [getBodyFatPercentageSamples](/docs/getBodyFatPercentageSamples().md)
+      * [getLatestHeight](/docs/getLatestHeight().md)
+      * [getLatestLeanBodyMass](/docs/getLatestLeanBodyMass().md)
+      * [getLeanBodyMassSamples](/docs/getLeanBodyMassSamples().md)
+      * [getLatestWeight](/docs/getLatestWeight().md)
+      * [getRespiratoryRateSamples](/docs/getRespiratoryRateSamples().md)
+      * [getSleepSamples](/docs/getSleepSamples().md)
       * [getStepCount](/docs/getStepCount().md)
-      * [getWeightSamples](/docs/getweightsamples().md)
+      * [getWeightSamples](/docs/getWeightSamples().md)
+      * [getSamples](docs/getSamples().md)
+      * [getMindfulSession](docs/getMindfulSession().md) 
     * Write Methods
-      * [saveBmi](/docs/savebmi().md)
-      * [saveHeight](/docs/saveheight().md)
+      * [saveBmi](/docs/saveBmi().md)
+      * [saveHeight](/docs/saveHeight().md)
       * [saveMindfulSession](/docs/saveMindfulSession().md)
-      * [saveWeight](/docs/saveweight().md)
+      * [saveWeight](/docs/saveWeight().md)
       * [saveSteps](/docs/saveSteps().md)
+      * [saveBodyFatPercentage](/docs/saveBodyFatPercentage().md)
+      * [saveLeanBodyMass](/docs/saveLeanBodyMass().md)
   * [References](#references)
 
 ## Supported Apple Permissions
@@ -163,6 +144,7 @@ The available Healthkit permissions to use with `initHealthKit`
 | StepCount              | [HKQuantityTypeIdentifierStepCount](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierstepcount?language=objc)                               | ✓    | ✓     |
 | Steps                  | [HKQuantityTypeIdentifierSteps](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifiersteps?language=objc)                                       | ✓    | ✓     |
 | Weight                 | [HKQuantityTypeIdentifierBodyMass](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodymass?language=objc)                                 | ✓    | ✓     |
+| BodyFatPercentage      | [HKQuantityTypeIdentifierBodyFatPercentage](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodyfatpercentage?language=objc)                                 | ✓    | ✓     |
 | AllergyRecord          | [HKClinicalTypeIdentifierAllergyRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierallergyrecord?language=objc)                   | ✓    |       |
 | ConditionRecord        | [HKClinicalTypeIdentifierConditionRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierconditionrecord?language=objc)               | ✓    |       |
 | ImmunizationRecord     | [HKClinicalTypeIdentifierImmunizationRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierimmunizationrecord?language=objc)         | ✓    |       |
