@@ -14,6 +14,7 @@
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Queries.h"
 #import "RCTAppleHealthKit+Utils.h"
+#import <React/RCTEventDispatcher.h>
 
 @implementation RCTAppleHealthKit (Manager)
 
@@ -33,7 +34,7 @@
     NSLog(@"healthkitValueAddedHandler");
     
     NSDictionary *dict = [[NSDictionary alloc] init];
-    [self.bridge.eventDispatcher emitEventWithName:@"healthkit" andPayload:dict];
+//    [self.bridge.eventDispatcher emitEventWithName:@"healthkit" andPayload:dict];
     [self.bridge.eventDispatcher sendAppEventWithName:@"healthkit" body:dict];
     
 }
