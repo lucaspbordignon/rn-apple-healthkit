@@ -59,9 +59,9 @@ RCT_EXPORT_MODULE();
                                                       userInfo:payload];
 }
 
-RCT_EXPORT_METHOD(setupHKListener:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(setupHKListener)
 {
-    [self setupHKListener:input callback:callback];
+    [self setupHKListener];
 }
 
 RCT_EXPORT_METHOD(isAvailable:(RCTResponseSenderBlock)callback)
