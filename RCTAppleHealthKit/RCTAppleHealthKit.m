@@ -48,8 +48,8 @@ RCT_EXPORT_MODULE();
 
 - (void)emitEventInternal:(NSNotification *)notification
 {
-    [self sendEventWithName:@"healthkitValueAddedHandler"
-                       body:@""];
+    [self.bridge.eventDispatcher sendAppEventWithName:@"healthkitValueAddedHandler"
+    body:@""];
 }
 
 + (void)emitEventWithName:(NSString *)name andPayload:(NSDictionary *)payload

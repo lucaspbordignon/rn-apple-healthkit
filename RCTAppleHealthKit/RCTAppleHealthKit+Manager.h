@@ -10,7 +10,7 @@
 
 @interface RCTAppleHealthKit (Manager)
 
-+ (RCTAppleHealthkitManager *)sharedManager;
++ (RCTAppleHealthKit *)sharedManager;
 
 - (void)setupHKListener;
 

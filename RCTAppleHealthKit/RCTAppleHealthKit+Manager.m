@@ -18,7 +18,7 @@
 @implementation RCTAppleHealthKit (Manager)
 
 //This is essentially creating a sharedManager (HealthKitManager) that can be called in AppDelegate
-+ (RCTAppleHealthkitManager *)sharedManager {
++ (RCTAppleHealthKit *)sharedManager {
     static dispatch_once_t pred = 0;
     static RCTAppleHealthKit *instance = nil;
     dispatch_once(&pred, ^{
