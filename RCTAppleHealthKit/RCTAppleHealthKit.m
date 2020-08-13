@@ -29,6 +29,41 @@
 
 RCT_EXPORT_MODULE();
 
+- (NSArray<NSString *> *)supportedEvents {
+    return @[@"healthkitValueAddedHandler"];
+}
+
+- (void)startObserving
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(emitEventInternal:)
+                                                 name:@"event-emitted"
+                                               object:nil];
+}
+
+- (void)stopObserving
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)emitEventInternal:(NSNotification *)notification
+{
+    [self sendEventWithName:@"healthkitValueAddedHandler"
+                       body:@""];
+}
+
++ (void)emitEventWithName:(NSString *)name andPayload:(NSDictionary *)payload
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"event-emitted"
+                                                        object:self
+                                                      userInfo:payload];
+}
+
+RCT_EXPORT_METHOD(setupHKListener:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self setupHKListener:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(isAvailable:(RCTResponseSenderBlock)callback)
 {
     [self isHealthKitAvailable:callback];
