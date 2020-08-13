@@ -6,9 +6,9 @@
 //  Copyright © 2020 Greg Wilson. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "RCTAppleHealthKit.h"
 
-@interface RCTAppleHealthkitManager : NSObject
+@interface RCTAppleHealthKit (Manager)
 
 + (RCTAppleHealthkitManager *)sharedManager;
 
