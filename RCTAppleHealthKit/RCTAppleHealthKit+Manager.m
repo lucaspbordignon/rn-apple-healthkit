@@ -6,24 +6,23 @@
 //  Copyright © 2020 Greg Wilson. All rights reserved.
 //
 
-#import "RCTAppleHealthkitManager.h"
+#import "RCTAppleHealthKit+Manager.h"
 #import <HealthKit/HealthKit.h>
 #import "RCTAppleHealthKit.h"
 
-@interface  RCTAppleHealthkitManager ()
 
-@property (nonatomic, retain) HKHealthStore *healthStore;
+#import "RCTAppleHealthKit+Methods_Sleep.h"
+#import "RCTAppleHealthKit+Queries.h"
+#import "RCTAppleHealthKit+Utils.h"
 
-@end
-
-@implementation RCTAppleHealthkitManager : NSObject
+@implementation RCTAppleHealthKit (Manager)
 
 //This is essentially creating a sharedManager (HealthKitManager) that can be called in AppDelegate
 + (RCTAppleHealthkitManager *)sharedManager {
     static dispatch_once_t pred = 0;
-    static RCTAppleHealthkitManager *instance = nil;
+    static RCTAppleHealthKit *instance = nil;
     dispatch_once(&pred, ^{
-        instance = [[RCTAppleHealthkitManager alloc] init];
+        instance = [[RCTAppleHealthKit alloc] init];
         instance.healthStore = [[HKHealthStore alloc] init];
     });
     return instance;
@@ -34,7 +33,8 @@
     NSLog(@"healthkitValueAddedHandler");
     
     NSDictionary *dict = [[NSDictionary alloc] init];
-    [RCTAppleHealthKit emitEventWithName:@"healthkit" andPayload:dict];
+    [self.bridge.eventDispatcher emitEventWithName:@"healthkit" andPayload:dict];
+    [self.bridge.eventDispatcher sendAppEventWithName:@"healthkit" body:dict];
     
 }
 
