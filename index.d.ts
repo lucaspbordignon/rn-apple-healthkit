@@ -5,6 +5,7 @@ declare module "rn-apple-healthkit" {
             write: string[];
         };
     }
+
     export interface MindfulSessionData {
         startDate?: Date,
         endDate?: Date,
@@ -27,6 +28,22 @@ declare module "rn-apple-healthkit" {
         getMindfulSession(options: MindfulSessionData, callback: (err: string, results: HealthValue) => void): void;
 
         getStepCount(options: any, callback: (err: string, results: HealthValue) => void): void;
+
+        getWeightSamples(options: HealthWeightOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getHeightSamples(options: HealthHeightOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getLatestBmi(options: null, callback: (err: string, results: HealthValue) => void): void;
+
+        getDailyStepCountSamples(options: HealthStepCountOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getSleepSamples(options: HealthOptions, callback: (err: string, results: HealthSleepValue[]) => void): void;
+
+        getActiveEnergyBurned(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getHeartRateSamples(options: HealthHeartRateOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getBodyFatPercentageSamples(options: BodyFatPercentageOptions, callback: (err: string, results: HealthValue[]) => void): void;
     }
 
     export interface HealthDateOfBirth {
@@ -40,9 +57,45 @@ declare module "rn-apple-healthkit" {
         endDate: string;
     }
 
+    export interface HealthSleepValue {
+        value: 'ASLEEP' | 'INBED';
+        startDate: string;
+        endDate: string;
+    }
+
+    export interface HealthOptions {
+        startDate: string;
+        endDate?: string;
+        limit?: number;
+    }
+
     export interface HealthUnitOptions {
         unit: HealthUnit;
     }
+
+    export interface HealthWeightOptions extends HealthOptions {
+        unit?: 'pound';
+        ascending?: boolean;
+    }
+
+    export interface HealthHeightOptions extends HealthOptions {
+        unit?: 'inch';
+        ascending?: boolean;
+    }
+
+    export interface HealthStepCountOptions extends HealthOptions {
+        includeManuallyAdded: boolean;
+    }
+
+    export interface HealthHeartRateOptions extends HealthOptions {
+        unit?: 'bpm';
+        ascending?: boolean;
+    }
+
+    export interface BodyFatPercentageOptions extends HealthOptions {
+        ascending?: boolean;
+    }
+
     export enum HealthUnit {
         bpm = "bpm",
         calorie = "calorie",
@@ -67,5 +120,6 @@ declare module "rn-apple-healthkit" {
     }
 
     const appleHealthKit: AppleHealthKit;
+
     export default appleHealthKit;
 }
