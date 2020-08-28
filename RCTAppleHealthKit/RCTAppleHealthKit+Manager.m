@@ -43,14 +43,14 @@
 - (void)setupHKListener {
     
     //sleep
-//    HKSampleType *sleepSampleType = [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
-//    HKObserverQuery *sleepQuery = [[HKObserverQuery alloc] initWithSampleType:sleepSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
-//        [self healthkitValueAddedHandler];
-//    }];
-//
-//    [self.healthStore executeQuery:sleepQuery];
-//    [self.healthStore enableBackgroundDeliveryForType:sleepSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
-//
+    HKSampleType *sleepSampleType = [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
+    HKObserverQuery *sleepQuery = [[HKObserverQuery alloc] initWithSampleType:sleepSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
+        [self healthkitValueAddedHandler];
+    }];
+
+    [self.healthStore executeQuery:sleepQuery];
+    [self.healthStore enableBackgroundDeliveryForType:sleepSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
+
 //    //blood pressure
 //    HKSampleType *bloodPressureDiastolicSampleType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic];
 //    HKObserverQuery *bloodPressureDiastolicQuery = [[HKObserverQuery alloc] initWithSampleType:bloodPressureDiastolicSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
@@ -87,15 +87,15 @@
 //    [self.healthStore enableBackgroundDeliveryForType:bloodGlucoseSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
 //
 //    //weight
-//    HKSampleType *weightSampleType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
-//    HKObserverQuery *weightQuery = [[HKObserverQuery alloc] initWithSampleType:weightSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
-//        [self healthkitValueAddedHandler];
-//    }];
-//
-//    [self.healthStore executeQuery:weightQuery];
-//    [self.healthStore enableBackgroundDeliveryForType:weightSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
-//
-//    //height
+    HKSampleType *weightSampleType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+    HKObserverQuery *weightQuery = [[HKObserverQuery alloc] initWithSampleType:weightSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
+        [self healthkitValueAddedHandler];
+    }];
+
+    [self.healthStore executeQuery:weightQuery];
+    [self.healthStore enableBackgroundDeliveryForType:weightSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
+
+    // height
     HKSampleType *heightSampleType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
     HKObserverQuery *heightQuery = [[HKObserverQuery alloc] initWithSampleType:heightSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
         [self healthkitValueAddedHandler];
@@ -103,15 +103,24 @@
 
     [self.healthStore executeQuery:heightQuery];
     [self.healthStore enableBackgroundDeliveryForType:heightSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
-//
-//    //heart rate
-//    HKSampleType *heartRateSampleType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-//    HKObserverQuery *heartRateQuery = [[HKObserverQuery alloc] initWithSampleType:heartRateSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
-//        [self healthkitValueAddedHandler];
-//    }];
-//
-//    [self.healthStore executeQuery:heartRateQuery];
-//    [self.healthStore enableBackgroundDeliveryForType:heartRateSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
+
+    // heart rate
+    HKSampleType *heartRateSampleType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+    HKObserverQuery *heartRateQuery = [[HKObserverQuery alloc] initWithSampleType:heartRateSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
+        [self healthkitValueAddedHandler];
+    }];
+
+    [self.healthStore executeQuery:heartRateQuery];
+    [self.healthStore enableBackgroundDeliveryForType:heartRateSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
+    
+    // workouts
+    HKSampleType *workoutSampleType = [HKObjectType workoutType];
+    HKObserverQuery *workoutQuery = [[HKObserverQuery alloc] initWithSampleType:workoutSampleType predicate:nil updateHandler:^(HKObserverQuery * _Nonnull query, HKObserverQueryCompletionHandler  _Nonnull completionHandler, NSError * _Nullable error) {
+            [self healthkitValueAddedHandler];
+    }];
+
+    [self.healthStore executeQuery:workoutQuery];
+    [self.healthStore enableBackgroundDeliveryForType:workoutSampleType frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError * _Nullable error) {}];
 }
 
 
