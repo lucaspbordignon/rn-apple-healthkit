@@ -45,6 +45,12 @@ declare module "rn-apple-healthkit" {
 
         getActiveEnergyBurned(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
 
+        getBasalEnergyBurned(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getBodyTemperatureSamples(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getBloodPressureSamples(options: HealthOptions, callback: (err: string, results: HealthBloodPressureValue[]) => void): void;
+
         getHeartRateSamples(options: HealthHeartRateOptions, callback: (err: string, results: HealthValue[]) => void): void;
 
         getBodyFatPercentageSamples(options: BodyFatPercentageOptions, callback: (err: string, results: HealthValue[]) => void): void;
@@ -67,6 +73,13 @@ declare module "rn-apple-healthkit" {
 
     export interface HealthSleepValue {
         value: 'ASLEEP' | 'INBED';
+        startDate: string;
+        endDate: string;
+    }
+
+    export interface HealthBloodPressureValue {
+        bloodPressureSystolicValue: number;
+        bloodPressureDiastolicValue: number;
         startDate: string;
         endDate: string;
     }
