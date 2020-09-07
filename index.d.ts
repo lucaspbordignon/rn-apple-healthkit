@@ -39,6 +39,8 @@ declare module "rn-apple-healthkit" {
 
         getDailyStepCountSamples(options: HealthStepCountOptions, callback: (err: string, results: HealthValue[]) => void): void;
 
+        getDailyFlightsClimbedSamples(options: HealthDailyFlightsClimbedOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
         getSleepSamples(options: HealthOptions, callback: (err: string, results: HealthSleepValue[]) => void): void;
 
         getActiveEnergyBurned(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
@@ -99,6 +101,11 @@ declare module "rn-apple-healthkit" {
     }
 
     export interface BodyFatPercentageOptions extends HealthOptions {
+        ascending?: boolean;
+    }
+
+    export interface HealthDailyFlightsClimbedOptions extends HealthOptions {
+        includeManuallyAdded?: boolean;
         ascending?: boolean;
     }
 
