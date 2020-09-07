@@ -21,6 +21,8 @@ declare module "rn-apple-healthkit" {
 
         getDateOfBirth(options: any, callback: (error: Object, results: HealthDateOfBirth) => void): void;
 
+        getBiologicalSex(options: any, callback: (error: Object, results: HealthBiologicalSex) => void): void;
+
         getLatestHeight(options: HealthUnitOptions, callback: (err: string, results: HealthValue) => void): void;
 
         getLatestWeight(options: HealthUnitOptions, callback: (err: string, results: HealthValue) => void): void;
@@ -49,6 +51,10 @@ declare module "rn-apple-healthkit" {
     export interface HealthDateOfBirth {
         value: string;
         age: number;
+    }
+
+    export interface HealthBiologicalSex {
+        value: 'unknown' | 'female' | 'male' | 'other';
     }
 
     export interface HealthValue {
