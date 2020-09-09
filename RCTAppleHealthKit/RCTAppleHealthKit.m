@@ -19,6 +19,8 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_ReproductiveHealth.h"
+#import "RCTAppleHealthKit+Methods_Vitals.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -82,6 +84,11 @@ RCT_EXPORT_METHOD(getHeightSamples:(NSDictionary *)input callback:(RCTResponseSe
 RCT_EXPORT_METHOD(saveHeight:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self body_saveHeight:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getNutritionSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self getNutritionSamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getLatestBmi:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)

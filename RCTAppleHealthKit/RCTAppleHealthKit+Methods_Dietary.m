@@ -406,4 +406,156 @@
     }];
 }
 
+- (void)getNutritionSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+    HKUnit *unit = [RCTAppleHealthKit hkUnitFromOptions:input key:@"unit" withDefault:[HKUnit gramUnit]];
+    NSString *type = [RCTAppleHealthKit stringFromOptions:input key:@"type" withDefault:nil];
+    
+    if(startDate == nil ){
+        callback(@[RCTMakeError(@"startDate is required in options", nil, nil)]);
+        return;
+    }
+    if(type == nil ){
+        callback(@[RCTMakeError(@"type is required in options", nil, nil)]);
+        return;
+    }
+    
+    HKQuantityType *quantityType;
+    if ([type isEqual:@"Biotin"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryBiotin];
+    }
+    if ([type isEqual:@"Caffeine"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCaffeine];
+    }
+    if ([type isEqual:@"Calcium"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalcium];
+    }
+    if ([type isEqual:@"Carbohydrates"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCarbohydrates];
+    }
+    if ([type isEqual:@"Chloride"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryChloride];
+    }
+    if ([type isEqual:@"Cholesterol"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCholesterol];
+    }
+    if ([type isEqual:@"Copper"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCopper];
+    }
+    if ([type isEqual:@"EnergyConsumed"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
+    }
+    if ([type isEqual:@"FatMonounsaturated"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatMonounsaturated];
+    }
+    if ([type isEqual:@"FatPolyunsaturated"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatPolyunsaturated];
+    }
+    if ([type isEqual:@"FatSaturated"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatSaturated];
+    }
+    if ([type isEqual:@"FatTotal"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatTotal];
+    }
+    if ([type isEqual:@"Fiber"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFiber];
+    }
+    if ([type isEqual:@"Folate"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFolate];
+    }
+    if ([type isEqual:@"Iodine"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryIodine];
+    }
+    if ([type isEqual:@"Iron"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryIron];
+    }
+    if ([type isEqual:@"Magnesium"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryMagnesium];
+    }
+    if ([type isEqual:@"Manganese"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryManganese];
+    }
+    if ([type isEqual:@"Molybdenum"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryMolybdenum];
+    }
+    if ([type isEqual:@"Niacin"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryNiacin];
+    }
+    if ([type isEqual:@"PantothenicAcid"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryPantothenicAcid];
+    }
+    if ([type isEqual:@"Phosphorus"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryPhosphorus];
+    }
+    if ([type isEqual:@"Potassium"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryPotassium];
+    }
+    if ([type isEqual:@"Protein"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryProtein];
+    }
+    if ([type isEqual:@"Riboflavin"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryRiboflavin];
+    }
+    if ([type isEqual:@"Selenium"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietarySelenium];
+    }
+    if ([type isEqual:@"Sodium"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietarySodium];
+    }
+    if ([type isEqual:@"Sugar"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietarySugar];
+    }
+    if ([type isEqual:@"Thiamin"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryThiamin];
+    }
+    if ([type isEqual:@"VitaminA"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminA];
+    }
+    if ([type isEqual:@"VitaminB12"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminB12];
+    }
+    if ([type isEqual:@"VitaminB6"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminB6];
+    }
+    if ([type isEqual:@"VitaminC"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminC];
+    }
+    if ([type isEqual:@"VitaminD"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminD];
+    }
+    if ([type isEqual:@"VitaminE"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminE];
+    }
+    if ([type isEqual:@"VitaminK"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminK];
+    }
+    if ([type isEqual:@"Zinc"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryZinc];
+    }
+    if ([type isEqual:@"Water"]) {
+        quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryWater];
+    }
+    
+    NSPredicate *predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
+    
+    [self fetchQuantitySamplesOfType:quantityType
+                                unit:unit
+                           predicate:predicate
+                           ascending:false
+                               limit:HKObjectQueryNoLimit
+                          completion:^(NSArray *results, NSError *error) {
+                              if(results){
+                                  callback(@[[NSNull null], results]);
+                                  return;
+                              } else {
+                                  NSLog(@"error getting %@ intake samples: %@", type, error);
+                                  callback(@[RCTMakeError(@"error getting %@ intake samples", type, nil)]);
+                                  return;
+                              }
+                          }];
+    
+}
+
 @end
