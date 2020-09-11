@@ -75,28 +75,25 @@
         if (completion) {
             NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+            for (HKQuantitySample *sample in results) {
+                HKQuantity *quantity = sample.quantity;
+                double value = [quantity doubleValueForUnit:unit];
 
-                for (HKQuantitySample *sample in results) {
-                    HKQuantity *quantity = sample.quantity;
-                    double value = [quantity doubleValueForUnit:unit];
+                NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
+                NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
 
-                    NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
-                    NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
+                NSDictionary *elem = @{
+                        @"value" : @(value),
+                        @"sourceName" : [[[sample sourceRevision] source] name],
+                        @"sourceId" : [[[sample sourceRevision] source] bundleIdentifier],
+                        @"startDate" : startDateString,
+                        @"endDate" : endDateString,
+                };
 
-                    NSDictionary *elem = @{
-                            @"value" : @(value),
-                            @"sourceName" : [[[sample sourceRevision] source] name],
-                            @"sourceId" : [[[sample sourceRevision] source] bundleIdentifier],
-                            @"startDate" : startDateString,
-                            @"endDate" : endDateString,
-                    };
+                [data addObject:elem];
+            }
 
-                    [data addObject:elem];
-                }
-
-                completion(data, error);
-            });
+            completion(data, error);
         }
     };
 
