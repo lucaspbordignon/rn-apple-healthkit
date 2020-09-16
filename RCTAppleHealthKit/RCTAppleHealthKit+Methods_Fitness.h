@@ -11,6 +11,8 @@
 
 @interface RCTAppleHealthKit (Methods_Fitness)
 
+- (void)fitness_getActiveMinutes:(NSDictionary *)input resolve:(RCTPromiseResolveBlock)resolve
+    reject:(RCTPromiseRejectBlock)reject;
 - (void)fitness_getStepCountOnDay:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)fitness_getSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)fitness_setObserver:(NSDictionary *)input;
