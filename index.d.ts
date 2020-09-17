@@ -20,7 +20,7 @@ declare module "rn-apple-healthkit" {
 
         /**
         * Get the total of active minutes of the specified date range.
-        * @param {Object} options getDailyDistanceSamples accepts an options object containing required startDate: ISO8601Timestamp and endDate: ISO8601Timestamp.
+        * @param {Object} options getActiveMinutes accepts an options object containing required startDate: ISO8601Timestamp and endDate: ISO8601Timestamp.
         */
         getActiveMinutes(options: any): Promise<any>;
 
