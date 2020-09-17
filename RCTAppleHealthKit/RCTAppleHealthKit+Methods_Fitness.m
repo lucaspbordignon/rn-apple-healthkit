@@ -20,7 +20,7 @@
                          resolve:(RCTPromiseResolveBlock)resolve
                           reject:(RCTPromiseRejectBlock)reject
 {
-    HKUnit *unit = [RCTAppleHealthKit hkUnitFromOptions:input key:@"unit" withDefault:[HKUnit countUnit]];
+    HKUnit *unit = [RCTAppleHealthKit hkUnitFromOptions:input key:@"unit" withDefault:[HKUnit minuteUnit]];
     NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
     BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
@@ -40,7 +40,7 @@
                                                limit:limit
                                 includeManuallyAdded:includeManuallyAdded completion:^(NSArray *results, NSError *error) {
             if(results){
-                resolve(@[[NSNull null], results]);
+                resolve(@[results]);
                 return;
             } else {
                 NSLog(@"error getting samples: %@", error);
@@ -49,7 +49,7 @@
             }
         }];
     } else {
-        // Fallback on earlier versions
+        reject(@"error_not_available", nil, nil);
     };
 }
 
