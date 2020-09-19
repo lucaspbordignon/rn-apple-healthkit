@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26B5CA3025150B3B00FF45A6 /* RCTAppleHealthKit+Methods_Symptoms.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B5CA2F25150B3B00FF45A6 /* RCTAppleHealthKit+Methods_Symptoms.m */; };
 		3774C8911D2092F20000B3F3 /* RCTAppleHealthKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3774C8901D2092F20000B3F3 /* RCTAppleHealthKit.h */; };
 		3774C8931D2092F20000B3F3 /* RCTAppleHealthKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3774C8921D2092F20000B3F3 /* RCTAppleHealthKit.m */; };
 		3774C89B1D2095450000B3F3 /* RCTAppleHealthKit+Queries.m in Sources */ = {isa = PBXBuildFile; fileRef = 3774C89A1D2095450000B3F3 /* RCTAppleHealthKit+Queries.m */; };
@@ -38,6 +39,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		26B5CA2F25150B3B00FF45A6 /* RCTAppleHealthKit+Methods_Symptoms.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Symptoms.m"; sourceTree = "<group>"; };
+		26B5CA3125150B4F00FF45A6 /* RCTAppleHealthKit+Methods_Symptoms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTAppleHealthKit+Methods_Symptoms.h"; sourceTree = "<group>"; };
 		3774C88D1D2092F20000B3F3 /* libRCTAppleHealthKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTAppleHealthKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3774C8901D2092F20000B3F3 /* RCTAppleHealthKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAppleHealthKit.h; sourceTree = "<group>"; };
 		3774C8921D2092F20000B3F3 /* RCTAppleHealthKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAppleHealthKit.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				377D44F21D247D0A004E35CB /* RCTAppleHealthKit+Methods_Characteristic.m */,
 				37837E7B1DCFE270000201A0 /* RCTAppleHealthKit+Methods_Sleep.h */,
 				37837E7C1DCFE270000201A0 /* RCTAppleHealthKit+Methods_Sleep.m */,
+				26B5CA2F25150B3B00FF45A6 /* RCTAppleHealthKit+Methods_Symptoms.m */,
+				26B5CA3125150B4F00FF45A6 /* RCTAppleHealthKit+Methods_Symptoms.h */,
 			);
 			path = RCTAppleHealthKit;
 			sourceTree = "<group>";
@@ -139,7 +144,6 @@
 				AD8403CE6AF2AAD2D7CEE97E /* Pods-RCTAppleHealthKit.debug.xcconfig */,
 				5ED55FED5925473BC28AF03D /* Pods-RCTAppleHealthKit.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -240,6 +244,7 @@
 				3774C8D41D20C6390000B3F3 /* RCTAppleHealthKit+Methods_Body.m in Sources */,
 				61232F931E303758000A5026 /* RCTAppleHealthKit+Methods_Mindfulness.m in Sources */,
 				846A98EA215244E7000C3E5D /* RCTAppleHealthKit+Methods_Dietary.m in Sources */,
+				26B5CA3025150B3B00FF45A6 /* RCTAppleHealthKit+Methods_Symptoms.m in Sources */,
 				64E0E73F1D37947B00EAB905 /* RCTAppleHealthKit+Methods_Results.m in Sources */,
 				64C42D4A1D351A8800A0A8F7 /* RCTAppleHealthKit+Methods_Vitals.m in Sources */,
 				3774C8931D2092F20000B3F3 /* RCTAppleHealthKit.m in Sources */,
@@ -291,7 +296,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "${SRCROOT}/../../ios/Pods/Headers/Public/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -330,7 +335,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "${SRCROOT}/../../ios/Pods/Headers/Public/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

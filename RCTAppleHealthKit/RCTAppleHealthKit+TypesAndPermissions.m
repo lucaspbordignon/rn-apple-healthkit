@@ -97,6 +97,11 @@
         return [HKObjectType workoutType];
     }
     
+    // symptoms
+    if ([@"Bloating" isEqualToString: key] && systemVersion >= 13.6) {
+        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierBloating];
+    }
+    
     return nil;
 }
 

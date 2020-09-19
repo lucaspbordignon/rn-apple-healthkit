@@ -3,11 +3,13 @@
 //  RCTAppleHealthKit
 //
 //  Created by Bartek Widlarz on 18/09/2020.
-//  Copyright © 2020 Greg Wilson. All rights reserved.
 //
+#import "RCTAppleHealthKit.h"
 
-#ifndef RCTAppleHealthKit_Methods_Symptoms_h
-#define RCTAppleHealthKit_Methods_Symptoms_h
+@interface RCTAppleHealthKit (Methods_Dietary)
 
+//- (void)getSymptomsDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
-#endif /* RCTAppleHealthKit_Methods_Symptoms_h */
+- (void)symptoms_getBloating:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+
+@end
