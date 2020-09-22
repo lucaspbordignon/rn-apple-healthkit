@@ -51,6 +51,43 @@
     [self.healthStore executeQuery:query];
 }
 
+
+- (void)fetchMostRecentSymptomSampleOfType:(HKCategoryType *)categoryType
+                                  predicate:(NSPredicate *)predicate
+                                 completion:(void (^)(HKCategoryValueSeverity *, NSDate *, NSDate *, NSError *))completion {
+
+    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc]
+            initWithKey:HKSampleSortIdentifierEndDate
+              ascending:NO
+    ];
+
+    HKSampleQuery *query = [[HKSampleQuery alloc]
+            initWithSampleType:categoryType
+                     predicate:predicate
+                         limit:1
+               sortDescriptors:@[timeSortDescriptor]
+                resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
+
+                      if (!results) {
+                          if (completion) {
+                              completion(nil, nil, nil, error);
+                          }
+                          return;
+                      }
+
+                      if (completion) {
+                          // If quantity isn't in the database, return nil in the completion block.
+                          HKCategorySample *categorySample = results.firstObject;
+                          HKCategoryValue *value = categorySample.value;
+                          NSDate *startDate = categorySample.startDate;
+                          NSDate *endDate = categorySample.endDate;
+                          completion(value, startDate, endDate, error);
+                      }
+                }
+    ];
+    [self.healthStore executeQuery:query];
+}
+
 - (void)fetchQuantitySamplesOfType:(HKQuantityType *)quantityType
                               unit:(HKUnit *)unit
                          predicate:(NSPredicate *)predicate

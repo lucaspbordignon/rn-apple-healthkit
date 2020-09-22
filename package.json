@@ -1,6 +1,6 @@
 {
-  "name": "rn-apple-healthkit",
-  "version": "0.8.0",
+  "name": "@okelm/rn-apple-healthkit",
+  "version": "0.8.1",
   "description": "A React Native package for interacting with Apple HealthKit",
   "main": "index.js",
   "repository": {
