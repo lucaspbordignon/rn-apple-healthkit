@@ -27,6 +27,7 @@
     ];
 
     HKCategoryType *type = [HKCategoryType categoryTypeForIdentifier: HKCategoryTypeIdentifierBloating];
+    
     NSPredicate *predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
 
     HKSampleQuery *query = [[HKSampleQuery alloc]
@@ -43,7 +44,7 @@
             }
             NSMutableArray *data = [NSMutableArray arrayWithCapacity:(10)];
 
-            for (HKQuantitySample *sample in results) {
+            for (HKCategorySample *sample in results) {
             NSLog(@"sample for bloating %@", sample);
             NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
             NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
@@ -60,6 +61,7 @@
     ];
     [self.healthStore executeQuery:query];
 }
+@end
 
 //
 //- (void)getSymptomsDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback

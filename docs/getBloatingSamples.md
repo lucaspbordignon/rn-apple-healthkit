@@ -2,8 +2,8 @@ Get the list of Bloating Samples within given dates.
 
 ```javascript
 let options = {
-  startDate: Date,
-  endDate: Date,
+  startDate?: Date,
+  endDate?: Date,
   limit?: number
 };
 ```
