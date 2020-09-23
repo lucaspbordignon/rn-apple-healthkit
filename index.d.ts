@@ -5,6 +5,11 @@ declare module "rn-apple-healthkit" {
             write: string[];
         };
     }
+    export interface MindfulSessionData {
+        startDate?: Date,
+        endDate?: Date,
+        limit?: number
+    }
 
     export interface AppleHealthKit {
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
@@ -18,6 +23,10 @@ declare module "rn-apple-healthkit" {
         getLatestHeight(options: HealthUnitOptions, callback: (err: string, results: HealthValue) => void): void;
 
         getLatestWeight(options: HealthUnitOptions, callback: (err: string, results: HealthValue) => void): void;
+
+        getMindfulSession(options: MindfulSessionData, callback: (err: string, results: HealthValue) => void): void;
+
+        getStepCount(options: any, callback: (err: string, results: HealthValue) => void): void;
     }
 
     export interface HealthDateOfBirth {

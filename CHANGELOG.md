@@ -1,4 +1,13 @@
 # Changelog
+
+0.8.0v
+- Added Support to read Mindfulness data from HealthKit [#139](https://github.com/terrillo/rn-apple-healthkit/pull/139)
+- Biological sex permission request [#136](https://github.com/terrillo/rn-apple-healthkit/pull/136)
+- Fixed sleep permission request not working [#132](https://github.com/terrillo/rn-apple-healthkit/pull/132)
+- Support asking for DateOfBirth permission [#134](https://github.com/terrillo/rn-apple-healthkit/pull/134)
+- Fixes URLs in podspec pointing to an invalid repository. [#129](https://github.com/terrillo/rn-apple-healthkit/pull/129)
+- Add getDistanceSwimming method [#135](https://github.com/terrillo/rn-apple-healthkit/pull/135)
+
 0.7.2v
 - Add query for basalEnergyBurned. [#49](https://github.com/terrillo/rn-apple-healthkit/pull/49)
 
