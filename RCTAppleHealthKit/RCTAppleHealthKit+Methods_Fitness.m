@@ -40,7 +40,7 @@
                                                limit:limit
                                 includeManuallyAdded:includeManuallyAdded completion:^(NSArray *results, NSError *error) {
             if(results){
-                resolve(@results);
+                resolve(results);
                 return;
             } else {
                 NSLog(@"error getting samples: %@", error);
