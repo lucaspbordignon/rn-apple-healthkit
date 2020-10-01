@@ -206,9 +206,19 @@ RCT_EXPORT_METHOD(getActiveEnergyBurned:(NSDictionary *)input callback:(RCTRespo
    [self activity_getActiveEnergyBurned:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getActiveEnergyDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+   [self activity_getActiveEnergyDailySamples:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getBasalEnergyBurned:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
-    [self activity_getBasalEnergyBurned:input callback:callback];
+   [self activity_getBasalEnergyBurned:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getBasalEnergyDailySamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+   [self activity_getBasalEnergyDailySamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getBodyTemperatureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
@@ -256,6 +266,10 @@ RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponse
     [self mindfulness_saveMindfulSession:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self mindfulness_getMindfulSession:input callback:callback];
+}
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback
 {

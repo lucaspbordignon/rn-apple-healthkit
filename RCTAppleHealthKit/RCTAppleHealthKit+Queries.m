@@ -303,6 +303,8 @@
 
                     NSDictionary *elem = @{
                             @"value" : valueString,
+                            @"sourceName" : [[[sample sourceRevision] source] name],
+                            @"sourceId" : [[[sample sourceRevision] source] bundleIdentifier],
                             @"startDate" : startDateString,
                             @"endDate" : endDateString,
                     };
