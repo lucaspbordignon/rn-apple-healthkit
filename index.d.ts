@@ -47,11 +47,23 @@ declare module "rn-apple-healthkit" {
 
         getBasalEnergyBurned(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
 
+        getAppleStandTime(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
         getBodyTemperatureSamples(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
 
         getBloodPressureSamples(options: HealthOptions, callback: (err: string, results: HealthBloodPressureValue[]) => void): void;
 
+        getMenstrualFlowSamples(options: HealthOptions, callback: (err: string, results: HealthMenstrualFlowValue[]) => void): void;
+
+        getLastMenstruationDate(options: any, callback: (err: string, results: HealthLastMenstruationDate) => void): void;
+
+        getInhalerUsageSamples(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getRestingHeartRateSamples(options: HealthHeartRateOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
         getHeartRateSamples(options: HealthHeartRateOptions, callback: (err: string, results: HealthValue[]) => void): void;
+
+        getHeartRateVariabilitySDNNSamples(options: HealthOptions, callback: (err: string, results: HealthValue[]) => void): void;
 
         getBodyFatPercentageSamples(options: BodyFatPercentageOptions, callback: (err: string, results: HealthValue[]) => void): void;
     }
@@ -59,6 +71,10 @@ declare module "rn-apple-healthkit" {
     export interface HealthDateOfBirth {
         value: string;
         age: number;
+    }
+
+    export interface HealthLastMenstruationDate {
+        startDate: string;
     }
 
     export interface HealthBiologicalSex {
@@ -82,6 +98,13 @@ declare module "rn-apple-healthkit" {
         bloodPressureDiastolicValue: number;
         startDate: string;
         endDate: string;
+    }
+
+    export interface HealthMenstrualFlowValue {
+        startDate: string;
+        endDate: string;
+        startOfCycle: boolean;
+        value: 'NONE' | 'UNSPECIFIED' | 'LIGHT' | 'MEDIUM' | 'HEAVY';
     }
 
     export interface HealthOptions {

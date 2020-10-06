@@ -343,6 +343,93 @@
 
 
 
+- (void)fetchMenstrualFlowCategorySamplesForPredicate:(NSPredicate *)predicate
+                                   limit:(NSUInteger)lim
+                                   completion:(void (^)(NSArray *, NSError *))completion {
+
+    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate
+                                                                     ascending:false];
+
+
+    // declare the block
+    void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
+    // create and assign the block
+    handlerBlock = ^(HKSampleQuery *query, NSArray *results, NSError *error) {
+        if (!results) {
+            if (completion) {
+                completion(nil, error);
+            }
+            return;
+        }
+        
+        if (completion) {
+            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+    
+            for (HKCategorySample *sample in results) {
+                NSInteger val = sample.value;
+
+                NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
+                NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
+                bool startOfCycle = [[sample metadata][HKMetadataKeyMenstrualCycleStart] intValue];
+
+                NSString *valueString;
+                
+                switch (val) {
+                    case HKCategoryValueMenstrualFlowNone:
+                        valueString = @"NONE";
+                        break;
+                    case HKCategoryValueMenstrualFlowUnspecified:
+                        valueString = @"UNSPECIFIED";
+                        break;
+                    case HKCategoryValueMenstrualFlowLight:
+                        valueString = @"LIGHT";
+                        break;
+                    case HKCategoryValueMenstrualFlowMedium:
+                        valueString = @"MEDIUM";
+                        break;
+                    case HKCategoryValueMenstrualFlowHeavy:
+                        valueString = @"HEAVY";
+                        break;
+                    default:
+                        valueString = @"UNKNOWN";
+                        break;
+                }
+                
+                NSDictionary *elem = @{
+                    @"value" : valueString,
+                    @"startOfCycle" : @(startOfCycle),
+                    @"sourceName" : [[[sample sourceRevision] source] name],
+                    @"sourceId" : [[[sample sourceRevision] source] bundleIdentifier],
+                    @"startDate" : startDateString,
+                    @"endDate" : endDateString,
+                };
+                
+                [data addObject:elem];
+            }
+            
+            completion(data, error);
+
+        }
+    };
+
+    HKCategoryType *categoryType =
+    [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow];
+
+
+
+   HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:categoryType
+                                                          predicate:predicate
+                                                              limit:lim
+                                                    sortDescriptors:@[timeSortDescriptor]
+                                                     resultsHandler:handlerBlock];
+
+
+    [self.healthStore executeQuery:query];
+}
+
+
+
+
 
 
 

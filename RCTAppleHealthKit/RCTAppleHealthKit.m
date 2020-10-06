@@ -200,6 +200,16 @@ RCT_EXPORT_METHOD(getHeartRateSamples:(NSDictionary *)input callback:(RCTRespons
     [self vitals_getHeartRateSamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getRestingHeartRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self vitals_getRestingHeartRateSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getHeartRateVariabilitySDNNSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self vitals_getHeartRateVariabilitySDNNSamples:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getActiveEnergyBurned:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
    [self activity_getActiveEnergyBurned:input callback:callback];
@@ -220,6 +230,11 @@ RCT_EXPORT_METHOD(getBasalEnergyDailySamples:(NSDictionary *)input callback:(RCT
    [self activity_getBasalEnergyDailySamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getAppleStandTime:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+   [self activity_getAppleStandTime:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getBodyTemperatureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self vitals_getBodyTemperatureSamples:input callback:callback];
@@ -230,6 +245,17 @@ RCT_EXPORT_METHOD(getBloodPressureSamples:(NSDictionary *)input callback:(RCTRes
     [self vitals_getBloodPressureSamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getMenstrualFlowSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self vitals_getMenstrualFlowSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getLastMenstruationDate:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self vitals_getLastMenstruationDate:input callback:callback];
+}
+
+
 RCT_EXPORT_METHOD(getRespiratoryRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self vitals_getRespiratoryRateSamples:input callback:callback];
@@ -238,6 +264,11 @@ RCT_EXPORT_METHOD(getRespiratoryRateSamples:(NSDictionary *)input callback:(RCTR
 RCT_EXPORT_METHOD(getBloodGlucoseSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self results_getBloodGlucoseSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getInhalerUsageSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self results_getInhalerUsageSamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getSleepSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)

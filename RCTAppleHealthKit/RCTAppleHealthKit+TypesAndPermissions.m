@@ -56,7 +56,10 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
     }else if ([@"NikeFuel" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierNikeFuel];
+    }else if ([@"AppleStandTime" isEqualToString: key] && systemVersion >= 13.0) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleStandTime];
     }
+
     
 //    if ([@"AppleExerciseTime" isEqualToString: key]) {
 //        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleExerciseTime];
@@ -70,6 +73,10 @@
     // Vital Signs Identifiers
     if ([@"HeartRate" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+    }else if ([@"HeartRateVariabilitySDNN" isEqualToString: key] && systemVersion >= 11.0) {
+           return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRateVariabilitySDNN];
+    }else if ([@"RestingHeartRate" isEqualToString: key] && systemVersion >= 11.0) {
+          return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierRestingHeartRate];
     }else if ([@"BodyTemperature" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyTemperature];
     }else if ([@"BloodPressureSystolic" isEqualToString: key]) {
@@ -78,11 +85,16 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic];
     }else if ([@"RespiratoryRate" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierRespiratoryRate];
+    }else if ([@"MenstrualFlow" isEqualToString: key]) {
+        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow];
     }
     
     // Results Identifiers
     if ([@"BloodGlucose" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose];
+    }
+    if ([@"InhalerUsage" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierInhalerUsage];
     }
     
     // Sleep

@@ -65,4 +65,8 @@
                                    limit:(NSUInteger)lim
                                    completion:(void (^)(NSArray *, NSError *))completion;
 
+- (void)fetchMenstrualFlowCategorySamplesForPredicate:(NSPredicate *)predicate
+                                                limit:(NSUInteger)lim
+                                           completion:(void (^)(NSArray *, NSError *))completion;
+
 @end
