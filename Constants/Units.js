@@ -23,5 +23,6 @@ export const Units = {
   mmolPerL: "mmolPerL",
   percent: "percent",
   pound: "pound",
-  second: "second"
+  second: "second",
+  yard: "yard"
 }

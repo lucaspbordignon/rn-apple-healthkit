@@ -217,6 +217,9 @@
     if([unitString isEqualToString:@"mgPerdL"]){
         theUnit = [HKUnit unitFromString:@"mg/dL"];
     }
+    if([unitString isEqualToString:@"yard"]){
+        theUnit = [HKUnit yardUnit];
+    }
 
     if(theUnit == nil){
         theUnit = defaultValue;
