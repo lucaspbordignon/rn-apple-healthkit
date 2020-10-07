@@ -1,5 +1,5 @@
 # React Native Apple Healthkit
-A React Native bridge module for interacting with Apple Healthkit data.
+A React Native bridge module for interacting with Apple Healthkit data. Checkout the DEMO app.(https://github.com/terrillo/rn-apple-healthkit/tree/master/Demo)
 
 ## Installation (React Native >=0.40)
 
@@ -35,14 +35,17 @@ If new read/write permissions are added to the options object then the app user 
 ```javascript
 import AppleHealthKit from 'rn-apple-healthkit';
 
-let options = {
+const PERMS = AppleHealthKit.Constants.Permissions;
+const healthKitOptions = {
     permissions: {
-        read: ["Height", "Weight"],
-        write: ["Height", "Weight"]
+        read:  [
+            PERMS.Age,
+            PERMS.Weight,
+        ]
     }
 };
 
-AppleHealthKit.initHealthKit(options, (err, results) => {
+AppleHealthKit.initHealthKit(healthKitOptions, (err, results) => {
     if (err) {
         console.log("error initializing Healthkit: ", err);
         return;

@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 import AppleHealthKit from 'rn-apple-healthkit';
+const PERMS = AppleHealthKit.Constants.Permissions;
 
 export class App extends React.Component {
 
@@ -30,13 +31,16 @@ export class App extends React.Component {
   }
 
   componentDidMount() {
-    let options = {
+    const healthKitOptions = {
         permissions: {
-          read: ["Weight", "DateOfBirth"]
+            read:  [
+                PERMS.DateOfBirth,
+                PERMS.Weight,
+            ]
         }
     };
 
-    AppleHealthKit.initHealthKit(options, (err, results) => {
+    AppleHealthKit.initHealthKit(healthKitOptions, (err, results) => {
       if (err) {
         console.log("error initializing Healthkit: ", err);
         return;
@@ -50,7 +54,7 @@ export class App extends React.Component {
       });
 
       // Get Latest Weight
-      AppleHealthKit.getLatestWeight(options, (err: string, results: Object) => {
+      AppleHealthKit.getLatestWeight(null, (err: string, results: Object) => {
         this.setState({
           Weight: results
         })
