@@ -123,11 +123,11 @@ Height Example Response
 ## Supported Apple Permissions
 
 The available Healthkit permissions to use with `initHealthKit`
-
+ 
 | Permission             | Healthkit Identifier Type                                                                                                                                          | Read | Write |
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|-------|
-| ActiveEnergyBurned     | [HKQuantityTypeIdentifierActiveEnergyBurned](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/1615771-activeenergyburned?language=objc)           | ✓    |       |
-| BasalEnergyBurned      | [HKQuantityTypeIdentifierBasalEnergyBurned](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/1615512-basalenergyburned?language=objc)           | ✓    |       |
+| ActiveEnergyBurned     | [HKQuantityTypeIdentifierActiveEnergyBurned](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/1615771-activeenergyburned?language=objc)| ✓    |       |
+| BasalEnergyBurned      | [HKQuantityTypeIdentifierBasalEnergyBurned](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/1615512-basalenergyburned?language=objc)  | ✓    |       |
 | BiologicalSex          | [HKCharacteristicTypeIdentifierBiologicalSex](https://developer.apple.com/reference/Healthkit/hkcharacteristictypeidentifierbiologicalsex?language=objc)           | ✓    |       |
 | BloodGlucose           | [HKQuantityTypeIdentifierBloodGlucose](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbloodglucose?language=objc)                         | ✓    |       |
 | BloodPressureDiastolic | [HKQuantityTypeIdentifierBloodPressureDiastolic](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifierbloodpressurediastolic?language=objc) | ✓    | ✓     |
@@ -148,6 +148,14 @@ The available Healthkit permissions to use with `initHealthKit`
 | Steps                  | [HKQuantityTypeIdentifierSteps](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifiersteps?language=objc)                                       | ✓    | ✓     |
 | Weight                 | [HKQuantityTypeIdentifierBodyMass](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodymass?language=objc)                                 | ✓    | ✓     |
 | BodyFatPercentage      | [HKQuantityTypeIdentifierBodyFatPercentage](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodyfatpercentage?language=objc)                                 | ✓    | ✓     |
+| AllergyRecord          | [HKClinicalTypeIdentifierAllergyRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierallergyrecord?language=objc)                   | ✓    |       |
+| ConditionRecord        | [HKClinicalTypeIdentifierConditionRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierconditionrecord?language=objc)               | ✓    |       |
+| ImmunizationRecord     | [HKClinicalTypeIdentifierImmunizationRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierimmunizationrecord?language=objc)         | ✓    |       |
+| LabResultRecord        | [HKClinicalTypeIdentifierLabResultRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierlabresultrecord?language=objc)               | ✓    |       |
+| MedicationRecord       | [HKClinicalTypeIdentifierMedicationRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifiermedicationrecord?language=objc)             | ✓    |       |
+| ProcedureRecord        | [HKClinicalTypeIdentifierProcedureRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifierprocedurerecord?language=objc)               | ✓    |       |
+| ClinicalVitalRecord    | [HKClinicalTypeIdentifierVitalSignRecord](https://developer.apple.com/documentation/healthkit/hkclinicaltypeidentifiervitalsignrecord?language=objc)               | ✓    |       |
+
 
 These permissions are exported as constants of the `rn-apple-healthkit` module.
 

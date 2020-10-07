@@ -58,10 +58,6 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierNikeFuel];
     }
     
-//    if ([@"AppleExerciseTime" isEqualToString: key]) {
-//        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleExerciseTime];
-//    }
-    
     // Nutrition Identifiers
     if ([@"DietaryEnergy" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
@@ -96,13 +92,54 @@
     } else if ([@"MindfulSession" isEqualToString: key]){
         return [HKObjectType workoutType];
     }
-    
+
+    if ([@"CDADocument" isEqualToString: key]) {
+        return [HKObjectType documentTypeForIdentifier:HKDocumentTypeIdentifierCDA];
+    }
+
+    if (@available(iOS 12.0, *)) {
+        if ([@"AllergyRecord" isEqualToString: key]) {
+            // [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord] forKey: @"AllergyRecord"];
+            return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord];
+        }
+
+        if ([@"ConditionRecord" isEqualToString: key]) {
+            // [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierConditionRecord] forKey: @"ConditionRecord"];
+            return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierConditionRecord];
+        }
+
+        if ([@"ImmunizationRecord" isEqualToString: key]) {
+            // [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierImmunizationRecord] forKey: @"ImmunizationRecord"];
+            return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierImmunizationRecord];
+        }
+
+        if ([@"LabResultRecord" isEqualToString: key]) {
+            // [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierLabResultRecord] forKey: @"LabResultRecord"];
+            return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierLabResultRecord];
+        }
+
+        if ([@"MedicationRecord" isEqualToString: key]) {
+            // [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierMedicationRecord] forKey: @"MedicationRecord"];
+            return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierMedicationRecord];
+        }
+
+        if ([@"ProcedureRecord" isEqualToString: key]) {
+            // [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierProcedureRecord] forKey: @"ProcedureRecord"];
+            return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierProcedureRecord];
+        }
+
+        if ([@"ClinicalVitalRecord" isEqualToString: key]) {
+            // [readPerms setObject:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord] forKey: @"ClinicalVitalRecord"];
+            return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord];
+        }
+    }
+   
     return nil;
 }
 
-- (nullable HKObjectType *)getWritePermFromText:(nonnull NSString*) key {
 
-    
+
+- (nullable HKObjectType *)getWritePermFromText:(nonnull NSString*) key {
     // Body Measurements
     if([@"Height" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
@@ -229,7 +266,7 @@
 // Returns HealthKit read permissions from options array
 - (NSSet *)getReadPermsFromOptions:(NSArray *)options {
     NSMutableSet *readPermSet = [NSMutableSet setWithCapacity:1];
-    
+
     for(int i=0; i<[options count]; i++) {
         NSString *optionKey = options[i];
         if(optionKey != nil){

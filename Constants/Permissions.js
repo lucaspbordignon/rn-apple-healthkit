@@ -1,6 +1,6 @@
 /**
  * Apple Health Permissions
- * https://github.com/terrillo/rn-apple-healthkit#permissions
+ * https://github.com/doc-ai/rn-apple-healthkit#supported-apple-permissions
  * @type {Object}
  */
 export const Permissions = {
@@ -20,6 +20,7 @@ export const Permissions = {
   Caffeine: "Caffeine",
   Calcium: "Calcium",
   Carbohydrates: "Carbohydrates",
+  CDADocument: "CDADocument",
   Chloride: "Chloride",
   Cholesterol: "Cholesterol",
   Copper: "Copper",
@@ -68,5 +69,11 @@ export const Permissions = {
   StepCount: "StepCount",
   Steps: "Steps",
   Weight: "Weight",
-  Workout: "Workout"
+  Workout: "Workout",
+  ConditionRecord: "ConditionRecord",
+  ImmunizationRecord: "ImmunizationRecord",
+  LabResultRecord: "LabResultRecord",
+  MedicationRecord: "MedicationRecord",
+  ProcedureRecord: "ProcedureRecord",
+  ClinicalVitalRecord: "ClinicalVitalRecord",
 }
