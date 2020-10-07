@@ -59,6 +59,7 @@ export const Permissions = {
   DistanceWalkingRunning: "DistanceWalkingRunning",
   FlightsClimbed: "FlightsClimbed",
   HeartRate: "HeartRate",
+  RestingHeartRate: "RestingHeartRate",
   Height: "Height",
   LeanBodyMass: "LeanBodyMass",
   MindfulSession: "MindfulSession",
