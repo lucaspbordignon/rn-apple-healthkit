@@ -1,7 +1,7 @@
 # React Native Apple Healthkit
-A React Native bridge module for interacting with Apple Healthkit data. Checkout the [full documentation](https://github.com/terrillo/rn-apple-healthkit/tree/master/docs)
+A React Native bridge module for interacting with Apple Healthkit data. Checkout the DEMO app.(https://github.com/terrillo/rn-apple-healthkit/tree/master/Demo)
 
-## Installation
+## Installation (React Native >=0.40)
 
 Install the [rn-apple-healthkit] package from npm:
 
@@ -35,14 +35,17 @@ If new read/write permissions are added to the options object then the app user 
 ```javascript
 import AppleHealthKit from 'rn-apple-healthkit';
 
-let options = {
+const PERMS = AppleHealthKit.Constants.Permissions;
+const healthKitOptions = {
     permissions: {
-        read: ["Height", "Weight"],
-        write: ["Height", "Weight"]
+        read:  [
+            PERMS.Age,
+            PERMS.Weight,
+        ]
     }
 };
 
-AppleHealthKit.initHealthKit(options, (err, results) => {
+AppleHealthKit.initHealthKit(healthKitOptions, (err, results) => {
     if (err) {
         console.log("error initializing Healthkit: ", err);
         return;
@@ -106,7 +109,7 @@ Height Example Response
       * [getStepCount](/docs/getStepCount().md)
       * [getWeightSamples](/docs/getWeightSamples().md)
       * [getSamples](docs/getSamples().md)
-      * [getMindfulSession](docs/getMindfulSession().md) 
+      * [getMindfulSession](docs/getMindfulSession().md)
     * Write Methods
       * [saveBmi](/docs/saveBmi().md)
       * [saveHeight](/docs/saveHeight().md)
@@ -193,5 +196,3 @@ const healthKitOptions = {
 
 ## References
 - Apple Healthkit Documentation [https://developer.apple.com/Healthkit/](https://developer.apple.com/Healthkit/)
-
-> *This package is an original fork of [react-native-apple-Healthkit](https://github.com/GregWilson/react-native-apple-Healthkit)*
