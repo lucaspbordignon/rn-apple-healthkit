@@ -12,5 +12,6 @@
 @interface RCTAppleHealthKit (Methods_Sleep)
 
 - (void)sleep_getSleepSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)sleep_saveSleep:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
 @end
