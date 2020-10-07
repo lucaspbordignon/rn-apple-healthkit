@@ -1,7 +1,7 @@
 # React Native Apple Healthkit
-A React Native bridge module for interacting with Apple Healthkit data. Checkout the [full documentation](https://github.com/terrillo/rn-apple-healthkit/tree/master/docs)
+A React Native bridge module for interacting with Apple Healthkit data.
 
-## Installation
+## Installation (React Native >=0.40)
 
 Install the [rn-apple-healthkit] package from npm:
 
@@ -106,7 +106,7 @@ Height Example Response
       * [getStepCount](/docs/getStepCount().md)
       * [getWeightSamples](/docs/getWeightSamples().md)
       * [getSamples](docs/getSamples().md)
-      * [getMindfulSession](docs/getMindfulSession().md) 
+      * [getMindfulSession](docs/getMindfulSession().md)
     * Write Methods
       * [saveBmi](/docs/saveBmi().md)
       * [saveHeight](/docs/saveHeight().md)
@@ -193,5 +193,3 @@ const healthKitOptions = {
 
 ## References
 - Apple Healthkit Documentation [https://developer.apple.com/Healthkit/](https://developer.apple.com/Healthkit/)
-
-> *This package is an original fork of [react-native-apple-Healthkit](https://github.com/GregWilson/react-native-apple-Healthkit)*
