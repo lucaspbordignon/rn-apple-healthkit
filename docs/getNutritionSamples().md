@@ -5,8 +5,7 @@ Anyone can add more nutrition in ```RCTAppleHealthKit+Methods_Dietary.m getNutri
 
 ```javascript
 let options = {
-  unit: 'liter', // current nutrition water, therefore use 'liter'
-  type: 'Water', // current nutrition water
+  type: 'Water', // required, currently type 'Water' working only. Check Nutrition from index.d.ts
   startDate: (new Date(2016,4,27)).toISOString(), // required
   endDate: (new Date()).toISOString(), // optional; default now
   ascending: false,	// optional; default false
@@ -25,9 +24,8 @@ AppleHealthKit.getNutritionSamples(options, (err: Object, results: Array<Object>
 
 ```javascript
 [
-// TODO: update 
-  { value: 160, startDate: '2016-07-09T00:00:00.000-0400', endDate: '2016-07-10T00:00:00.000-0400' },
-  { value: 161, startDate: '2016-07-08T00:00:00.000-0400', endDate: '2016-07-09T00:00:00.000-0400' },
-  { value: 165, startDate: '2016-07-07T00:00:00.000-0400', endDate: '2016-07-08T00:00:00.000-0400' },
+  { value: 1, startDate: '2016-07-09T00:00:00.000-0400', endDate: '2016-07-10T00:00:00.000-0400', sourceId: "com.apple.Health", sourceName: "Health" },
+  { value: 2, startDate: '2016-07-08T00:00:00.000-0400', endDate: '2016-07-09T00:00:00.000-0400', sourceId: "com.apple.Health", sourceName: "Health"  },
+  { value: 5, startDate: '2016-07-07T00:00:00.000-0400', endDate: '2016-07-08T00:00:00.000-0400', sourceId: "com.apple.Health", sourceName: "Health"  },
 ]
 ```

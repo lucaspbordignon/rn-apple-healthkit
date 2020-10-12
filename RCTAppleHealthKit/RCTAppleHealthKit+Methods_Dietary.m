@@ -410,7 +410,6 @@
 {
     NSString *type = [RCTAppleHealthKit stringFromOptions:input key:@"type" withDefault:nil];
 
-    HKUnit *unit = [RCTAppleHealthKit hkUnitFromOptions:input key:@"unit" withDefault:[HKUnit gramUnit]];
     NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
     BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
@@ -423,16 +422,17 @@
     NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
     
     HKQuantityType *nutritionType;
+    HKUnit *unit;
     
-    switch (type) {
-        case @"Water":
-            nutritionType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryWater]
-            break;
-            
-        // TODO: Add more nutritions here as per need
-        default:
-            break;
+    // Nutrition 'Water'
+    if([type isEqualToString:@"Water"]){
+        nutritionType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryWater];
+        unit = [HKUnit literUnit];
     }
+    else{
+        unit = [HKUnit gramUnit];   // Default unit for nutrition other than water
+    }
+    // TODO: Add more nutritions here as per need
 
     [self fetchQuantitySamplesOfType:nutritionType
                                 unit:unit
