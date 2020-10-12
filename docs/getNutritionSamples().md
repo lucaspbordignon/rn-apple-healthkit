@@ -1,4 +1,4 @@
-Query for weight samples. the options object is used to setup a query to retrieve relevant samples.
+Query for nurition samples. the options object is used to setup a query to retrieve relevant samples.
 
 Anyone can add more nutrition in ```RCTAppleHealthKit+Methods_Dietary.m getNutritionSamples``` function using ```HKQuantityType```
 [Health-Kit Quantity type identifiers](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier?language=objc)
