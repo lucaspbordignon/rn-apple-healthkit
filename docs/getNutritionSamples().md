@@ -5,7 +5,7 @@ Anyone can add more nutrition in ```RCTAppleHealthKit+Methods_Dietary.m getNutri
 
 ```javascript
 let options = {
-  type: 'Water', // required, currently type 'Water' working only. Check Nutrition from index.d.ts
+  type: 'Water', // required, currently type 'Water' working only. Check Nutrition types from Constants/Nutrition
   startDate: (new Date(2016,4,27)).toISOString(), // required
   endDate: (new Date()).toISOString(), // optional; default now
   ascending: false,	// optional; default false
