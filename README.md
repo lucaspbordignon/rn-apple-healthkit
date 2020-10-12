@@ -110,6 +110,7 @@ Height Example Response
       * [getWeightSamples](/docs/getWeightSamples().md)
       * [getSamples](docs/getSamples().md)
       * [getMindfulSession](docs/getMindfulSession().md)
+      * [getNutritionSamples](docs/getNutritionSamples().md)
     * Write Methods
       * [saveBmi](/docs/saveBmi().md)
       * [saveHeight](/docs/saveHeight().md)
@@ -118,6 +119,7 @@ Height Example Response
       * [saveSteps](/docs/saveSteps().md)
       * [saveBodyFatPercentage](/docs/saveBodyFatPercentage().md)
       * [saveLeanBodyMass](/docs/saveLeanBodyMass().md)
+      * [saveWater](/docs/saveWater().md)
   * [References](#references)
 
 ## Supported Apple Permissions
@@ -148,6 +150,7 @@ The available Healthkit permissions to use with `initHealthKit`
 | Steps                  | [HKQuantityTypeIdentifierSteps](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifiersteps?language=objc)                                       | ✓    | ✓     |
 | Weight                 | [HKQuantityTypeIdentifierBodyMass](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodymass?language=objc)                                 | ✓    | ✓     |
 | BodyFatPercentage      | [HKQuantityTypeIdentifierBodyFatPercentage](https://developer.apple.com/reference/Healthkit/hkquantitytypeidentifierbodyfatpercentage?language=objc)                                 | ✓    | ✓     |
+| Water      | [HKQuantityTypeIdentifierDietaryWater](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifierdietarywater?language=objc)                                 | ✓    | ✓     |
 
 These permissions are exported as constants of the `rn-apple-healthkit` module.
 
@@ -192,6 +195,7 @@ const healthKitOptions = {
 - percent
 - pound
 - second
+- liter
 
 
 ## References
