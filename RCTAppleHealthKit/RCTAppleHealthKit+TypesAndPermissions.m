@@ -96,6 +96,11 @@
     } else if ([@"MindfulSession" isEqualToString: key]){
         return [HKObjectType workoutType];
     }
+
+    // Water
+    if([@"Water" isEqualToString:key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryWater];
+    }
     
     return nil;
 }

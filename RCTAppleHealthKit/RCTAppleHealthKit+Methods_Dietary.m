@@ -63,7 +63,7 @@
             HKMetadataKeyFoodType:foodNameValue,
             //@"HKFoodBrandName":@"FoodBrandName", // Restaurant name or packaged food brand name
             //@"HKFoodTypeUUID":@"FoodTypeUUID", // Identifier for this food
-            @"HKFoodMeal":mealNameValue//, // Breakfast, Lunch, Dinner, or Snacks 
+            @"HKFoodMeal":mealNameValue//, // Breakfast, Lunch, Dinner, or Snacks
             //@"HKFoodImageName":@"FoodImageName" // Food icon name
     };
 
@@ -403,6 +403,50 @@
             return;
         }
         callback(@[[NSNull null], @true]);
+    }];
+}
+
+- (void)getNutritionSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    NSString *type = [RCTAppleHealthKit stringFromOptions:input key:@"type" withDefault:nil];
+
+    NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
+    BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+    
+    if(startDate == nil){
+        callback(@[RCTMakeError(@"startDate is required in options", nil, nil)]);
+        return;
+    }
+    NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
+    
+    HKQuantityType *nutritionType;
+    HKUnit *unit;
+    
+    // Nutrition 'Water'
+    if([type isEqualToString:@"Water"]){
+        nutritionType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryWater];
+        unit = [HKUnit literUnit];
+    }
+    else{
+        unit = [HKUnit gramUnit];   // Default unit for nutrition other than water
+    }
+    // TODO: Add more nutritions here as per need
+
+    [self fetchQuantitySamplesOfType:nutritionType
+                                unit:unit
+                           predicate:predicate
+                           ascending:ascending
+                               limit:limit
+                          completion:^(NSArray *results, NSError *error) {
+        if(results){
+            callback(@[[NSNull null], results]);
+            return;
+        } else {
+            callback(@[RCTJSErrorFromNSError(error)]);
+            return;
+        }
     }];
 }
 
