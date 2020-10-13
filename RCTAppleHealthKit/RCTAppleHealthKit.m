@@ -9,6 +9,7 @@
 
 #import "RCTAppleHealthKit.h"
 #import "RCTAppleHealthKit+TypesAndPermissions.h"
+#import "RCTAppleHealthKit+Statistics.h"
 
 #import "RCTAppleHealthKit+Methods_Activity.h"
 #import "RCTAppleHealthKit+Methods_Body.h"
@@ -37,6 +38,11 @@ RCT_EXPORT_METHOD(isAvailable:(RCTResponseSenderBlock)callback)
 RCT_EXPORT_METHOD(initHealthKit:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self initializeHealthKit:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(fetchStatistics:(NSDictionary *)options callback:(RCTResponseSenderBlock)callback)
+{
+    [self statistics_fetchStatistics:options callback:callback];
 }
 
 RCT_EXPORT_METHOD(initStepCountObserver:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)

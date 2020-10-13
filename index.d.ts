@@ -12,12 +12,22 @@ declare module "rn-apple-healthkit" {
         limit?: number
     }
 
+    export interface StatisticsOptions {
+        startDate: string,
+        endDate?: string,
+        type: QuantityType,
+        aggregationType: AggregationType,
+        unit: HealthUnit,
+    }
+
     export interface AppleHealthKit {
+        isAvailable(callback: (error: Object, results: boolean) => void): void;
+
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
 
-        saveFood(options: Object, callback: (error: string, result: Object) => void): void;
+        fetchStatistics(options: StatisticsOptions, callback: (error: string, result: Object) => void): void;
 
-        isAvailable(callback: (error: Object, results: boolean) => void): void;
+        saveFood(options: Object, callback: (error: string, result: Object) => void): void;
 
         getDateOfBirth(options: any, callback: (error: Object, results: HealthDateOfBirth) => void): void;
 
@@ -145,28 +155,42 @@ declare module "rn-apple-healthkit" {
         ascending?: boolean;
     }
 
-    export enum HealthUnit {
-        bpm = "bpm",
-        calorie = "calorie",
-        celsius = "celsius",
-        count = "count",
-        day = "day",
-        fahrenheit = "fahrenheit",
-        foot = "foot",
-        gram = "gram",
-        hour = "hour",
-        inch = "inch",
-        joule = "joule",
-        meter = "meter",
-        mgPerdL = "mgPerdL",
-        mile = "mile",
-        minute = "minute",
-        mmhg = "mmhg",
-        mmolPerL = "mmolPerL",
-        percent = "percent",
-        pound = "pound",
-        second = "second"
-    }
+    export type HealthUnit =
+        | "bpm"
+        | "calorie"
+        | "kilocalorie"
+        | "celsius"
+        | "count"
+        | "day"
+        | "fahrenheit"
+        | "foot"
+        | "gram"
+        | "kg"
+        | "hour"
+        | "inch"
+        | "joule"
+        | "meter"
+        | "mgPerdL"
+        | "mile"
+        | "minute"
+        | "mmhg"
+        | "mmolPerL"
+        | "percent"
+        | "pound"
+        | "second"
+        | "millisecond";
+
+    export type QuantityType =
+        | "stepCount"
+        | "activeEnergyBurned"
+        | "bodyMassIndex"
+        | "bodyMass"
+        | "bodyFatPercentage"
+        | "heartRate"
+        | "restingHeartRate"
+        | "heartRateVariability";
+
+    export type AggregationType = "average" | "min" | "max" | "sum" | "mostRecent";
 
     const appleHealthKit: AppleHealthKit;
 

@@ -175,6 +175,9 @@
     if([unitString isEqualToString:@"second"]){
         theUnit = [HKUnit secondUnit];
     }
+    if([unitString isEqualToString:@"millisecond"]){
+        theUnit = [HKUnit secondUnitWithMetricPrefix:HKMetricPrefixMilli];
+    }
     if([unitString isEqualToString:@"minute"]){
         theUnit = [HKUnit minuteUnit];
     }
@@ -186,6 +189,9 @@
     }
     if([unitString isEqualToString:@"joule"]){
         theUnit = [HKUnit jouleUnit];
+    }
+    if([unitString isEqualToString:@"kilocalorie"]){
+        theUnit = [HKUnit kilocalorieUnit];
     }
     if([unitString isEqualToString:@"calorie"]){
         theUnit = [HKUnit calorieUnit];

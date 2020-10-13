@@ -171,12 +171,14 @@ const healthKitOptions = {
 ## Units
 - bpm
 - calorie
+- kilocalorie
 - celsius
 - count
 - day
 - fahrenheit
 - foot
 - gram
+- kg
 - hour
 - inch
 - joule
@@ -189,6 +191,7 @@ const healthKitOptions = {
 - percent
 - pound
 - second
+- millisecond
 
 
 ## References
