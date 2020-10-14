@@ -20,12 +20,18 @@ declare module "rn-apple-healthkit" {
         unit: HealthUnit,
     }
 
+    export interface StatisticsRecord {
+        value: number;
+        startDate: string,
+        endDate: string,
+    }
+
     export interface AppleHealthKit {
         isAvailable(callback: (error: Object, results: boolean) => void): void;
 
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
 
-        fetchStatistics(options: StatisticsOptions, callback: (error: string, result: Object) => void): void;
+        fetchStatistics(options: StatisticsOptions, callback: (error: string, results: StatisticsRecord[]) => void): void;
 
         saveFood(options: Object, callback: (error: string, result: Object) => void): void;
 
