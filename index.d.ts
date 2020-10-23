@@ -144,7 +144,7 @@ declare module "rn-apple-healthkit" {
     }
 
     export interface HealthStepCountOptions extends HealthOptions {
-        includeManuallyAdded: boolean;
+        includeManuallyAdded?: boolean;
     }
 
     export interface HealthHeartRateOptions extends HealthOptions {
