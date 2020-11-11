@@ -2,3 +2,5 @@ node_modules
 RCTAppleHealthKit.xcodeproj/xcuserdata
 RCTAppleHealthKit.xcodeproj/project.xcworkspace
 .DS_Store
+Demo
+docs
