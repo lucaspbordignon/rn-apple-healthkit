@@ -200,6 +200,16 @@ RCT_EXPORT_METHOD(getHeartRateSamples:(NSDictionary *)input callback:(RCTRespons
     [self vitals_getHeartRateSamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(saveHeartRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self vitals_saveHeartRateSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getRestingHeartRate:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self vitals_getRestingHeartRate:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getActiveEnergyBurned:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
    [self activity_getActiveEnergyBurned:input callback:callback];
@@ -228,6 +238,11 @@ RCT_EXPORT_METHOD(getBodyTemperatureSamples:(NSDictionary *)input callback:(RCTR
 RCT_EXPORT_METHOD(getBloodPressureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self vitals_getBloodPressureSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(saveBloodPressureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self vitals_saveBloodPressureSamples:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getRespiratoryRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)

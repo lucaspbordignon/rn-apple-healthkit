@@ -3,8 +3,11 @@
 @interface RCTAppleHealthKit (Methods_Vitals)
 
 - (void)vitals_getHeartRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)vitals_saveHeartRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)vitals_getRestingHeartRate:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)vitals_getBodyTemperatureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)vitals_getBloodPressureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)vitals_saveBloodPressureSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)vitals_getRespiratoryRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
 @end

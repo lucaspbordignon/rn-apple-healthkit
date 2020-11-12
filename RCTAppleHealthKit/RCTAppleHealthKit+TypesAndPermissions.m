@@ -70,6 +70,8 @@
     // Vital Signs Identifiers
     if ([@"HeartRate" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+    }else if ([@"RestingHeartRate" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierRestingHeartRate];  
     }else if ([@"BodyTemperature" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyTemperature];
     }else if ([@"BloodPressureSystolic" isEqualToString: key]) {
@@ -135,6 +137,15 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
     }
     
+    // Vital Signs Identifiers
+    if ([@"BloodPressureSystolic" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic];
+    } else if ([@"BloodPressureDiastolic" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic];
+    } else if ([@"HeartRate" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+    }
+
     // Nutrition Identifiers
     if([@"Biotin" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryBiotin];
