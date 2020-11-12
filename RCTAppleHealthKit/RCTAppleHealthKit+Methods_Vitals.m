@@ -49,7 +49,7 @@
     // Need to grab date from device, optionally set it to now
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:[NSDate date]];
     NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
-    double heartRate = [RCTAppleHealthKit doubleFromOptions:input key:@"heartrate" withDefault:0];
+    double heartRate = [RCTAppleHealthKit doubleFromOptions:input key:@"heartRate" withDefault:0];
     HKQuantity *heartRateQuantity = [HKQuantity quantityWithUnit:[count unitDividedByUnit:minute] doubleValue:heartRate];
     HKQuantitySample *heartRateSample = [HKQuantitySample quantitySampleWithType:heartRateType quantity:heartRateQuantity startDate:startDate endDate:endDate];
     
