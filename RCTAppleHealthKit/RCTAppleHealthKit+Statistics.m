@@ -74,6 +74,9 @@
     if([key isEqualToString:@"activeEnergyBurned"]){
         quantityType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
     }
+    if([key isEqualToString:@"basalEnergyBurned"]){
+        quantityType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
+    }
     if([key isEqualToString:@"bodyMassIndex"]){
         quantityType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMassIndex];
     }

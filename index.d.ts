@@ -189,6 +189,7 @@ declare module "rn-apple-healthkit" {
     export type QuantityType =
         | "stepCount"
         | "activeEnergyBurned"
+        | "basalEnergyBurned"
         | "bodyMassIndex"
         | "bodyMass"
         | "bodyFatPercentage"
