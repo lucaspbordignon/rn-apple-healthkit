@@ -60,11 +60,10 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleStandTime];
     }
 
-    
-//    if ([@"AppleExerciseTime" isEqualToString: key]) {
-//        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleExerciseTime];
-//    }
-    
+    if ([@"Workout" isEqualToString: key]){
+        return [HKWorkoutType workoutType];
+    }
+
     // Nutrition Identifiers
     if ([@"DietaryEnergy" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
@@ -88,7 +87,7 @@
     }else if ([@"MenstrualFlow" isEqualToString: key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow];
     }
-    
+
     // Results Identifiers
     if ([@"BloodGlucose" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose];
@@ -96,19 +95,16 @@
     if ([@"InhalerUsage" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierInhalerUsage];
     }
-    
+
     // Sleep
     if ([@"SleepAnalysis" isEqualToString: key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     }
-    
-    // workouts
+
     if ([@"MindfulSession" isEqualToString: key] && systemVersion >= 10.0) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession];
-    } else if ([@"MindfulSession" isEqualToString: key]){
-        return [HKObjectType workoutType];
     }
-    
+
     return nil;
 }
 
