@@ -45,6 +45,11 @@ RCT_EXPORT_METHOD(fetchStatistics:(NSDictionary *)options callback:(RCTResponseS
     [self statistics_fetchStatistics:options callback:callback];
 }
 
+RCT_EXPORT_METHOD(fetchWorkoutStatistics:(NSDictionary *)options callback:(RCTResponseSenderBlock)callback)
+{
+    [self statistics_fetchWorkoutStatistics:options callback:callback];
+}
+
 RCT_EXPORT_METHOD(initStepCountObserver:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self fitness_initializeStepEventObserver:input callback:callback];

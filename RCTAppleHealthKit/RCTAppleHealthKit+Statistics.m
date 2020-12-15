@@ -195,4 +195,52 @@
     [self.healthStore executeQuery:query];
 }
 
+- (void)statistics_fetchWorkoutStatistics:(NSDictionary *)options
+                                 callback:(RCTResponseSenderBlock)callback
+{
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:options key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:options key:@"endDate" withDefault:[NSDate date]];
+
+    if(startDate == nil) {
+        callback(@[RCTMakeError(@"options.startDate is required", nil, nil)]);
+        return;
+    }
+
+    NSPredicate* period = [HKQuery predicateForSamplesWithStartDate:startDate
+                                                            endDate:endDate
+                                                            options:HKQueryOptionNone];
+
+    HKSampleQuery* query = [[HKSampleQuery alloc] initWithSampleType:[HKWorkoutType workoutType]
+                                                           predicate:period
+                                                               limit:HKObjectQueryNoLimit
+                                                     sortDescriptors:nil
+                                                      resultsHandler:^(HKSampleQuery* query,
+                                                                       NSArray<HKWorkout*>* results,
+                                                                       NSError* error) {
+        if (error) {
+            callback(@[RCTMakeError(error.localizedDescription, nil, nil)]);
+            return;
+        }
+
+        NSMutableArray* samples = [NSMutableArray arrayWithCapacity:results.count];
+
+        for (HKWorkout* workout in results) {
+            double durationMinutes = [workout.endDate timeIntervalSinceDate:workout.startDate] / 60;
+
+            NSDictionary* sample = @{
+                @"activityType": [NSString stringWithFormat:@"%lu", workout.workoutActivityType],
+                @"value" : @(durationMinutes),
+                @"startDate" : [RCTAppleHealthKit buildISO8601StringFromDate:workout.startDate],
+                @"endDate" : [RCTAppleHealthKit buildISO8601StringFromDate:workout.endDate]
+            };
+
+            [samples addObject:sample];
+        }
+
+        callback(@[[NSNull null], samples]);
+    }];
+
+    [self.healthStore executeQuery:query];
+}
+
 @end

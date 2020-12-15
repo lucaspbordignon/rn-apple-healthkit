@@ -14,5 +14,7 @@
 - (HKStatisticsOptions)statistics_getStatisticsType:(NSString *)key;
 - (nullable HKQuantityType *)statistics_getQuantityType:(NSString *)key;
 - (void)statistics_fetchStatistics:(NSDictionary *)options callback:(RCTResponseSenderBlock)callback;
+- (void)statistics_fetchWorkoutStatistics:(NSDictionary *)options
+                                 callback:(RCTResponseSenderBlock)callback;
 
 @end

@@ -26,12 +26,28 @@ declare module "rn-apple-healthkit" {
         endDate: string,
     }
 
+    export interface WorkoutStatisticsOptions {
+        startDate: string,
+        endDate?: string,
+    }
+
+    export interface WorkoutStatisticsRecord {
+        activityType: string;
+        value: number;
+        startDate: string,
+        endDate: string,
+    }
+
     export interface AppleHealthKit {
         isAvailable(callback: (error: Object, results: boolean) => void): void;
 
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
 
         fetchStatistics(options: StatisticsOptions, callback: (error: string, results: StatisticsRecord[]) => void): void;
+
+        fetchWorkoutStatistics(
+            options: WorkoutStatisticsOptions,
+            callback: (error: string, results: WorkoutStatisticsRecord[]) => void): void;
 
         saveFood(options: Object, callback: (error: string, result: Object) => void): void;
 
