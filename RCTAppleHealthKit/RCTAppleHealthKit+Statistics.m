@@ -163,9 +163,8 @@
     ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection *results, NSError *error) {
 
         if (error) {
-            NSLog(@"*** An error occurred while calculating the statistics: %@ ***",
-                  error.localizedDescription);
-            abort();
+            callback(@[RCTMakeError(error.localizedDescription, nil, nil)]);
+            return;
         }
 
         NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
