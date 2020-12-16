@@ -227,7 +227,7 @@
             double durationMinutes = [workout.endDate timeIntervalSinceDate:workout.startDate] / 60;
 
             NSDictionary* sample = @{
-                @"activityType": [NSString stringWithFormat:@"%lu", workout.workoutActivityType],
+                @"activityType": [RCTAppleHealthKit stringForHKWorkoutActivityType:workout.workoutActivityType],
                 @"value" : @(durationMinutes),
                 @"startDate" : [RCTAppleHealthKit buildISO8601StringFromDate:workout.startDate],
                 @"endDate" : [RCTAppleHealthKit buildISO8601StringFromDate:workout.endDate]
