@@ -33,7 +33,9 @@ declare module "rn-apple-healthkit" {
 
     export interface WorkoutStatisticsRecord {
         activityType: string;
-        value: number;
+        duration: number;
+        energyBurned?: number;
+        distance?: number;
         startDate: string,
         endDate: string,
     }

@@ -229,6 +229,8 @@
             NSDictionary* sample = @{
                 @"activityType": [RCTAppleHealthKit stringForHKWorkoutActivityType:workout.workoutActivityType],
                 @"value" : @(durationMinutes),
+                @"energyBurned": @([workout.totalEnergyBurned doubleValueForUnit:[HKUnit kilocalorieUnit]]),
+                @"distance": @([workout.totalDistance doubleValueForUnit:[HKUnit meterUnit]]),
                 @"startDate" : [RCTAppleHealthKit buildISO8601StringFromDate:workout.startDate],
                 @"endDate" : [RCTAppleHealthKit buildISO8601StringFromDate:workout.endDate]
             };
