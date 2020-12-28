@@ -42,7 +42,13 @@
     // Fitness Identifiers
     if ([@"Steps" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-    }else if ([@"StepCount" isEqualToString: key]) {
+    } else if ([@"ActiveMinutes" isEqualToString: key]) {
+        if (@available(iOS 9.3, *)) {
+            return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleExerciseTime];
+        } else {
+            // Fallback on earlier versions
+        }
+    } else if ([@"StepCount" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     }else if ([@"DistanceWalkingRunning" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];

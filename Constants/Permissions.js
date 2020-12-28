@@ -4,6 +4,7 @@
  * @type {Object}
  */
 export const Permissions = {
+  ActiveMinutes: "ActiveMinutes",
   ActiveEnergyBurned: "ActiveEnergyBurned",
   AppleExerciseTime: "AppleExerciseTime",
   BasalEnergyBurned: "BasalEnergyBurned",
