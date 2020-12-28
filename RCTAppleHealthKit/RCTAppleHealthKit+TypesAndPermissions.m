@@ -112,6 +112,11 @@
         return [HKObjectType workoutType];
     }
     
+    // workouts: real one!
+    if ([@"Workout" isEqualToString: key]) {
+        return [HKObjectType workoutType];
+    }
+
     return nil;
 }
 
