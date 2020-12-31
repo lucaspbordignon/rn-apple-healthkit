@@ -446,6 +446,18 @@
             return @"MixedCardio";
         case HKWorkoutActivityTypeHandCycling:
             return @"HandCycling";
+        case HKWorkoutActivityTypeCardioDance:
+            return @"CardioDance";
+        case HKWorkoutActivityTypeCooldown:
+            return @"Cooldown";
+        case HKWorkoutActivityTypeDiscSports:
+            return @"DiscSports";
+        case HKWorkoutActivityTypeFitnessGaming:
+            return @"FitnessGaming";
+        case HKWorkoutActivityTypePickleball:
+            return @"Pickleball";
+        case HKWorkoutActivityTypeSocialDance:
+            return @"SocialDance";
         default:{
             NSException *e = [NSException
                               exceptionWithName:@"HKWorkoutActivityType InvalidValue"
