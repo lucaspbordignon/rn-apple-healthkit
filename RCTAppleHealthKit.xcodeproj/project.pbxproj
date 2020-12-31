@@ -68,6 +68,7 @@
 		846A98E9215244E6000C3E5D /* RCTAppleHealthKit+Methods_Dietary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Dietary.m"; sourceTree = "<group>"; };
 		AD8403CE6AF2AAD2D7CEE97E /* Pods-RCTAppleHealthKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCTAppleHealthKit.debug.xcconfig"; path = "Target Support Files/Pods-RCTAppleHealthKit/Pods-RCTAppleHealthKit.debug.xcconfig"; sourceTree = "<group>"; };
 		C84411FDBEEBD8BA9C43C813 /* Pods_RCTAppleHealthKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RCTAppleHealthKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3EC1C062511E599001D4D48 /* RCTAppleHealthKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTAppleHealthKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,16 +140,21 @@
 				AD8403CE6AF2AAD2D7CEE97E /* Pods-RCTAppleHealthKit.debug.xcconfig */,
 				5ED55FED5925473BC28AF03D /* Pods-RCTAppleHealthKit.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		BF8F8FA9DB6FF33D400AA73E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3EC1C062511E599001D4D48 /* RCTAppleHealthKit.xcodeproj */,
 				C84411FDBEEBD8BA9C43C813 /* Pods_RCTAppleHealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3EC1C072511E599001D4D48 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +203,12 @@
 			mainGroup = 3774C8841D2092F20000B3F3;
 			productRefGroup = 3774C88E1D2092F20000B3F3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D3EC1C072511E599001D4D48 /* Products */;
+					ProjectRef = D3EC1C062511E599001D4D48 /* RCTAppleHealthKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3774C88C1D2092F20000B3F3 /* RCTAppleHealthKit */,
