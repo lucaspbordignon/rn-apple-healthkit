@@ -152,7 +152,10 @@ declare module "rn-apple-healthkit" {
     }
 
     export interface HealthWeightOptions extends HealthOptions {
-        unit?: 'pound';
+        startDate: string;
+        endDate?: string;
+        limit?: number;
+        unit?: HealthUnit;
         ascending?: boolean;
     }
 
