@@ -105,6 +105,9 @@
             return nil;
         }
     }
+    if([key isEqualToString:@"oxygenSaturation"]){
+        quantityType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierOxygenSaturation];
+    }
 
     return quantityType;
 }
