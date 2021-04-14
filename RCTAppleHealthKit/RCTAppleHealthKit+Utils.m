@@ -312,8 +312,12 @@
             return @"Bowling";
         case HKWorkoutActivityTypeBoxing:
             return @"Boxing";
+        case HKWorkoutActivityTypeCardioDance:
+            return @"CardioDance";
         case HKWorkoutActivityTypeClimbing:
             return @"Climbing";
+        case HKWorkoutActivityTypeCooldown:
+            return @"Cooldown";
         case HKWorkoutActivityTypeCricket:
             return @"Cricket";
         case HKWorkoutActivityTypeCrossTraining:
@@ -326,12 +330,16 @@
             return @"Dance";
         case HKWorkoutActivityTypeDanceInspiredTraining:
             return @"DanceInspiredTraining";
+        case HKWorkoutActivityTypeDiscSports:
+            return @"DiscSports";
         case HKWorkoutActivityTypeElliptical:
             return @"Elliptical";
         case HKWorkoutActivityTypeEquestrianSports:
             return @"EquestrianSports";
         case HKWorkoutActivityTypeFencing:
             return @"Fencing";
+        case HKWorkoutActivityTypeFitnessGaming:
+            return @"FitnessGaming";
         case HKWorkoutActivityTypeFishing:
             return @"Fishing";
         case HKWorkoutActivityTypeFunctionalStrengthTraining:
@@ -360,6 +368,8 @@
             return @"PaddleSports";
         case HKWorkoutActivityTypePlay:
             return @"Play";
+        case HKWorkoutActivityTypePickleball:
+            return @"Pickleball";
         case HKWorkoutActivityTypePreparationAndRecovery:
             return @"PreparationAndRecovery";
         case HKWorkoutActivityTypeRacquetball:
@@ -378,6 +388,8 @@
             return @"SnowSports";
         case HKWorkoutActivityTypeSoccer:
             return @"Soccer";
+        case HKWorkoutActivityTypeSocialDance:
+            return @"SocialDance";
         case HKWorkoutActivityTypeSoftball:
             return @"Softball";
         case HKWorkoutActivityTypeSquash:
@@ -447,11 +459,7 @@
         case HKWorkoutActivityTypeHandCycling:
             return @"HandCycling";
         default:{
-            NSException *e = [NSException
-                              exceptionWithName:@"HKWorkoutActivityType InvalidValue"
-                              reason:@"HKWorkoutActivityType can only have a value from the HKWorkoutActivityType enum"
-                              userInfo:nil];
-            @throw e;
+            return [@(enumValue) stringValue];
         }
     }
 }
