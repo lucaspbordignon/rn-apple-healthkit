@@ -46,6 +46,8 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     }else if ([@"DistanceWalkingRunning" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
+    }else if ([@"DistanceSwimming" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceSwimming];
     }else if ([@"DistanceCycling" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling];
     }else if ([@"BasalEnergyBurned" isEqualToString: key]) {
@@ -94,6 +96,11 @@
     if ([@"MindfulSession" isEqualToString: key] && systemVersion >= 10.0) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession];
     } else if ([@"MindfulSession" isEqualToString: key]){
+        return [HKObjectType workoutType];
+    }
+
+    // workouts
+    if ([@"Workout" isEqualToString: key]){
         return [HKObjectType workoutType];
     }
     
