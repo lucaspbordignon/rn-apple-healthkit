@@ -18,6 +18,12 @@ declare module "rn-apple-healthkit" {
 
         isAvailable(callback: (error: Object, results: boolean) => void): void;
 
+        /**
+        * Get the total of active minutes of the specified date range.
+        * @param {Object} options getActiveMinutes accepts an options object containing required startDate: ISO8601Timestamp and endDate: ISO8601Timestamp.
+        */
+        getActiveMinutes(options: any): Promise<any>;
+
         getDateOfBirth(options: any, callback: (error: Object, results: HealthDateOfBirth) => void): void;
 
         getLatestHeight(options: HealthUnitOptions, callback: (err: string, results: HealthValue) => void): void;
