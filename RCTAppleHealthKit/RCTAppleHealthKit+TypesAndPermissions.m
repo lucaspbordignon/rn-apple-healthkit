@@ -27,7 +27,7 @@
     }else if ([@"BiologicalSex" isEqualToString: key]) {
         return [HKObjectType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
     }
-    
+
     // Body Measurements
     if ([@"BodyMass" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
@@ -38,7 +38,7 @@
     }else if ([@"LeanBodyMass" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierLeanBodyMass];
     }
-    
+
     // Fitness Identifiers
     if ([@"Steps" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
@@ -57,16 +57,16 @@
     }else if ([@"NikeFuel" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierNikeFuel];
     }
-    
+
 //    if ([@"AppleExerciseTime" isEqualToString: key]) {
 //        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleExerciseTime];
 //    }
-    
+
     // Nutrition Identifiers
     if ([@"DietaryEnergy" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
     }
-    
+
     // Vital Signs Identifiers
     if ([@"HeartRate" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
@@ -79,30 +79,30 @@
     }else if ([@"RespiratoryRate" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierRespiratoryRate];
     }
-    
+
     // Results Identifiers
     if ([@"BloodGlucose" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose];
     }
-    
+
     // Sleep
     if ([@"SleepAnalysis" isEqualToString: key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     }
-    
+
     // workouts
     if ([@"MindfulSession" isEqualToString: key] && systemVersion >= 10.0) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession];
     } else if ([@"MindfulSession" isEqualToString: key]){
         return [HKObjectType workoutType];
     }
-    
+
     return nil;
 }
 
 - (nullable HKObjectType *)getWritePermFromText:(nonnull NSString*) key {
 
-    
+
     // Body Measurements
     if([@"Height" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
@@ -117,7 +117,7 @@
     } else if([@"LeanBodyMass" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierLeanBodyMass];
     }
-    
+
     // Fitness Identifiers
     if([@"Steps" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
@@ -134,7 +134,7 @@
     } else if([@"FlightsClimbed" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
     }
-    
+
     // Nutrition Identifiers
     if([@"Biotin" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryBiotin];
@@ -213,15 +213,20 @@
     } else if([@"Water" isEqualToString:key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryWater];
     }
-    
+
     // Sleep
     if([@"SleepAnalysis" isEqualToString:key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     }
-    
+
     // Mindfulness
     if([@"MindfulSession" isEqualToString:key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession];
+    }
+
+    // Workout
+    if([@"Workout" isEqualToString:key]) {
+        return [HKObjectType workoutType];
     }
     return nil;
 }
@@ -229,7 +234,7 @@
 // Returns HealthKit read permissions from options array
 - (NSSet *)getReadPermsFromOptions:(NSArray *)options {
     NSMutableSet *readPermSet = [NSMutableSet setWithCapacity:1];
-    
+
     for(int i=0; i<[options count]; i++) {
         NSString *optionKey = options[i];
         if(optionKey != nil){
@@ -246,7 +251,7 @@
 // Returns HealthKit write permissions from options array
 - (NSSet *)getWritePermsFromOptions:(NSArray *)options {
     NSMutableSet *writePermSet = [NSMutableSet setWithCapacity:1];
-    
+
     for(int i=0; i<[options count]; i++) {
         NSString *optionKey = options[i];
         if(optionKey != nil){
