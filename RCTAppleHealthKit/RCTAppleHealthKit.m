@@ -19,6 +19,7 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Methods_Audio.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -243,6 +244,16 @@ RCT_EXPORT_METHOD(getBloodGlucoseSamples:(NSDictionary *)input callback:(RCTResp
 RCT_EXPORT_METHOD(getSleepSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self sleep_getSleepSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getEnvironmentalAudioExposureLevelSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self audio_getEnvironmentalSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getEnvironmentalAudioExposureLevelAvgForDateRange:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self audio_getAvgDecibelsInDateRange:input callback:callback];
 }
 
 RCT_EXPORT_METHOD(getInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)

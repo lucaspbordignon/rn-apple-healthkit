@@ -96,7 +96,11 @@
     } else if ([@"MindfulSession" isEqualToString: key]){
         return [HKObjectType workoutType];
     }
-    
+
+    if ([@"AudioExposure" isEqualToString: key] && systemVersion >= 13.0) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierEnvironmentalAudioExposure];
+    }
+
     return nil;
 }
 

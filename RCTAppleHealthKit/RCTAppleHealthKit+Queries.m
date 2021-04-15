@@ -348,13 +348,6 @@
 
 
 
-
-
-
-
-
-
-
 - (void)fetchCorrelationSamplesOfType:(HKQuantityType *)quantityType
                                  unit:(HKUnit *)unit
                             predicate:(NSPredicate *)predicate
@@ -443,7 +436,31 @@
                                                               NSDate *endDate = result.endDate;
                                                               if (completionHandler) {
                                                                      double value = [sum doubleValueForUnit:unit];
-                                                                     completionHandler(value,startDate, endDate, error);
+                                                                     completionHandler(value, startDate, endDate, error);
+                                                              }
+                                                          }];
+
+    [self.healthStore executeQuery:query];
+}
+
+
+- (void)fetchAvgOfSamplesInDateRangeForType:(HKQuantityType *)quantityType
+                                       unit:(HKUnit *)unit
+                                  startDate:(NSDate *)startDate
+                                    endDate:(NSDate *)endDate
+                           completion:(void (^)(double, NSDate *, NSDate *, NSError *))completionHandler {
+
+    NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
+    HKStatisticsQuery *query = [[HKStatisticsQuery alloc] initWithQuantityType:quantityType
+                                                          quantitySamplePredicate:predicate
+                                                          options:HKStatisticsOptionDiscreteAverage
+                                                          completionHandler:^(HKStatisticsQuery *query, HKStatistics *result, NSError *error) {
+                                                              HKQuantity *avg = [result averageQuantity];
+                                                              NSDate *startDate = result.startDate;
+                                                              NSDate *endDate = result.endDate;
+                                                              if (completionHandler) {
+                                                                     double value = [avg doubleValueForUnit:unit];
+                                                                     completionHandler(value, startDate, endDate, error);
                                                               }
                                                           }];
 
