@@ -96,6 +96,13 @@
     } else if ([@"MindfulSession" isEqualToString: key]){
         return [HKObjectType workoutType];
     }
+
+    //hearing
+    if ([@"HeadphoneAudioExposure" isEqualToString: key] && systemVersion >= 10.0) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeadphoneAudioExposure];
+    } else if ([@"EnvironmentalAudioExposure" isEqualToString: key] && systemVersion >= 10.0) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierEnvironmentalAudioExposure];
+    }
     
     return nil;
 }
