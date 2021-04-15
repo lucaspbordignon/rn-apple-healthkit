@@ -42,7 +42,13 @@
     // Fitness Identifiers
     if ([@"Steps" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-    }else if ([@"StepCount" isEqualToString: key]) {
+    } else if ([@"ActiveMinutes" isEqualToString: key]) {
+        if (@available(iOS 9.3, *)) {
+            return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierAppleExerciseTime];
+        } else {
+            // Fallback on earlier versions
+        }
+    } else if ([@"StepCount" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     }else if ([@"DistanceWalkingRunning" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
@@ -84,6 +90,11 @@
     if ([@"BloodGlucose" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose];
     }
+
+    // Reproductive Health
+    if([@"MenstrualFlow" isEqualToString:key]) {
+        return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMenstrualFlow];
+    }
     
     // Sleep
     if ([@"SleepAnalysis" isEqualToString: key]) {
@@ -96,7 +107,16 @@
     } else if ([@"MindfulSession" isEqualToString: key]){
         return [HKObjectType workoutType];
     }
+
+    if ([@"Workout" isEqualToString: key]) {
+        return [HKObjectType workoutType];
+    }
     
+    // workouts: real one!
+    if ([@"Workout" isEqualToString: key]) {
+        return [HKObjectType workoutType];
+    }
+
     return nil;
 }
 
@@ -218,7 +238,7 @@
     if([@"SleepAnalysis" isEqualToString:key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     }
-    
+
     // Mindfulness
     if([@"MindfulSession" isEqualToString:key]) {
         return [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession];

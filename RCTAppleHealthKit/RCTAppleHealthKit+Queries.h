@@ -60,6 +60,9 @@
                                          includeManuallyAdded:(BOOL)includeManuallyAdded
                                     completion:(void (^)(NSArray *, NSError *))completionHandler;
 
+- (void)fetchMenstrualCategorySamplesForPredicate:(NSPredicate *)predicate
+                                   limit:(NSUInteger)lim
+                                   completion:(void (^)(NSArray *, NSError *))completion;
 
 - (void)fetchSleepCategorySamplesForPredicate:(NSPredicate *)predicate
                                    limit:(NSUInteger)lim
