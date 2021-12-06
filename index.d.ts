@@ -217,7 +217,8 @@ declare module "rn-apple-healthkit" {
         | "heartRate"
         | "restingHeartRate"
         | "heartRateVariability"
-        | "oxygenSaturation";
+        | "oxygenSaturation"
+        | "peakExpiratoryFlowRate";
 
     export type AggregationType = "average" | "min" | "max" | "sum" | "mostRecent";
 

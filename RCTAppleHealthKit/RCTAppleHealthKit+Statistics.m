@@ -108,6 +108,9 @@
     if([key isEqualToString:@"oxygenSaturation"]){
         quantityType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierOxygenSaturation];
     }
+    if([key isEqualToString:@"peakExpiratoryFlowRate"]){
+        quantityType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierPeakExpiratoryFlowRate];
+    }
 
     return quantityType;
 }
