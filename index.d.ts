@@ -205,7 +205,8 @@ declare module "rn-apple-healthkit" {
         | "percent"
         | "pound"
         | "second"
-        | "millisecond";
+        | "millisecond"
+        | "LPerMinute";
 
     export type QuantityType =
         | "stepCount"
